@@ -1,5 +1,24 @@
 [
  {
+  "at": "2026-10-01T09:34:20.060Z",
+  "lines": [
+   "  ✗ gemini-3.8-flash: 429 { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: ",
+   "  ✗ gemini-3.7-flash: 503 { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\", \"statu",
+   "نموذج Gemini المستخدم: gemini-3.6-flash",
+   "البلاغات: ماكو بلاغات جديدة",
+   "  ⚠️ iraqi-films: Gemini ما رد بعد عدة محاولات (503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\", \"status\": \"UNAVAILABLE\" } } )",
+   "  ⚠️ iraqi-films: Gemini ما رد بعد عدة محاولات (429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monito)",
+   "  ⚠️ iraqi-films: Gemini ما رد بعد عدة محاولات (429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monito)",
+   "  ⚠️ iraqi-films: Gemini ما رد بعد عدة محاولات (503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\", \"status\": \"UNAVAILABLE\" } } )",
+   "  ⚠️ singers: Gemini ما رد بعد عدة محاولات (503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\", \"status\": \"UNAVAILABLE\" } } )",
+   "  iraqi-films: +0 (مرفوض 0) — توقف مؤقتاً",
+   "  singers: +0 (مرفوض 0)",
+   "التوليد: انضاف 0 سؤال جديد",
+   "نموذج Gemini: gemini-3.6-flash، طلبات: 11، ملفات تغيرت: 0، الوقت: 1255 ثانية",
+   "عدد الأسئلة: مسلسلات عراقية: 28 | أفلام ومسرحيات عراقية: 0 | مطربون وأغانٍ عراقية: 0 | من القائل؟: 0 | تلفزيون الزمن الجميل: 0 | احزر العمل من قصته: 0 | كرة القدم العراقية: 60 | المنتخب العراقي: 0 | الدوري والأندية العراقية: 0 | كرة القدم العالمية: 0 | من أنا؟ رياضية: 0 | أمثال شعبية: 60 | كلمات عراقية: 60 | لهجات المحافظات: 0 | شعراء وأدباء عراقيون: 0 | محافظات ومدن: 60 | معالم وآثار: 60 | تاريخ العراق القديم: 60 | أنهار وأهوار وطبيعة: 0 | جغرافيا العالم: 0 | أعلام ودول: 0 | أكلات عراقية: 60 | حلويات ومشروبات: 0 | أسواق ومهن قديمة: 0 | جيل الطيبين: 60 | ألعاب شعبية: 0 | رمضان والعيد: 0 | معلومات عامة: 80 | علوم وطب: 0 | عالم الحيوان: 0 | قصص الأنبياء: 0 | سيارات: 0 | كرتون الطفولة: 60 | أنمي: 0 | ألعاب إلكترونية: 0 | من أنا؟: 60 | صورة مقرّبة: 0 | رتّبها: 0 | صحّح الخطأ: 0 | الجواب بكلمتين: 0 | إي لو لا؟: 0 | ولا كلمة: 0"
+  ]
+ },
+ {
   "at": "2026-10-01T09:09:17.955Z",
   "lines": [
    "البلاغات: ماكو بلاغات جديدة",
