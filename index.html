@@ -3,10 +3,48 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="فطحل: لعبة أسئلة جماعية بروح عراقية. فريقان، 6 فئات، ومقدّم واحد. مجانية بالكامل وبدون تسجيل." />
+    <title>فطحل؟ | لعبة أسئلة عراقية جماعية مجانية</title>
+    <meta name="description" content="فطحل: لعبة أسئلة ومسابقات جماعية بروح عراقية. فريقان، 6 فئات من أكثر من 40 فئة (مسلسلات عراقية، كرة قدم، أمثال، أكلات، جيل الطيبين...)، ومقدّم واحد. مجانية بالكامل وبدون تسجيل." />
+    <link rel="canonical" href="https://fathal.pages.dev/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#FFC72C" />
-    <title>فطحل؟</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="فطحل؟" />
+    <meta property="og:locale" content="ar_IQ" />
+    <meta property="og:url" content="https://fathal.pages.dev/" />
+    <meta property="og:title" content="فطحل؟ | لعبة أسئلة عراقية جماعية" />
+    <meta property="og:description" content="فريقان، 6 فئات، ومقدّم واحد. أسئلة باللهجة العراقية، مجانية وبدون تسجيل." />
+    <meta property="og:image" content="https://fathal.pages.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="فطحل؟ لعبة أسئلة جماعية بروح عراقية" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="فطحل؟ | لعبة أسئلة عراقية جماعية" />
+    <meta name="twitter:description" content="فريقان، 6 فئات، ومقدّم واحد. مجانية وبدون تسجيل." />
+    <meta name="twitter:image" content="https://fathal.pages.dev/og.png" />
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "فطحل؟",
+        "alternateName": "Fathal",
+        "url": "https://fathal.pages.dev/",
+        "description": "لعبة أسئلة ومسابقات جماعية بروح عراقية: فريقان، 6 فئات، ومقدّم واحد.",
+        "inLanguage": "ar",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "image": "https://fathal.pages.dev/og.png",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
     <script>
       // نطبّق الوضع المحفوظ قبل ما تنرسم الصفحة، حتى ما يرمش اللون
       try {
@@ -16,7 +54,20 @@
     </script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- نص لمحركات البحث وللي متصفحه ما يشغّل جافاسكربت. اللعبة تبدّله أول ما تشتغل. -->
+      <main style="max-width: 640px; margin: 0 auto; padding: 24px 16px; font-family: system-ui, sans-serif">
+        <h1>فطحل؟ لعبة أسئلة جماعية بروح عراقية</h1>
+        <p>
+          فطحل لعبة مسابقات للعائلة والأصدقاء: فريقان يتنافسون، كل فريق يختار 3 فئات، واللوحة بيها أسئلة بقيمة 200 و400 و600 نقطة.
+          يحتاج مقدّم واحد يقرأ الأسئلة ويحكم. الأسئلة باللهجة العراقية، وبعضها بصور. مجانية بالكامل، بدون إعلانات وبدون تسجيل،
+          وتشتغل على الموبايل والكمبيوتر والتلفزيون.
+        </p>
+        <h2>الفئات (<!--seo-count--> فئة)</h2>
+        <!--seo-cats-->
+        <noscript><p>هذه اللعبة تحتاج تشغيل جافاسكربت بالمتصفح.</p></noscript>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
