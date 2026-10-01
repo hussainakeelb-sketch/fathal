@@ -22,17 +22,31 @@ export function parseJSON(text) {
   return JSON.parse(m[1]);
 }
 
-async function pickFallbackModel() {
-  const res = await fetch(`${API}/models?pageSize=100`, { headers: { 'x-goog-api-key': GEMINI.key } });
-  const { models = [] } = await res.json();
-  const ok = models
-    .filter((m) => m.supportedGenerationMethods?.includes('generateContent') && /flash/.test(m.name) && !/image|tts|live|audio|thinking-exp/.test(m.name))
-    .map((m) => m.name.replace('models/', ''));
-  const best = ok.find((n) => !/lite|preview|exp/.test(n)) || ok[0];
-  if (!best) throw new Error('ما لگينا نموذج Gemini متوفر');
-  console.log(`⚠️ النموذج ${model} مو متوفر، راح نستخدم ${best}`);
-  model = best;
+// النماذج الي جربناها وما اشتغلت (Google يوقف النماذج القديمة بين فترة وفترة)
+const badModels = new Set();
+const versionOf = (n) => (n.match(/(\d+(?:\.\d+)?)/) || [0, 0])[1] * 1;
+
+// إذا النموذج ما متوفر: ناخذ النموذج الي Google ينصح بيه برسالة الخطأ، أو أحدث نموذج Flash بالقائمة
+async function pickFallbackModel(errorText) {
+  badModels.add(model);
+  const suggested = errorText.match(/use models\/([\w.-]+)/)?.[1];
+  let next = suggested && !badModels.has(suggested) ? suggested : null;
+  if (!next) {
+    const res = await fetch(`${API}/models?pageSize=200`, { headers: { 'x-goog-api-key': GEMINI.key } });
+    const { models = [] } = await res.json();
+    const ok = models
+      .filter((m) => m.supportedGenerationMethods?.includes('generateContent') && /flash/.test(m.name) && !/image|tts|live|audio|exp/.test(m.name))
+      .map((m) => m.name.replace('models/', ''))
+      .filter((n) => !badModels.has(n))
+      .sort((a, b) => versionOf(b) - versionOf(a));
+    next = ok.find((n) => !/lite|preview/.test(n)) || ok.find((n) => !/lite/.test(n)) || ok[0];
+  }
+  if (!next) throw new Error('ما لگينا نموذج Gemini متوفر');
+  console.log(`⚠️ النموذج ${model} مو متوفر، راح نستخدم ${next}`);
+  model = next;
 }
+
+export const currentModel = () => model;
 
 /**
  * طلب واحد لـ Gemini.
@@ -61,8 +75,9 @@ export async function ask(parts, { system, search = false, json = true, temperat
       headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI.key },
       body: JSON.stringify(body),
     });
-    if (res.status === 404 && attempt === 0) {
-      await pickFallbackModel();
+    if (res.status === 404 && badModels.size < 4) {
+      await pickFallbackModel(await res.text());
+      attempt--; // تبديل النموذج ما ينحسب محاولة
       continue;
     }
     if (res.status === 429 || res.status >= 500) {
@@ -74,7 +89,7 @@ export async function ask(parts, { system, search = false, json = true, temperat
       await sleep(Math.min(ms, 90000));
       continue;
     }
-    if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).replace(/\s+/g, ' ').slice(0, 160)}`);
     const data = await res.json();
     const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
     if (!text) throw new Error('جواب فاضي من Gemini');

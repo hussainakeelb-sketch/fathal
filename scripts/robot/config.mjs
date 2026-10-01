@@ -9,7 +9,7 @@ export const MOCK = env.ROBOT_MOCK === '1'; // تشغيل تجريبي بدون 
 export const GEMINI = {
   key: env.GEMINI_API_KEY,
   // إذا هذا النموذج ما متوفر، الروبوت يدوّر لحاله على نموذج Flash ثاني مجاني
-  model: env.GEMINI_MODEL || 'gemini-2.5-flash',
+  model: env.GEMINI_MODEL || 'gemini-3.8-flash',
   maxRequests: Number(env.GEMINI_MAX_REQUESTS || 180), // حد يومي حتى نبقى ضمن الباقة المجانية
   minGapMs: Number(env.GEMINI_MIN_GAP_MS || 7000), // تقريباً 8 طلبات بالدقيقة
 };

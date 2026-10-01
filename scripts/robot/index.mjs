@@ -9,7 +9,7 @@ import { ROOT, MOCK, GEMINI, CF, TARGET } from './config.mjs';
 import { Store, loadCategories } from './store.mjs';
 import { processReports } from './reports.mjs';
 import { generate } from './generate.mjs';
-import { geminiUsed } from './gemini.mjs';
+import { geminiUsed, currentModel } from './gemini.mjs';
 
 const lines = [];
 const log = (s) => {
@@ -57,7 +57,7 @@ async function main() {
   execFileSync(process.execPath, [path.join(ROOT, 'scripts/build-data.mjs')], { stdio: 'inherit' });
 
   const counts = categories.map((c) => `${c.name}: ${store.live(c.id).length}`);
-  log(`طلبات Gemini: ${geminiUsed()}، ملفات تغيرت: ${saved}، الوقت: ${Math.round((Date.now() - started) / 1000)} ثانية`);
+  log(`نموذج Gemini: ${currentModel()}، طلبات: ${geminiUsed()}، ملفات تغيرت: ${saved}، الوقت: ${Math.round((Date.now() - started) / 1000)} ثانية`);
   log(`عدد الأسئلة: ${counts.join(' | ')}`);
 
   // سجل مختصر آخر 30 تشغيل
