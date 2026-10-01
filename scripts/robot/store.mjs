@@ -92,7 +92,11 @@ export function localCheck(item) {
   if (!/[؀-ۿ]/.test(q)) return 'السؤال مو عربي';
   if (q.includes('|') || a.includes('|')) return 'رمز ممنوع';
   const text = `${q} ${a}`;
-  const bad = BLOCKLIST.find((w) => text.includes(w));
+  // مطابقة كلمة كاملة (ويا البادئات الشائعة: و، ف، ب، ل، ال...) حتى "أقمار" ما تنحسب "قمار" و"مخمور" ما تنحسب "خمور"
+  const bad = BLOCKLIST.find((w) => {
+    const word = w.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`(?<![\\p{L}])(?:و|ف|ب|ل|ال|وال|بال|لل)?${word}(?![\\p{L}])`, 'u').test(text);
+  });
   if (bad) return `كلمة ممنوعة: ${bad.trim()}`;
   return null;
 }
