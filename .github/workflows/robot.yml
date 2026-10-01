@@ -1,0 +1,49 @@
+# الروبوت اليومي لموقع فطحل: يعالج البلاغات، يولّد أسئلة جديدة ويراجعها، ويرفع التحديث.
+# Cloudflare Pages يلاحظ التحديث وينشر الموقع تلقائياً.
+name: روبوت فطحل
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # كل يوم الساعة 4 الصبح بتوقيت بغداد
+  workflow_dispatch: # تشغيل يدوي من صفحة Actions إذا احتجنا
+
+permissions:
+  contents: write
+
+concurrency:
+  group: robot
+  cancel-in-progress: false
+
+jobs:
+  robot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: تشغيل الروبوت
+        run: node scripts/robot/index.mjs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+
+      - name: رفع التحديث
+        run: |
+          git config user.name "fathal-robot"
+          git config user.email "fathal-robot@users.noreply.github.com"
+          git add -A data public
+          if git diff --cached --quiet; then
+            echo "ماكو تغيير اليوم"
+          else
+            git commit -m "روبوت: تحديث يومي للأسئلة"
+            git push
+          fi

@@ -1,61 +1,383 @@
 {
-  "sections": [
-    { "id": "fan", "name": "فن وإعلام" },
-    { "id": "sport", "name": "رياضة" },
-    { "id": "culture", "name": "لغة وثقافة" },
-    { "id": "geo", "name": "جغرافيا وتاريخ" },
-    { "id": "life", "name": "أكل وحياة" },
-    { "id": "general", "name": "عام" },
-    { "id": "challenge", "name": "تحديات" }
-  ],
-  "categories": [
-    { "id": "iraqi-series", "section": "fan", "name": "مسلسلات عراقية", "icon": "device-tv", "launch": true },
-    { "id": "iraqi-films", "section": "fan", "name": "أفلام ومسرحيات عراقية", "icon": "movie" },
-    { "id": "singers", "section": "fan", "name": "مطربون وأغانٍ عراقية", "icon": "microphone-2" },
-    { "id": "who-said", "section": "fan", "name": "من القائل؟", "icon": "quote" },
-    { "id": "golden-tv", "section": "fan", "name": "تلفزيون الزمن الجميل", "icon": "device-tv-old" },
-    { "id": "guess-story", "section": "fan", "name": "احزر العمل من قصته", "icon": "book" },
-
-    { "id": "iraqi-football", "section": "sport", "name": "كرة القدم العراقية", "icon": "ball-football", "launch": true },
-    { "id": "national-team", "section": "sport", "name": "المنتخب العراقي", "icon": "trophy" },
-    { "id": "iraqi-league", "section": "sport", "name": "الدوري والأندية العراقية", "icon": "shirt-sport" },
-    { "id": "world-football", "section": "sport", "name": "كرة القدم العالمية", "icon": "world" },
-    { "id": "who-am-i-sport", "section": "sport", "name": "من أنا؟ رياضية", "icon": "user-question" },
-
-    { "id": "proverbs", "section": "culture", "name": "أمثال شعبية", "icon": "message-circle", "launch": true },
-    { "id": "iraqi-words", "section": "culture", "name": "كلمات عراقية", "icon": "abc", "launch": true },
-    { "id": "dialects", "section": "culture", "name": "لهجات المحافظات", "icon": "map-2" },
-    { "id": "poets", "section": "culture", "name": "شعراء وأدباء عراقيون", "icon": "feather" },
-
-    { "id": "provinces", "section": "geo", "name": "محافظات ومدن", "icon": "map-pin", "launch": true },
-    { "id": "landmarks", "section": "geo", "name": "معالم وآثار", "icon": "building-monument", "launch": true },
-    { "id": "ancient-history", "section": "geo", "name": "تاريخ العراق القديم", "icon": "building-castle", "launch": true },
-    { "id": "rivers-nature", "section": "geo", "name": "أنهار وأهوار وطبيعة", "icon": "ripple" },
-    { "id": "world-geo", "section": "geo", "name": "جغرافيا العالم", "icon": "globe" },
-    { "id": "flags", "section": "geo", "name": "أعلام ودول", "icon": "flag" },
-
-    { "id": "food", "section": "life", "name": "أكلات عراقية", "icon": "soup", "launch": true },
-    { "id": "sweets", "section": "life", "name": "حلويات ومشروبات", "icon": "cookie" },
-    { "id": "old-markets", "section": "life", "name": "أسواق ومهن قديمة", "icon": "building-store" },
-    { "id": "tayyibeen", "section": "life", "name": "جيل الطيبين", "icon": "device-audio-tape", "launch": true },
-    { "id": "folk-games", "section": "life", "name": "ألعاب شعبية", "icon": "horse-toy" },
-    { "id": "ramadan-eid", "section": "life", "name": "رمضان والعيد", "icon": "moon-stars" },
-
-    { "id": "general", "section": "general", "name": "معلومات عامة", "icon": "bulb", "launch": true, "tiebreak": true },
-    { "id": "science", "section": "general", "name": "علوم وطب", "icon": "flask" },
-    { "id": "animals", "section": "general", "name": "عالم الحيوان", "icon": "paw" },
-    { "id": "prophets", "section": "general", "name": "قصص الأنبياء", "icon": "book-2" },
-    { "id": "cars", "section": "general", "name": "سيارات", "icon": "car" },
-    { "id": "cartoons", "section": "general", "name": "كرتون الطفولة", "icon": "mood-kid", "launch": true },
-    { "id": "anime", "section": "general", "name": "أنمي", "icon": "sparkles" },
-    { "id": "video-games", "section": "general", "name": "ألعاب إلكترونية", "icon": "device-gamepad-2" },
-
-    { "id": "who-am-i", "section": "challenge", "name": "من أنا؟", "icon": "help-circle", "launch": true },
-    { "id": "zoom", "section": "challenge", "name": "صورة مقرّبة", "icon": "zoom-in" },
-    { "id": "order-it", "section": "challenge", "name": "رتّبها", "icon": "sort-ascending" },
-    { "id": "fix-it", "section": "challenge", "name": "صحّح الخطأ", "icon": "pencil-check" },
-    { "id": "two-words", "section": "challenge", "name": "الجواب بكلمتين", "icon": "letter-case" },
-    { "id": "yes-no", "section": "challenge", "name": "إي لو لا؟", "icon": "thumb-up" },
-    { "id": "charades", "section": "challenge", "name": "ولا كلمة", "icon": "mood-happy" }
-  ]
+ "sections": [
+  {
+   "id": "fan",
+   "name": "فن وإعلام"
+  },
+  {
+   "id": "sport",
+   "name": "رياضة"
+  },
+  {
+   "id": "culture",
+   "name": "لغة وثقافة"
+  },
+  {
+   "id": "geo",
+   "name": "جغرافيا وتاريخ"
+  },
+  {
+   "id": "life",
+   "name": "أكل وحياة"
+  },
+  {
+   "id": "general",
+   "name": "عام"
+  },
+  {
+   "id": "challenge",
+   "name": "تحديات"
+  }
+ ],
+ "categories": [
+  {
+   "id": "iraqi-series",
+   "section": "fan",
+   "name": "مسلسلات عراقية",
+   "icon": "device-tv",
+   "launch": true,
+   "guide": "Iraqi TV drama and comedy series from the 1960s to today: titles, writers, directors, actors and their famous characters, plots.",
+   "media": "none"
+  },
+  {
+   "id": "iraqi-films",
+   "section": "fan",
+   "name": "أفلام ومسرحيات عراقية",
+   "icon": "movie",
+   "guide": "Iraqi cinema films and theatre plays: titles, directors, actors, years, famous scenes.",
+   "media": "none"
+  },
+  {
+   "id": "singers",
+   "section": "fan",
+   "name": "مطربون وأغانٍ عراقية",
+   "icon": "microphone-2",
+   "guide": "Iraqi singers and songs (text only, never quote more than a few words of lyrics): who sang which famous song, nicknames, maqam singers, composers, instruments.",
+   "media": "none"
+  },
+  {
+   "id": "who-said",
+   "section": "fan",
+   "name": "من القائل؟",
+   "icon": "quote",
+   "guide": "Famous lines said by characters in Iraqi TV series, plays, cartoons dubbed in Arabic, or Arabic proverbs/poetry verses (short, under 12 words). Ask who said it or which work it is from. No political speeches.",
+   "media": "none"
+  },
+  {
+   "id": "golden-tv",
+   "section": "fan",
+   "name": "تلفزيون الزمن الجميل",
+   "icon": "device-tv-old",
+   "guide": "Iraqi television and radio of the 1970s-1990s: old programs, presenters, children shows, sports programs, famous announcers. No political programs.",
+   "media": "none"
+  },
+  {
+   "id": "guess-story",
+   "section": "fan",
+   "name": "احزر العمل من قصته",
+   "icon": "book",
+   "guide": "Describe the plot of a well known Iraqi or Arab TV series, film or play in 1-2 sentences without names; the answer is the title.",
+   "media": "none"
+  },
+  {
+   "id": "iraqi-football",
+   "section": "sport",
+   "name": "كرة القدم العراقية",
+   "icon": "ball-football",
+   "launch": true,
+   "guide": "Iraqi football: national team history, Asian Cup 2007, Gulf Cup, World Cup 1986, clubs and their nicknames, stadiums, famous players and coaches.",
+   "media": "commons-image"
+  },
+  {
+   "id": "national-team",
+   "section": "sport",
+   "name": "المنتخب العراقي",
+   "icon": "trophy",
+   "guide": "Iraq national football team only: tournaments, results, coaches, captains, records, youth and Olympic teams.",
+   "media": "none"
+  },
+  {
+   "id": "iraqi-league",
+   "section": "sport",
+   "name": "الدوري والأندية العراقية",
+   "icon": "shirt-sport",
+   "guide": "Iraqi league and clubs: club nicknames, cities, founding years, titles, stadiums, famous derbies, AFC Cup runs.",
+   "media": "none"
+  },
+  {
+   "id": "world-football",
+   "section": "sport",
+   "name": "كرة القدم العالمية",
+   "icon": "world",
+   "guide": "World football: World Cups, Champions League, famous players, clubs, transfers, records. Facts must be stable (not changing weekly).",
+   "media": "commons-image"
+  },
+  {
+   "id": "who-am-i-sport",
+   "section": "sport",
+   "name": "من أنا؟ رياضية",
+   "icon": "user-question",
+   "guide": "Riddle format: 2-3 first-person clues about a famous athlete (any sport, Iraqi or world). Answer is the person.",
+   "media": "commons-image"
+  },
+  {
+   "id": "proverbs",
+   "section": "culture",
+   "name": "أمثال شعبية",
+   "icon": "message-circle",
+   "launch": true,
+   "guide": "Iraqi popular proverbs: complete the proverb, or explain its meaning, or which situation it is said in.",
+   "media": "none"
+  },
+  {
+   "id": "iraqi-words",
+   "section": "culture",
+   "name": "كلمات عراقية",
+   "icon": "abc",
+   "launch": true,
+   "guide": "Iraqi dialect words: meaning of a word, origin (Turkish/Persian/English loanwords), the Iraqi word for a standard Arabic word.",
+   "media": "ai-image"
+  },
+  {
+   "id": "dialects",
+   "section": "culture",
+   "name": "لهجات المحافظات",
+   "icon": "map-2",
+   "guide": "Differences between Iraqi regional dialects (Baghdad, Basra, Mosul, south, west): which city says which word, how a word is pronounced. Respectful, no mocking any group.",
+   "media": "none"
+  },
+  {
+   "id": "poets",
+   "section": "culture",
+   "name": "شعراء وأدباء عراقيون",
+   "icon": "feather",
+   "guide": "Iraqi poets and writers, classical and modern: famous works, birthplaces, nicknames, movements (free verse). No political or sectarian content.",
+   "media": "commons-image"
+  },
+  {
+   "id": "provinces",
+   "section": "geo",
+   "name": "محافظات ومدن",
+   "icon": "map-pin",
+   "launch": true,
+   "guide": "Iraqi provinces and cities: capitals of provinces, which city is in which province, rivers through cities, nicknames, famous products. Avoid disputed boundaries.",
+   "media": "none"
+  },
+  {
+   "id": "landmarks",
+   "section": "geo",
+   "name": "معالم وآثار",
+   "icon": "building-monument",
+   "launch": true,
+   "guide": "Iraqi landmarks, monuments, archaeological sites, statues, bridges, mosques/churches as architecture only, UNESCO sites.",
+   "media": "commons-image"
+  },
+  {
+   "id": "ancient-history",
+   "section": "geo",
+   "name": "تاريخ العراق القديم",
+   "icon": "building-castle",
+   "launch": true,
+   "guide": "Ancient Mesopotamia: Sumer, Akkad, Babylon, Assyria, Hatra, inventions, kings, gods (as history), epic of Gilgamesh, archaeology.",
+   "media": "commons-image"
+  },
+  {
+   "id": "rivers-nature",
+   "section": "geo",
+   "name": "أنهار وأهوار وطبيعة",
+   "icon": "ripple",
+   "guide": "Iraq rivers, marshes, lakes, dams, mountains, deserts, plants, animals and climate.",
+   "media": "commons-image"
+  },
+  {
+   "id": "world-geo",
+   "section": "geo",
+   "name": "جغرافيا العالم",
+   "icon": "globe",
+   "guide": "World geography: capitals, countries, rivers, mountains, deserts, oceans, records.",
+   "media": "none"
+  },
+  {
+   "id": "flags",
+   "section": "geo",
+   "name": "أعلام ودول",
+   "icon": "flag",
+   "guide": "Flags and countries: describe a flag in words or show a flag image; colors, symbols, continents.",
+   "media": "commons-image"
+  },
+  {
+   "id": "food",
+   "section": "life",
+   "name": "أكلات عراقية",
+   "icon": "soup",
+   "launch": true,
+   "guide": "Iraqi food: dishes, ingredients, how they are cooked, breakfast, street food, regional specialities.",
+   "media": "ai-image"
+  },
+  {
+   "id": "sweets",
+   "section": "life",
+   "name": "حلويات ومشروبات",
+   "icon": "cookie",
+   "guide": "Iraqi sweets, desserts, bakeries and drinks: kleicha, zlabia, mann al-sama, tea culture, juices, regional sweets.",
+   "media": "ai-image"
+  },
+  {
+   "id": "old-markets",
+   "section": "life",
+   "name": "أسواق ومهن قديمة",
+   "icon": "building-store",
+   "guide": "Old Iraqi markets and traditional professions: famous souqs in Baghdad and other cities, craftsmen, tools, street sellers.",
+   "media": "ai-image"
+  },
+  {
+   "id": "tayyibeen",
+   "section": "life",
+   "name": "جيل الطيبين",
+   "icon": "device-audio-tape",
+   "launch": true,
+   "guide": "Nostalgia for Iraq in the 1970s-2000s: games, devices, school life, cars, magazines, TV, money, home items. No political content.",
+   "media": "ai-image"
+  },
+  {
+   "id": "folk-games",
+   "section": "life",
+   "name": "ألعاب شعبية",
+   "icon": "horse-toy",
+   "guide": "Traditional Iraqi children and adult games (mheibis, dagga, khtela, dabbal...), rules and names.",
+   "media": "none"
+  },
+  {
+   "id": "ramadan-eid",
+   "section": "life",
+   "name": "رمضان والعيد",
+   "icon": "moon-stars",
+   "guide": "Ramadan and Eid customs in Iraq: food, mheibis, majina, eidiya, sweets, social habits. Customs only, nothing sectarian or doctrinal.",
+   "media": "ai-image"
+  },
+  {
+   "id": "general",
+   "section": "general",
+   "name": "معلومات عامة",
+   "icon": "bulb",
+   "launch": true,
+   "tiebreak": true,
+   "guide": "General knowledge: science, geography, history of the world, records, language. Stable, verifiable facts only.",
+   "media": "none"
+  },
+  {
+   "id": "science",
+   "section": "general",
+   "name": "علوم وطب",
+   "icon": "flask",
+   "guide": "Science and medicine: body, chemistry, physics, space, inventions, inventors, health facts.",
+   "media": "ai-image"
+  },
+  {
+   "id": "animals",
+   "section": "general",
+   "name": "عالم الحيوان",
+   "icon": "paw",
+   "guide": "Animals: records, habitats, names of young, sounds, behaviours, Iraqi wildlife.",
+   "media": "commons-audio"
+  },
+  {
+   "id": "prophets",
+   "section": "general",
+   "name": "قصص الأنبياء",
+   "icon": "book-2",
+   "guide": "Stories of the prophets as shared by Muslims and Christians (Noah, Abraham, Joseph, Moses, Jonah...): well known events only. Never sects, schools, or disputed matters.",
+   "media": "none"
+  },
+  {
+   "id": "cars",
+   "section": "general",
+   "name": "سيارات",
+   "icon": "car",
+   "guide": "Cars: brands, logos described in words, countries of origin, famous models, popular cars in Iraq.",
+   "media": "commons-image"
+  },
+  {
+   "id": "cartoons",
+   "section": "general",
+   "name": "كرتون الطفولة",
+   "icon": "mood-kid",
+   "launch": true,
+   "guide": "Classic cartoons and anime dubbed in Arabic (1980s-2010s, Spacetoon era) and Disney/Western cartoons: characters, names in Arabic dub, stories.",
+   "media": "none"
+  },
+  {
+   "id": "anime",
+   "section": "general",
+   "name": "أنمي",
+   "icon": "sparkles",
+   "guide": "Anime and manga: Naruto, One Piece, Dragon Ball, Attack on Titan, Detective Conan, etc. Characters, abilities, studios.",
+   "media": "none"
+  },
+  {
+   "id": "video-games",
+   "section": "general",
+   "name": "ألعاب إلكترونية",
+   "icon": "device-gamepad-2",
+   "guide": "Video games popular in Iraq: PUBG, FIFA, GTA, Minecraft, Call of Duty, classic consoles; characters, publishers, release years.",
+   "media": "none"
+  },
+  {
+   "id": "who-am-i",
+   "section": "challenge",
+   "name": "من أنا؟",
+   "icon": "help-circle",
+   "launch": true,
+   "guide": "Riddle format: 2-3 first-person clues about a famous person, place, animal, object or food (Iraqi or world). Answer is the thing.",
+   "media": "none"
+  },
+  {
+   "id": "zoom",
+   "section": "challenge",
+   "name": "صورة مقرّبة",
+   "icon": "zoom-in",
+   "guide": "Show a close-up crop of a common object/animal/food; question is what is this? Answer is the object. Always image with zoom.",
+   "media": "commons-image-zoom"
+  },
+  {
+   "id": "order-it",
+   "section": "challenge",
+   "name": "رتّبها",
+   "icon": "sort-ascending",
+   "guide": "Ask to order 3-4 items (by date, size, length, population). Answer lists the correct order.",
+   "media": "none"
+  },
+  {
+   "id": "fix-it",
+   "section": "challenge",
+   "name": "صحّح الخطأ",
+   "icon": "pencil-check",
+   "guide": "Give a statement with one deliberate factual error; the team must say what is wrong and correct it. Answer gives the correction.",
+   "media": "none"
+  },
+  {
+   "id": "two-words",
+   "section": "challenge",
+   "name": "الجواب بكلمتين",
+   "icon": "letter-case",
+   "guide": "Questions whose answer is exactly two words (a person, place, dish, title).",
+   "media": "none"
+  },
+  {
+   "id": "yes-no",
+   "section": "challenge",
+   "name": "إي لو لا؟",
+   "icon": "thumb-up",
+   "guide": "A surprising statement; answer is yes or no (إي or لا) followed by a very short correction if no.",
+   "media": "none"
+  },
+  {
+   "id": "charades",
+   "section": "challenge",
+   "name": "ولا كلمة",
+   "icon": "mood-happy",
+   "guide": "Charades: the host shows a word to one player who acts it silently. Question text: مثّل بدون كلام: <word>. Answer: the word. Words are Iraqi items, food, professions, films, actions. 200 easy, 600 hard.",
+   "media": "none"
+  }
+ ]
 }

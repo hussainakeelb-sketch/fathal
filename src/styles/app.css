@@ -245,3 +245,14 @@ button{font:inherit}
 .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
 .conf{position:absolute;top:-30px;width:14px;height:26px;border-radius:4px;animation:fz-fall var(--dur-confetti) var(--ease-out) forwards}
 @keyframes fz-fall{0%{transform:translate(0,0) rotate(0);opacity:1}85%{opacity:1}100%{transform:translate(var(--drift),110vh) rotate(var(--rot));opacity:0}}
+
+/* ---- الإبلاغ عن خطأ ---- */
+.modal-layer{overflow:auto}
+.report-btn{font-size:max(14px,calc(var(--body)*.8)) !important;min-height:var(--target-min);color:inherit}
+.report-reasons{display:flex;flex-direction:column;gap:var(--space-2)}
+.report-reason{display:flex;align-items:center;gap:var(--space-3);min-height:var(--target-min);padding:0 var(--space-4);border:2px solid var(--border-ink);border-radius:var(--radius-md);background:var(--surface-card);font-weight:600;font-size:17px;cursor:pointer}
+.report-reason input{width:20px;height:20px;accent-color:var(--action-primary);margin:0}
+.report-reason.is-selected{background:var(--surface-sunken)}
+.report-reason:focus-within{outline:3px solid var(--focus-ring);outline-offset:3px}
+.report-error{color:var(--text-primary);font-weight:600}
+.report-error .fz-ico{color:var(--danger)}

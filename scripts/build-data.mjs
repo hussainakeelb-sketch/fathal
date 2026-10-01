@@ -11,6 +11,8 @@ const read = (p) => JSON.parse(fs.readFileSync(path.join(root, p), 'utf8'));
 const { sections, categories } = read('data/categories.json');
 const qDir = path.join(root, 'data/questions');
 const outDir = path.join(root, 'public/data');
+// نبدي من جديد كل مرة حتى ما تبقى ملفات قديمة
+fs.rmSync(path.join(outDir, 'cats'), { recursive: true, force: true });
 fs.mkdirSync(path.join(outDir, 'cats'), { recursive: true });
 
 const LEVELS = [200, 400, 600];

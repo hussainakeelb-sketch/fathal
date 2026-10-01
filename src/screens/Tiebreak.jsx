@@ -4,6 +4,7 @@ import { Scoreboard } from '../components/Scoreboard.jsx';
 import { Timer } from '../components/Timer.jsx';
 import { QuestionCard } from '../components/QuestionCard.jsx';
 import { RevealModal } from '../components/RevealModal.jsx';
+import { ReportModal } from '../components/ReportModal.jsx';
 import { ErrorState } from '../components/ErrorState.jsx';
 import { Icon } from '../components/Icon.jsx';
 import { fetchIndex, fetchCategory, preloadMedia } from '../lib/data.js';
@@ -20,12 +21,14 @@ async function nextQuestion(game) {
   const exclude = new Set([...allUsedIds(game), ...game.tb.used]);
   // إذا خلصت أسئلة الحسم بهاي اللعبة، نسمح بالي انعرضت بالحسم قبل
   const [q] = pickQuestions(pool, 1, { exclude });
-  return q ?? pickQuestions(pool, 1, { exclude: new Set(allUsedIds(game)) })[0];
+  const picked = q ?? pickQuestions(pool, 1, { exclude: new Set(allUsedIds(game)) })[0];
+  return picked && { ...picked, cat: cat.id };
 }
 
 export function Tiebreak({ header, game, setGame }) {
   const [error, setError] = useState(null);
   const [confirm, setConfirm] = useState(false);
+  const [report, setReport] = useState(false);
   const { tb, teams } = game;
 
   const load = () => {
@@ -66,6 +69,7 @@ export function Tiebreak({ header, game, setGame }) {
             teams={teams}
             revealed={tb.revealed}
             onReveal={() => setConfirm(true)}
+            onReport={() => setReport(true)}
             chips={
               <>
                 <span class="fz-chip fz-chip--brand">{t('tb.cat')}</span>
@@ -98,6 +102,7 @@ export function Tiebreak({ header, game, setGame }) {
           </div>
         </>
       )}
+      {report && <ReportModal q={tb.q} cat={tb.q.cat || 'general'} onClose={() => setReport(false)} />}
       {confirm && (
         <RevealModal
           onClose={() => setConfirm(false)}

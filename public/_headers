@@ -1,0 +1,10 @@
+# ملفات الأسئلة والصور: رابطها بيه رقم نسخة، فالمتصفح يحفظها مدة طويلة
+/data/cats/*
+  Cache-Control: public, max-age=31536000, immutable
+/media/*
+  Cache-Control: public, max-age=31536000, immutable
+# قائمة الفئات تتحدث كل يوم
+/data/index.json
+  Cache-Control: public, max-age=300
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

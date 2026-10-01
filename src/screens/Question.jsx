@@ -4,6 +4,7 @@ import { Scoreboard } from '../components/Scoreboard.jsx';
 import { Timer } from '../components/Timer.jsx';
 import { QuestionCard } from '../components/QuestionCard.jsx';
 import { RevealModal } from '../components/RevealModal.jsx';
+import { ReportModal } from '../components/ReportModal.jsx';
 import { Icon } from '../components/Icon.jsx';
 import { markSeen } from '../lib/deck.js';
 import { playSound } from '../lib/sound.js';
@@ -13,6 +14,7 @@ import {
 
 export function Question({ header, game, setGame, judge, toast }) {
   const [confirm, setConfirm] = useState(false);
+  const [report, setReport] = useState(false);
   const { cur, teams, turn } = game;
   const { q } = curTile(game);
   const col = game.board[cur.col];
@@ -63,6 +65,7 @@ export function Question({ header, game, setGame, judge, toast }) {
         revealed={cur.revealed}
         verdict={verdict}
         onReveal={() => setConfirm(true)}
+        onReport={() => setReport(true)}
         cardClass={`${done && verdict?.type === 'ok' ? 'is-correct' : ''} ${verdict?.type === 'no' && steal ? 'is-wrong' : ''} ${done && verdict?.type === 'none' ? 'is-wrong' : ''}`}
         cardStyle={steal ? { borderColor: `var(--team-${active})`, borderWidth: '4px' } : null}
         timer={
@@ -111,6 +114,7 @@ export function Question({ header, game, setGame, judge, toast }) {
         )}
       </div>
 
+      {report && <ReportModal q={q} cat={col.id} onClose={() => setReport(false)} />}
       {confirm && (
         <RevealModal
           onClose={() => setConfirm(false)}

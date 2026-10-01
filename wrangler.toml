@@ -1,0 +1,11 @@
+# إعدادات Cloudflare Pages. الموقع ينبني من dist/ ويرتبط بقاعدة بيانات البلاغات (D1).
+name = "fathal"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fathal-reports"
+# يتعبّى بعد ما ننشئ قاعدة البيانات على Cloudflare (خطوة النشر)
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"

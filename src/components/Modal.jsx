@@ -3,16 +3,16 @@ import { Icon } from './Icon.jsx';
 
 // نافذة تأكيد: تتسكر بـ Esc وبالضغط على الخلفية وبزر الإلغاء.
 // التركيز يدخل النافذة ويبقى محبوس داخلها، ويرجع للزر الي فتحها.
-export function Modal({ icon, iconStyle, title, body, actions, onClose }) {
+export function Modal({ icon, iconStyle, title, body, actions, onClose, children }) {
   const ref = useRef(null);
   useEffect(() => {
     const opener = document.activeElement;
     const box = ref.current;
-    box.querySelector('button')?.focus();
+    box.querySelector('input, button:not([disabled])')?.focus();
     const onKey = (e) => {
       if (e.key === 'Escape') onClose();
       if (e.key !== 'Tab') return;
-      const items = [...box.querySelectorAll('button:not([disabled])')];
+      const items = [...box.querySelectorAll('button:not([disabled]), input:not([disabled]), textarea')];
       const first = items[0];
       const last = items[items.length - 1];
       if (e.shiftKey && document.activeElement === first) {
@@ -36,6 +36,7 @@ export function Modal({ icon, iconStyle, title, body, actions, onClose }) {
         <div class="fz-modal__icon" style={iconStyle}><Icon name={icon} /></div>
         <h2 class="fz-modal__title" id="modal-title">{title}</h2>
         <p class="fz-modal__body">{body}</p>
+        {children}
         <div class="fz-modal__actions">{actions}</div>
       </div>
     </div>

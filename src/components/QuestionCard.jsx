@@ -41,7 +41,7 @@ export function Verdict({ verdict, teams }) {
 }
 
 // كارت السؤال: الرأس (الشارات والعداد)، النص، الوسائط، والجواب المخفي ورا زر
-export function QuestionCard({ chips, timer, q, revealed, onReveal, verdict, teams, cardClass = '', cardStyle }) {
+export function QuestionCard({ chips, timer, q, revealed, onReveal, onReport, verdict, teams, cardClass = '', cardStyle }) {
   return (
     <section class={`fz-qcard qcard ${cardClass}`} style={cardStyle} aria-live="polite">
       <div class="fz-qcard__head">
@@ -60,6 +60,11 @@ export function QuestionCard({ chips, timer, q, revealed, onReveal, verdict, tea
             <div class="fz-answer__text">{q.a}</div>
           </div>
           <Verdict verdict={verdict} teams={teams} />
+          {onReport && (
+            <button class="fz-btn fz-btn--ghost report-btn" onClick={onReport}>
+              <Icon name="flag" />{t('report.button')}
+            </button>
+          )}
         </div>
       ) : (
         <div class="fz-answer fz-answer--hidden">
