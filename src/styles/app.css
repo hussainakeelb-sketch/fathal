@@ -137,3 +137,111 @@ button{font:inherit}
 .timer-set__label{font-weight:600;font-size:var(--body);white-space:nowrap}
 .timer-set__ctl{display:flex;align-items:center;gap:8px}
 .timer-set__val{white-space:nowrap;font-size:calc(var(--btn)*1.2);min-width:2.6em;text-align:center;font-variant-numeric:tabular-nums}
+
+/* ================= شاشات اللعب ================= */
+
+/* اللوحة وشاشة السؤال تنعرض كاملة بدون scroll من التابلت وفوگ */
+@media (min-width:600px){
+  .scr--fit{height:100dvh;min-height:0;overflow:auto;gap:calc(var(--gap)*.6)}
+  .scr--fit > *{flex:none}
+}
+.compact .fz-team__score{font-size:calc(var(--score)*.7)}
+.compact .fz-team{padding-block:4px}
+@media (max-width:599px){.fz-team{padding:6px 12px;gap:6px}.fz-team__name{font-size:14px}}
+.scr .fz-team__score{font-size:var(--score)}
+.scr .fz-team__name{font-size:var(--btn)}
+.compact .fz-team__score{font-size:calc(var(--score)*.7)}
+
+/* طبقات عائمة */
+.modal-layer{position:fixed;inset:0;z-index:50}
+.toast-layer{position:fixed;inset-inline:0;bottom:calc(var(--space-4) + env(safe-area-inset-bottom));z-index:40;display:flex;justify-content:center;padding-inline:var(--space-4);pointer-events:none}
+.toast-layer .fz-toast{pointer-events:auto;font-size:var(--body)}
+.sticky-foot{position:sticky;bottom:0;padding-block:var(--space-3);background:var(--surface-page)}
+
+/* ---- اختيار الفئات ---- */
+.turnbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.turnbar__chip{font-size:var(--btn);padding:.3em 1em}
+.cat-section{display:flex;flex-direction:column;gap:var(--space-4)}
+.cat-section__title{font-family:var(--font-display);font-weight:400;font-size:calc(var(--h1)*.7);line-height:1.2;margin:var(--space-3) 0 0}
+.cat-grid{display:grid;gap:var(--gap);grid-template-columns:repeat(2,minmax(0,1fr));padding-top:14px}
+@media (min-width:600px){.cat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.cat-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1920px){.cat-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.fz-cat__icon{width:96px;height:96px}.fz-cat__icon .fz-ico{width:48px;height:48px}}
+.scr .fz-cat__name{font-size:var(--catn)}
+.fz-cat:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+.fz-cat[aria-disabled="true"]{cursor:not-allowed}
+.fz-cat[aria-disabled="true"]:hover{transform:none;box-shadow:var(--shadow-pop-md)}
+
+/* ---- اللوحة ---- */
+.board{flex:1 1 auto !important;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:calc(var(--gap) * .7);min-height:0}
+.col{display:flex;flex-direction:column;gap:calc(var(--gap) * .5);min-width:0;min-height:0}
+.colh{background:var(--surface-card);border:2px solid var(--border-ink);border-radius:var(--radius-md);padding:.5em .4em;text-align:center;font-family:var(--font-display);font-size:var(--catn);line-height:1.15;position:relative;color:var(--text-primary)}
+.colh i{position:absolute;top:-.6em;inset-inline-start:.4em;font-style:normal;font-size:.6em;border-radius:999px;padding:0 .5em;font-family:var(--font-text);font-weight:600}
+.colh i.a{background:var(--team-a);color:var(--on-team-a)}
+.colh i.b{background:var(--team-b);color:var(--on-team-b)}
+.tiles{flex:1;display:flex;flex-direction:column;gap:calc(var(--gap) * .5);min-height:0}
+.scr .tiles .fz-tile{flex:1;min-height:0;min-width:0;padding:4px;font-size:var(--tile)}
+@keyframes fz-grow{to{transform:scale(1.25);opacity:0}}
+.fz-tile.is-growing{animation:fz-grow var(--dur-select) var(--ease-out) forwards;z-index:5}
+
+/* الموبايل بالطول: كل فئة صف، وبيه شبكة 3×2 */
+@media (max-width:599px) and (orientation:portrait){
+  .board{display:flex;flex-direction:column;gap:10px}
+  .col{flex-direction:row;align-items:stretch;gap:10px;background:var(--surface-card);border:2px solid var(--border-ink);border-radius:var(--radius-md);padding:8px}
+  .colh{border:none;padding:0;width:76px;flex:none;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .colh i{top:-.9em;inset-inline-start:0}
+  .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,auto);grid-auto-flow:column;gap:8px}
+  .scr .tiles .fz-tile{min-height:var(--target-min);font-size:22px;box-shadow:var(--shadow-pop-sm)}
+}
+/* موبايل بالعرض: 6 أعمدة مثل التابلت، بس أصغر */
+@media (max-height:500px) and (orientation:landscape){
+  .scr--fit{height:auto;min-height:100dvh;overflow:visible}
+  .scr .tiles .fz-tile{min-height:var(--target-min);font-size:22px}
+  .colh{font-size:15px}
+}
+@media (min-width:1920px){.scr .tiles .fz-tile{min-height:0}}
+
+/* ---- السؤال ---- */
+.qcard{flex:1 1 auto !important;min-height:0}
+.fz-qcard__head{padding-bottom:24px}
+.scr .fz-timer__state{bottom:-24px}
+.scr .fz-qcard__q{font-size:var(--q)}
+.scr .fz-chip{font-size:calc(var(--body) * .85)}
+.scr .fz-answer__text{font-size:calc(var(--q) * 1.1)}
+.scr .fz-answer__label{font-size:calc(var(--body)*.85)}
+.scr .fz-timer{width:calc(var(--btnh) * 1.6);height:calc(var(--btnh) * 1.6)}
+.scr .fz-timer__num{font-size:calc(var(--btnh) * .62)}
+.scr .fz-timer.is-ended .fz-timer__num{font-size:calc(var(--btnh) * .34)}
+.scr .fz-timer__state{font-size:max(14px,calc(var(--body)*.8))}
+.scr .fz-judge__hint{font-size:calc(var(--body)*.9)}
+.scr .fz-audio__play{width:calc(var(--btnh)*1.1);height:calc(var(--btnh)*1.1)}
+.scr .fz-audio__time{font-size:var(--btn)}
+.qmedia{flex:1 1 auto;min-height:120px}
+.qmedia img{width:100%;height:100%;object-fit:contain}
+@media (min-width:600px){.qmedia{max-height:none;height:0}.qmedia img{max-height:100%}}
+@media (max-width:599px){.qmedia{max-height:45vh;min-height:180px}}
+@keyframes fz-flip{0%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+.is-flipping{animation:fz-flip var(--dur-reveal) var(--ease-in-out)}
+.is-loading-card{animation:fz-shimmer 1.2s ease-in-out infinite;min-height:240px}
+.tb-title{display:flex;align-items:center;justify-content:center}
+.tb-title .logo{font-size:var(--h1)}
+
+/* أزرار التحكيم ثابتة بأسفل الشاشة بالموبايل */
+.judge-bar{background:var(--surface-page)}
+@media (max-width:599px){
+  .judge-bar{position:sticky;bottom:0;z-index:10;margin-inline:calc(var(--pad-inline) * -1);padding:var(--space-3) var(--pad-inline) calc(var(--space-3) + env(safe-area-inset-bottom));border-top:2px solid var(--border-ink);width:auto;max-width:none}
+}
+.judge-bar .fz-judge .fz-btn{flex:1}
+/* باللابتوب والتلفزيون: التلميح والأزرار بسطر واحد حتى تبقى مساحة أكبر للصورة */
+@media (min-width:1024px){.judge-bar .fz-judge{flex-wrap:nowrap}.judge-bar .fz-judge__hint{width:auto;flex:0 1 auto;max-width:34%}}
+
+/* ---- الفائز ---- */
+.winner{position:relative;overflow:hidden}
+.win-title{font-family:var(--font-display);font-weight:400;font-size:var(--h1);color:var(--text-on-brand);margin:0;line-height:1.15}
+.win-name{border:3px solid #1A1423;border-radius:999px;padding:.2em .9em;font-family:var(--font-display);font-size:calc(var(--disp)*.6);line-height:1.1;box-shadow:0 8px 0 0 #1A1423;max-width:100%;overflow-wrap:anywhere}
+.win-name--a{background:var(--team-a);color:var(--on-team-a)}
+.win-name--b{background:var(--team-b);color:var(--on-team-b)}
+.trophy .fz-ico{width:50%;height:50%}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.conf{position:absolute;top:-30px;width:14px;height:26px;border-radius:4px;animation:fz-fall var(--dur-confetti) var(--ease-out) forwards}
+@keyframes fz-fall{0%{transform:translate(0,0) rotate(0);opacity:1}85%{opacity:1}100%{transform:translate(var(--drift),110vh) rotate(var(--rot));opacity:0}}

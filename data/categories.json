@@ -1,0 +1,61 @@
+{
+  "sections": [
+    { "id": "fan", "name": "فن وإعلام" },
+    { "id": "sport", "name": "رياضة" },
+    { "id": "culture", "name": "لغة وثقافة" },
+    { "id": "geo", "name": "جغرافيا وتاريخ" },
+    { "id": "life", "name": "أكل وحياة" },
+    { "id": "general", "name": "عام" },
+    { "id": "challenge", "name": "تحديات" }
+  ],
+  "categories": [
+    { "id": "iraqi-series", "section": "fan", "name": "مسلسلات عراقية", "icon": "device-tv", "launch": true },
+    { "id": "iraqi-films", "section": "fan", "name": "أفلام ومسرحيات عراقية", "icon": "movie" },
+    { "id": "singers", "section": "fan", "name": "مطربون وأغانٍ عراقية", "icon": "microphone-2" },
+    { "id": "who-said", "section": "fan", "name": "من القائل؟", "icon": "quote" },
+    { "id": "golden-tv", "section": "fan", "name": "تلفزيون الزمن الجميل", "icon": "device-tv-old" },
+    { "id": "guess-story", "section": "fan", "name": "احزر العمل من قصته", "icon": "book" },
+
+    { "id": "iraqi-football", "section": "sport", "name": "كرة القدم العراقية", "icon": "ball-football", "launch": true },
+    { "id": "national-team", "section": "sport", "name": "المنتخب العراقي", "icon": "trophy" },
+    { "id": "iraqi-league", "section": "sport", "name": "الدوري والأندية العراقية", "icon": "shirt-sport" },
+    { "id": "world-football", "section": "sport", "name": "كرة القدم العالمية", "icon": "world" },
+    { "id": "who-am-i-sport", "section": "sport", "name": "من أنا؟ رياضية", "icon": "user-question" },
+
+    { "id": "proverbs", "section": "culture", "name": "أمثال شعبية", "icon": "message-circle", "launch": true },
+    { "id": "iraqi-words", "section": "culture", "name": "كلمات عراقية", "icon": "abc", "launch": true },
+    { "id": "dialects", "section": "culture", "name": "لهجات المحافظات", "icon": "map-2" },
+    { "id": "poets", "section": "culture", "name": "شعراء وأدباء عراقيون", "icon": "feather" },
+
+    { "id": "provinces", "section": "geo", "name": "محافظات ومدن", "icon": "map-pin", "launch": true },
+    { "id": "landmarks", "section": "geo", "name": "معالم وآثار", "icon": "building-monument", "launch": true },
+    { "id": "ancient-history", "section": "geo", "name": "تاريخ العراق القديم", "icon": "building-castle", "launch": true },
+    { "id": "rivers-nature", "section": "geo", "name": "أنهار وأهوار وطبيعة", "icon": "ripple" },
+    { "id": "world-geo", "section": "geo", "name": "جغرافيا العالم", "icon": "globe" },
+    { "id": "flags", "section": "geo", "name": "أعلام ودول", "icon": "flag" },
+
+    { "id": "food", "section": "life", "name": "أكلات عراقية", "icon": "soup", "launch": true },
+    { "id": "sweets", "section": "life", "name": "حلويات ومشروبات", "icon": "cookie" },
+    { "id": "old-markets", "section": "life", "name": "أسواق ومهن قديمة", "icon": "building-store" },
+    { "id": "tayyibeen", "section": "life", "name": "جيل الطيبين", "icon": "device-audio-tape", "launch": true },
+    { "id": "folk-games", "section": "life", "name": "ألعاب شعبية", "icon": "horse-toy" },
+    { "id": "ramadan-eid", "section": "life", "name": "رمضان والعيد", "icon": "moon-stars" },
+
+    { "id": "general", "section": "general", "name": "معلومات عامة", "icon": "bulb", "launch": true, "tiebreak": true },
+    { "id": "science", "section": "general", "name": "علوم وطب", "icon": "flask" },
+    { "id": "animals", "section": "general", "name": "عالم الحيوان", "icon": "paw" },
+    { "id": "prophets", "section": "general", "name": "قصص الأنبياء", "icon": "book-2" },
+    { "id": "cars", "section": "general", "name": "سيارات", "icon": "car" },
+    { "id": "cartoons", "section": "general", "name": "كرتون الطفولة", "icon": "mood-kid", "launch": true },
+    { "id": "anime", "section": "general", "name": "أنمي", "icon": "sparkles" },
+    { "id": "video-games", "section": "general", "name": "ألعاب إلكترونية", "icon": "device-gamepad-2" },
+
+    { "id": "who-am-i", "section": "challenge", "name": "من أنا؟", "icon": "help-circle", "launch": true },
+    { "id": "zoom", "section": "challenge", "name": "صورة مقرّبة", "icon": "zoom-in" },
+    { "id": "order-it", "section": "challenge", "name": "رتّبها", "icon": "sort-ascending" },
+    { "id": "fix-it", "section": "challenge", "name": "صحّح الخطأ", "icon": "pencil-check" },
+    { "id": "two-words", "section": "challenge", "name": "الجواب بكلمتين", "icon": "letter-case" },
+    { "id": "yes-no", "section": "challenge", "name": "إي لو لا؟", "icon": "thumb-up" },
+    { "id": "charades", "section": "challenge", "name": "ولا كلمة", "icon": "mood-happy" }
+  ]
+}

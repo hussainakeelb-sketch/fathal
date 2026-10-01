@@ -10,6 +10,10 @@ import './styles/tokens.css';
 import './styles/bundle.css';
 import './styles/app.css';
 import { App } from './app.jsx';
+import { unlockAudio } from './lib/sound.js';
+
+// ماكو صوت قبل أول ضغطة من المستخدم (المتصفحات تمنعه أصلاً)
+for (const ev of ['pointerdown', 'keydown']) addEventListener(ev, unlockAudio, { capture: true });
 
 if (import.meta.env.DEV) {
   const th = new URLSearchParams(location.hash.slice(1)).get('theme');

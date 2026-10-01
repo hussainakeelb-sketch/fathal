@@ -1,3 +1,5 @@
+import { CAT_ICONS } from '../data/catIcons.js';
+
 // أيقونات Tabler (outline، سمك 2px، رخصة MIT). بس الي نحتاجها، حتى يبقى الموقع خفيف.
 const PATHS = {
   volume: ['M15 8a5 5 0 0 1 0 8', 'M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a.8 .8 0 0 1 1.5 .5v14a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5'],
@@ -10,13 +12,30 @@ const PATHS = {
   check: ['M5 12l5 5l10 -10'],
   x: ['M18 6l-12 12', 'M6 6l12 12'],
   alert: ['M12 9v4', 'M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z', 'M12 16h.01'],
+  play: ['M7 4v16l13 -8z'],
+  pause: ['M6 5h4v14h-4z', 'M14 5h4v14h-4z'],
+  refresh: ['M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4', 'M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4'],
+  eye: ['M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0', 'M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6'],
+  exit: ['M13 12v.01', 'M3 21h18', 'M5 21v-16a2 2 0 0 1 2 -2h7.5m2.5 10.5v7.5', 'M14 7h7m-3 -3l3 3l-3 3'],
+  trophy: ['M8 21l8 0', 'M12 17l0 4', 'M7 4l10 0', 'M17 4v8a5 5 0 0 1 -10 0v-8', 'M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0', 'M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0'],
+  wifiOff: ['M12 18l.01 0', 'M9.172 15.172a4 4 0 0 1 5.656 0', 'M6.343 12.343a7.963 7.963 0 0 1 3.864 -2.14m4.163 .155a7.965 7.965 0 0 1 3.287 2', 'M3.515 9.515a12 12 0 0 1 3.544 -2.455m3.101 -.92a12 12 0 0 1 10.325 3.374', 'M3 3l18 18'],
   info: ['M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0', 'M12 9h.01', 'M11 12h1v4h1'],
 };
 
-export function Icon({ name, class: cls = '', style }) {
+export function Icon({ name, class: cls = '', style, filled }) {
   return (
-    <svg class={`fz-ico ${cls}`} viewBox="0 0 24 24" aria-hidden="true" style={style}>
+    <svg class={`fz-ico ${cls}`} viewBox="0 0 24 24" aria-hidden="true" style={filled ? { fill: 'currentColor', ...style } : style}>
       {PATHS[name].map((d) => <path d={d} />)}
+    </svg>
+  );
+}
+
+// أيقونة الفئة (من ملف مولّد بـ scripts/build-data.mjs)
+export function CatIcon({ name }) {
+  const nodes = CAT_ICONS[name] || CAT_ICONS.bulb || [];
+  return (
+    <svg class="fz-ico" viewBox="0 0 24 24" aria-hidden="true">
+      {nodes.map(([Tag, attrs]) => <Tag {...attrs} />)}
     </svg>
   );
 }
