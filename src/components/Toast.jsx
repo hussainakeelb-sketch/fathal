@@ -13,14 +13,12 @@ export function Toast({ toast, onUndo, onDone }) {
   }, [toast.key]);
 
   return (
-    <div class="toast-layer">
-      <div class={`fz-alert fz-alert--${toast.kind} fz-toast`} role="status" key={toast.key}>
+    <div class={`fz-alert fz-alert--${toast.kind} fz-toast`} role="status" key={toast.key}>
         <span class="fz-alert__icon"><Icon name={ICONS[toast.kind]} /></span>
         <span class="fz-alert__text"><b>{toast.text}</b></span>
         {onUndo && (
           <button class="fz-btn fz-btn--ghost" onClick={onUndo}>{t('toast.undo')}</button>
         )}
-      </div>
     </div>
   );
 }

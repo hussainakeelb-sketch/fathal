@@ -11,7 +11,7 @@ import {
   SYM, other, curTile, tickTimer, togglePause, reveal, judgeCorrect, judgeWrong, backToBoard,
 } from '../lib/game.js';
 
-export function Question({ header, game, setGame, judge }) {
+export function Question({ header, game, setGame, judge, toast }) {
   const [confirm, setConfirm] = useState(false);
   const { cur, teams, turn } = game;
   const { q } = curTile(game);
@@ -78,8 +78,10 @@ export function Question({ header, game, setGame, judge }) {
       />
 
       <div class="judge-bar">
+        {toast && !done && <div class="foot judge-bar__toast">{toast}</div>}
         {done ? (
           <div class="foot">
+            {toast}
             <button class="fz-btn fz-btn--primary" onClick={() => setGame(backToBoard)}>
               {t('q.back')}
               <Icon name="arrow" />

@@ -154,8 +154,8 @@ button{font:inherit}
 
 /* طبقات عائمة */
 .modal-layer{position:fixed;inset:0;z-index:50}
-.toast-layer{position:fixed;inset-inline:0;bottom:calc(var(--space-4) + env(safe-area-inset-bottom));z-index:40;display:flex;justify-content:center;padding-inline:var(--space-4);pointer-events:none}
-.toast-layer .fz-toast{pointer-events:auto;font-size:var(--body)}
+.judge-bar .fz-toast{font-size:var(--body);max-width:100%;animation:fz-pop var(--dur-base) var(--ease-pop)}
+.judge-bar__toast{margin-bottom:var(--space-3)}
 .sticky-foot{position:sticky;bottom:0;padding-block:var(--space-3);background:var(--surface-page)}
 
 /* ---- اختيار الفئات ---- */

@@ -110,7 +110,27 @@ export function App() {
         view = <Board header={gameHeader} game={game} setGame={setGame} />;
         break;
       case 'question':
-        view = <Question header={gameHeader} game={game} setGame={setGame} judge={judge} />;
+        view = (
+          <Question
+            header={gameHeader}
+            game={game}
+            setGame={setGame}
+            judge={judge}
+            // رسالة التراجع تنعرض داخل شريط التحكيم، جنب الزر، حتى ما تغطي أي زر
+            toast={
+              toast && (
+                <Toast
+                  toast={toast}
+                  onDone={() => setToast(null)}
+                  onUndo={() => {
+                    setGame(toast.undo);
+                    setToast(null);
+                  }}
+                />
+              )
+            }
+          />
+        );
         break;
       case 'tiebreak':
         view = <Tiebreak header={gameHeader} game={game} setGame={setGame} />;
@@ -135,16 +155,6 @@ export function App() {
   return (
     <>
       {view}
-      {toast && game?.phase === 'question' && (
-        <Toast
-          toast={toast}
-          onDone={() => setToast(null)}
-          onUndo={() => {
-            setGame(toast.undo);
-            setToast(null);
-          }}
-        />
-      )}
       {confirmEnd && game && (
         <Modal
           icon="exit"
