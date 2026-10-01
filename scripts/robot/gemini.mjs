@@ -49,6 +49,9 @@ async function pickFallbackModel(errorText) {
 export const currentModel = () => model;
 
 let lastError = '';
+let busyCount = 0;
+// سجل تبديل النماذج خلال التشغيل (يطلع بسجل الروبوت)
+export const modelLog = [];
 const short = (t) => String(t).replace(/\s+/g, ' ').slice(0, 220);
 
 async function listFlashModels() {
@@ -116,15 +119,7 @@ export async function ask(parts, { system, search = false, json = true, temperat
       continue;
     }
     if (res.status === 429 || res.status >= 500) {
-      // تجاوزنا الحد أو الخدمة مشغولة: ننتظر ونعيد
       const raw = await res.text();
-      lastError = `${res.status}: ${short(raw)}`;
-      // "limit: 0" يعني هذا النموذج ما إله حصة مجانية بهذا الحساب، فنبدّله
-      if (res.status === 429 && /limit:\s*0\b/.test(raw) && badModels.size < 6) {
-        await pickFallbackModel(raw);
-        attempt--;
-        continue;
-      }
       const info = (() => {
         try {
           return JSON.parse(raw);
@@ -132,9 +127,30 @@ export async function ask(parts, { system, search = false, json = true, temperat
           return {};
         }
       })();
+      // اسم الحصة الي خلصت (بالدقيقة لو باليوم) حتى نعرف وين المشكلة بالضبط
+      const quota = (info?.error?.details || [])
+        .flatMap((d) => d.violations || [])
+        .map((v) => v.quotaId || v.quotaMetric)
+        .filter(Boolean)
+        .join('، ');
+      lastError = `${res.status} ${model}: ${quota || short(info?.error?.message || raw).slice(0, 120)}`;
+
+      // كل نموذج إله حصة مجانية منفصلة. إذا خلصت حصته اليومية، أو مشغول مرتين ورا بعض، نبدّل لنموذج ثاني بدل ما ننتظر
+      const daily = /PerDay/i.test(quota) || /limit:\s*0\b/.test(raw);
+      busyCount = res.status >= 500 ? busyCount + 1 : 0;
+      if (daily || busyCount >= 2) {
+        modelLog.push(lastError);
+        busyCount = 0;
+        try {
+          await pickFallbackModel(raw);
+        } catch {
+          throw new Error('daily-quota'); // ماكو نموذج ثاني، نكمل باچر
+        }
+        attempt--;
+        continue;
+      }
       const retry = info?.error?.details?.find((d) => d.retryDelay)?.retryDelay;
-      const ms = retry ? parseFloat(retry) * 1000 : 20000 * (attempt + 1);
-      if (res.status === 429 && /per day|PerDay/i.test(JSON.stringify(info))) throw new Error('daily-quota');
+      const ms = retry ? parseFloat(retry) * 1000 + 2000 : 30000 * (attempt + 1);
       await sleep(Math.min(ms, 90000));
       continue;
     }
