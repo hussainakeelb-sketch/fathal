@@ -9,7 +9,7 @@ import { ROOT, MOCK, GEMINI, CF, TARGET } from './config.mjs';
 import { Store, loadCategories } from './store.mjs';
 import { processReports } from './reports.mjs';
 import { generate } from './generate.mjs';
-import { geminiUsed, currentModel } from './gemini.mjs';
+import { geminiUsed, currentModel, ensureModel } from './gemini.mjs';
 
 const lines = [];
 const log = (s) => {
@@ -27,12 +27,30 @@ function checkEnv() {
   if (missing.length) throw new Error(`مفاتيح ناقصة: ${missing.join('، ')}`);
 }
 
+// سجل مختصر آخر 30 تشغيل
+function saveLog() {
+  const logFile = path.join(ROOT, 'data/robot-log.json');
+  const history = fs.existsSync(logFile) ? JSON.parse(fs.readFileSync(logFile, 'utf8')) : [];
+  history.unshift({ at: new Date().toISOString(), mock: MOCK || undefined, lines });
+  fs.writeFileSync(logFile, JSON.stringify(history.slice(0, 30), null, 1));
+}
+
 async function main() {
   const started = Date.now();
   checkEnv();
   const { categories } = loadCategories();
   const store = new Store();
   const only = process.env.ROBOT_ONLY; // reports | generate (اختياري)
+
+  // نتأكد إن الذكاء الاصطناعي يشتغل قبل أي شي. إذا ما اشتغل، نسجل السبب ونوقف
+  try {
+    await ensureModel(log);
+  } catch (e) {
+    log(`❌ ${e.message}`);
+    saveLog();
+    process.exitCode = 1;
+    return;
+  }
 
   if (only !== 'generate') {
     try {
@@ -60,11 +78,7 @@ async function main() {
   log(`نموذج Gemini: ${currentModel()}، طلبات: ${geminiUsed()}، ملفات تغيرت: ${saved}، الوقت: ${Math.round((Date.now() - started) / 1000)} ثانية`);
   log(`عدد الأسئلة: ${counts.join(' | ')}`);
 
-  // سجل مختصر آخر 30 تشغيل
-  const logFile = path.join(ROOT, 'data/robot-log.json');
-  const history = fs.existsSync(logFile) ? JSON.parse(fs.readFileSync(logFile, 'utf8')) : [];
-  history.unshift({ at: new Date().toISOString(), mock: MOCK || undefined, lines });
-  fs.writeFileSync(logFile, JSON.stringify(history.slice(0, 30), null, 1));
+  saveLog();
 
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## روبوت فطحل\n\n${lines.map((l) => `- ${l}`).join('\n')}\n`);
 }

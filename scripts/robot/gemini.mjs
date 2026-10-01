@@ -48,6 +48,41 @@ async function pickFallbackModel(errorText) {
 
 export const currentModel = () => model;
 
+let lastError = '';
+const short = (t) => String(t).replace(/\s+/g, ' ').slice(0, 220);
+
+async function listFlashModels() {
+  const res = await fetch(`${API}/models?pageSize=200`, { headers: { 'x-goog-api-key': GEMINI.key } });
+  const { models = [] } = await res.json().catch(() => ({}));
+  return models
+    .filter((m) => m.supportedGenerationMethods?.includes('generateContent') && /flash/.test(m.name) && !/image|tts|live|audio|exp/.test(m.name))
+    .map((m) => m.name.replace('models/', ''))
+    .sort((a, b) => versionOf(b) - versionOf(a) || /lite/.test(a) - /lite/.test(b));
+}
+
+// قبل ما نبدي: نجرب النماذج ونختار أول واحد يشتغل فعلاً بالحصة المجانية، ونسجل سبب رفض الباقي
+export async function ensureModel(log) {
+  if (MOCK) return model;
+  const candidates = [model, ...(await listFlashModels())].filter((m, i, a) => a.indexOf(m) === i).slice(0, 8);
+  for (const m of candidates) {
+    used++;
+    const res = await fetch(`${API}/models/${m}:generateContent`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI.key },
+      body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Reply with the word OK.' }] }] }),
+    });
+    if (res.ok) {
+      model = m;
+      log(`نموذج Gemini المستخدم: ${m}`);
+      return m;
+    }
+    log(`  ✗ ${m}: ${res.status} ${short(await res.text()).slice(0, 160)}`);
+    badModels.add(m);
+    await sleep(3000);
+  }
+  throw new Error('ماكو أي نموذج Gemini يشتغل بهذا المفتاح');
+}
+
 /**
  * طلب واحد لـ Gemini.
  * parts: نص، أو [{text}|{inline_data:{mime_type,data}}]
@@ -82,18 +117,32 @@ export async function ask(parts, { system, search = false, json = true, temperat
     }
     if (res.status === 429 || res.status >= 500) {
       // تجاوزنا الحد أو الخدمة مشغولة: ننتظر ونعيد
-      const info = await res.json().catch(() => ({}));
+      const raw = await res.text();
+      lastError = `${res.status}: ${short(raw)}`;
+      // "limit: 0" يعني هذا النموذج ما إله حصة مجانية بهذا الحساب، فنبدّله
+      if (res.status === 429 && /limit:\s*0\b/.test(raw) && badModels.size < 6) {
+        await pickFallbackModel(raw);
+        attempt--;
+        continue;
+      }
+      const info = (() => {
+        try {
+          return JSON.parse(raw);
+        } catch {
+          return {};
+        }
+      })();
       const retry = info?.error?.details?.find((d) => d.retryDelay)?.retryDelay;
       const ms = retry ? parseFloat(retry) * 1000 : 20000 * (attempt + 1);
       if (res.status === 429 && /per day|PerDay/i.test(JSON.stringify(info))) throw new Error('daily-quota');
       await sleep(Math.min(ms, 90000));
       continue;
     }
-    if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).replace(/\s+/g, ' ').slice(0, 160)}`);
+    if (!res.ok) throw new Error(`Gemini ${res.status}: ${short(await res.text())}`);
     const data = await res.json();
     const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
     if (!text) throw new Error('جواب فاضي من Gemini');
     return json ? parseJSON(text) : text;
   }
-  throw new Error('Gemini ما رد بعد عدة محاولات');
+  throw new Error(`Gemini ما رد بعد عدة محاولات (${lastError})`);
 }

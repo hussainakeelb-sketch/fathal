@@ -37,6 +37,7 @@ jobs:
           D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
 
       - name: رفع التحديث
+        if: always() # حتى لو الروبوت فشل، نرفع السجل حتى نعرف السبب
         run: |
           git config user.name "fathal-robot"
           git config user.email "fathal-robot@users.noreply.github.com"
