@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="فطحل: لعبة أسئلة جماعية بروح عراقية. فريقان، 6 فئات، ومقدّم واحد. مجانية بالكامل وبدون تسجيل." />
+    <meta name="theme-color" content="#FFC72C" />
+    <title>فطحل؟</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      // نطبّق الوضع المحفوظ قبل ما تنرسم الصفحة، حتى ما يرمش اللون
+      try {
+        var th = JSON.parse(localStorage.getItem('fz.theme'));
+        if (th === 'light' || th === 'dark') document.documentElement.setAttribute('data-theme', th);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

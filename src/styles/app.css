@@ -1,0 +1,139 @@
+/* تخطيط الشاشات، مأخوذ من ملفات preview بالديزاين سستم (الكلاسات .scr و.hd و.center…) */
+
+/* الأحجام تكبر تدريجياً: موبايل 360 ← لابتوب 1280 ← تلفزيون 1920 */
+:root{
+  --h1:clamp(28px,calc(28px + 16*(100vw - 360px)/920),44px);
+  --body:clamp(16px,calc(16px + 2*(100vw - 360px)/920),18px);
+  --btn:clamp(18px,calc(18px + 2*(100vw - 360px)/920),20px);
+  --btnh:clamp(48px,calc(48px + 4*(100vw - 360px)/920),52px);
+  --logo:clamp(30px,calc(30px + 10*(100vw - 360px)/920),40px);
+  --disp:clamp(76px,calc(76px + 52*(100vw - 360px)/920),128px);
+  --catn:clamp(18px,calc(18px + 4*(100vw - 360px)/920),22px);
+  --q:clamp(24px,calc(24px + 12*(100vw - 360px)/920),36px);
+  --score:clamp(32px,calc(32px + 16*(100vw - 360px)/920),48px);
+  --tile:clamp(24px,calc(24px + 10*(100vw - 360px)/920),34px);
+  --tileh:clamp(48px,calc(48px + 12*(100vw - 360px)/920),60px);
+  --gap:clamp(16px,calc(16px + 8*(100vw - 360px)/920),24px);
+  --pad-inline:var(--space-4);
+  --pad-block:var(--space-4);
+}
+@media (min-width:600px){:root{--pad-inline:var(--space-5);--pad-block:var(--space-5)}}
+@media (min-width:1024px){:root{--pad-inline:var(--space-7);--pad-block:var(--space-6)}}
+@media (min-width:1280px){:root{
+  --h1:clamp(44px,calc(44px + 28*(100vw - 1280px)/640),72px);
+  --body:clamp(18px,calc(18px + 10*(100vw - 1280px)/640),28px);
+  --btn:clamp(20px,calc(20px + 10*(100vw - 1280px)/640),30px);
+  --btnh:clamp(52px,calc(52px + 20*(100vw - 1280px)/640),72px);
+  --logo:clamp(40px,calc(40px + 20*(100vw - 1280px)/640),60px);
+  --disp:clamp(128px,calc(128px + 72*(100vw - 1280px)/640),200px);
+  --catn:clamp(22px,calc(22px + 12*(100vw - 1280px)/640),34px);
+  --q:clamp(36px,calc(36px + 20*(100vw - 1280px)/640),56px);
+  --score:clamp(48px,calc(48px + 36*(100vw - 1280px)/640),84px);
+  --tile:clamp(34px,calc(34px + 20*(100vw - 1280px)/640),54px);
+  --tileh:clamp(60px,calc(60px + 36*(100vw - 1280px)/640),96px);
+  --gap:clamp(24px,calc(24px + 16*(100vw - 1280px)/640),40px);
+}}
+/* التلفزيون: space-8 ويه هامش أمان 5% من كل جهة */
+@media (min-width:1920px){:root{--pad-inline:calc(var(--space-8) + 5vw);--pad-block:calc(var(--space-6) + 5vh)}}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--surface-page)}
+body{font-family:var(--font-text);color:var(--text-primary);-webkit-text-size-adjust:100%}
+button{font:inherit}
+
+.scr{direction:rtl;font-family:var(--font-text);color:var(--text-primary);background:var(--surface-page);min-height:100dvh;padding:var(--pad-block) var(--pad-inline);display:flex;flex-direction:column;gap:var(--gap)}
+.scr > *{width:100%;max-width:1600px;margin-inline:auto}
+.scr .fz-btn{font-size:var(--btn);min-height:var(--btnh)}
+.scr .fz-btn--icon{width:var(--btnh);padding:0}
+.scr .fz-btn--lg{font-size:calc(var(--btn) * 1.25);min-height:calc(var(--btnh) * 1.25);padding:0 2em}
+.scr .fz-chip{font-size:calc(var(--body) * .85)}
+.scr .fz-field__box input{font-size:var(--btn)}
+.scr .fz-field__msg,.scr .fz-field__count{font-size:max(14px,calc(var(--body)*.8))}
+@media (min-width:1024px){.scr .fz-field__box{min-height:64px}.scr .fz-ico{width:26px;height:26px}}
+@media (min-width:1920px){.scr .fz-field__box{min-height:96px;padding:0 28px}.scr .fz-ico{width:36px;height:36px}}
+
+
+/* الزعفراني نفس اللون بالوضعين، فالعناصر فوقه تاخذ ألوان الوضع الفاتح دائماً.
+   بدون هذا، الزر الأساسي بالوضع الداكن يصير زعفراني فوق زعفراني وما يبين. */
+.brand {
+  --surface-page: #FFF7E0;
+  --surface-card: #FFFDF5;
+  --surface-sunken: #F3E7C4;
+  --surface-brand: #FFC72C;
+  --pattern-star: #E9B01F;
+  --text-primary: #1A1423;
+  --text-secondary: #5C4A1A;
+  --text-disabled: #6B5C30;
+  --text-on-brand: #1A1423;
+  --border-ink: #1A1423;
+  --action-primary: #1A1423;
+  --on-action-primary: #FFC72C;
+  --accent: #C81D4E;
+  --overlay: #1A1423B3;
+  --focus-ring: #1A1423;
+  --team-a: #1D4ED8;
+  --on-team-a: #FFFFFF;
+  --team-a-soft: #DCE6FD;
+  --team-a-ink: #1D4ED8;
+  --team-b: #C2410C;
+  --on-team-b: #FFFFFF;
+  --team-b-soft: #FDE4D3;
+  --team-b-ink: #9A3412;
+  --success: #15803D;
+  --on-success: #FFFFFF;
+  --success-soft: #DCFCE7;
+  --danger: #B91C1C;
+  --on-danger: #FFFFFF;
+  --danger-soft: #FEE2E2;
+  --warning: #B45309;
+  --on-warning: #FFFFFF;
+  --shadow-pop-sm: 0 3px 0 0 #1A1423;
+  --shadow-pop-md: 0 5px 0 0 #1A1423;
+  --shadow-pop-lg: 0 8px 0 0 #1A1423;
+  --shadow-pop-accent: 0 5px 0 0 #C81D4E;
+  --shadow-pressed: 0 1px 0 0 #1A1423;
+  color-scheme: light;
+}
+.brand{background-color:var(--surface-brand);color:var(--text-on-brand)}
+.stars{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpolygon points='28,10 32.6,21.4 44,26 32.6,30.6 28,42 23.4,30.6 12,26 23.4,21.4' fill='%23E9B01F'/%3E%3C/svg%3E")}
+/* أزرار ghost فوق الزعفراني: النص يبقى غامق بالوضعين */
+.brand .fz-btn--ghost{color:var(--text-on-brand)}
+.brand .fz-btn--ghost:hover{background:var(--pattern-star)}
+
+.hd{display:flex;align-items:center;gap:12px}
+.hd .sp{flex:1}
+.logo{font-family:var(--font-display);font-size:var(--logo);line-height:1}
+.logo span{color:var(--accent)}
+.brand .logo span{color:#C81D4E}
+.h1{font-family:var(--font-display);font-weight:400;font-size:var(--h1);line-height:1.15;margin:0}
+.sub{font-size:var(--body);color:var(--text-secondary);margin:0}
+.brand .sub{color:var(--text-on-brand)}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:var(--gap)}
+.center--top{justify-content:flex-start}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:.35em 1em;font-weight:600;font-size:var(--body);border:2px solid var(--border-ink);background:var(--surface-card);color:var(--text-primary)}
+.foot{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+.grow{flex:1}
+.flip{display:inline-flex;transform:scaleX(-1)}
+[dir="ltr"] .flip{transform:none}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---- طريقة اللعب ---- */
+.steps{display:grid;gap:var(--gap);grid-template-columns:minmax(0,1fr);width:100%;max-width:1200px;list-style:none;margin:0;padding:0}
+@media (min-width:1024px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.step{display:flex;gap:14px;align-items:center;background:var(--surface-card);border:2px solid var(--border-ink);border-radius:var(--radius-lg);box-shadow:var(--shadow-pop-md);padding:12px 16px;text-align:start}
+.step__num{flex:none;width:1.6em;height:1.6em;border-radius:50%;background:var(--surface-brand);color:var(--text-on-brand);display:flex;align-items:center;justify-content:center;font-size:var(--h1)}
+.step__text{font-size:var(--body);font-weight:600;line-height:1.5}
+
+/* ---- أسماء الفريقين ---- */
+.teams{display:flex;flex-direction:column;gap:var(--gap);width:100%;max-width:1100px;text-align:start;align-items:stretch}
+@media (min-width:1024px){.teams{flex-direction:row}}
+.teams .fz-field{flex:1;min-width:0}
+.teams .fz-field__label{font-size:var(--body)}
+.vs{font-size:var(--h1);align-self:center;color:var(--accent)}
+.timers{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.timers__grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;width:100%}
+@media (min-width:600px){.timers__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.timer-set{display:flex;align-items:center;gap:10px;justify-content:space-between;background:var(--surface-card);border:2px solid var(--border-ink);border-radius:var(--radius-md);padding:6px;padding-inline-start:14px}
+.timer-set__label{font-weight:600;font-size:var(--body);white-space:nowrap}
+.timer-set__ctl{display:flex;align-items:center;gap:8px}
+.timer-set__val{white-space:nowrap;font-size:calc(var(--btn)*1.2);min-width:2.6em;text-align:center;font-variant-numeric:tabular-nums}
