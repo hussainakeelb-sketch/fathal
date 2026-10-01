@@ -6,6 +6,5 @@ compatibility_date = "2026-09-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "fathal-reports"
-# يتعبّى بعد ما ننشئ قاعدة البيانات على Cloudflare (خطوة النشر)
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "91d0f064-c0e3-4b5c-97a1-e0005212c788"
 migrations_dir = "migrations"
