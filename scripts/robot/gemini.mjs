@@ -113,8 +113,15 @@ export async function ask(parts, { system, search = false, json = true, temperat
       headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI.key },
       body: JSON.stringify(body),
     });
-    if (res.status === 404 && badModels.size < 4) {
-      await pickFallbackModel(await res.text());
+    if (res.status === 404) {
+      // النموذج انسحب: نبدّل لغيره، وإذا ماكو غيره نوقف لباچر
+      const raw = await res.text();
+      modelLog.push(`404 ${model}`);
+      try {
+        await pickFallbackModel(raw);
+      } catch {
+        throw new Error('daily-quota');
+      }
       attempt--; // تبديل النموذج ما ينحسب محاولة
       continue;
     }
