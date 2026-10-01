@@ -8,7 +8,11 @@ HARD RULES (never break them):
 - Never mock any city, tribe, dialect or group.
 - Never quote song lyrics or long copyrighted text (max 6 words).
 - The question must belong clearly to the given category.
-- Difficulty: 200 = most Iraqi adults know it; 400 = needs some knowledge; 600 = hard, only enthusiasts know.
+- Difficulty is HIGH (the players asked for hard questions). Never write easy common-knowledge questions:
+  200 = hard: a well-read adult who follows the topic may know it (e.g. a specific year, a second-tier name, a lesser-known detail).
+  400 = very hard: only real fans/specialists of the topic know it.
+  600 = expert level: precise details (exact years, full names, records, rare facts) that only experts know.
+  The fact must still be verifiable on reliable sources, and the question must stay short and clear.
 - One clear correct answer. No trick questions. No "which of these" multiple choice.`;
 
 export function generatePrompt(cat, need, existing, mediaKind) {
