@@ -1,6 +1,6 @@
 // توليد أسئلة جديدة: الذكاء الاصطناعي يكتب، وبعدين يراجع بشدة (ويه بحث گوگل إذا Gemini متوفر)، وبس الي ينجح ينضاف.
 // قواعد التوازن تنطبق هنا: الصعوبة حسب المقياس، وأسئلة الأرقام سؤال من كل 5 بالكثير بكل مستوى.
-import { ask, aiLeft, aiCaps } from './ai.mjs';
+import { ask, aiLeft, aiCaps, aiProvider } from './ai.mjs';
 import { generatePrompt, reviewPrompt, SYSTEM } from './prompts.mjs';
 import { LEVELS, localCheck, makeId, norm, today, isNumeric, balanceOf } from './store.mjs';
 import { buildMedia } from './media.mjs';
@@ -8,14 +8,14 @@ import { imagesLeft } from './cloudflare.mjs';
 import { TARGET, BALANCE } from './config.mjs';
 
 // كم سؤال نحتاج بكل مستوى حتى نوصل الهدف
-function needFor(store, cat, target) {
+function needFor(store, cat, target, batch) {
   const counts = store.levelCounts(cat.id);
   const perLevel = target / 3;
   const need = {};
-  let left = TARGET.batch;
+  let left = batch;
   // نعبي المستوى الأنقص أول
   for (const p of [...LEVELS].sort((a, b) => counts[a] - counts[b])) {
-    const n = Math.max(0, Math.min(left, Math.ceil(perLevel - counts[p]), Math.ceil(TARGET.batch / 2)));
+    const n = Math.max(0, Math.min(left, Math.ceil(perLevel - counts[p]), Math.ceil(batch / 2)));
     need[p] = n;
     left -= n;
   }
@@ -32,6 +32,8 @@ export async function generate(store, cats, log, { weekly }) {
   const known = store.allNormalized();
   const stats = new Map();
   const { search, vision } = aiCaps();
+  // نماذج Cloudflare أصغر: طلبات أقصر (6 أسئلة) حتى ما يخلص حدها قبل ما تكمل الجواب
+  const batch = aiProvider() === 'cloudflare' ? Math.min(6, TARGET.batch) : TARGET.batch;
   // بدون نموذج يشوف الصور، ما نگدر نتأكد من أي صورة: فالأسئلة تصير نص بس، وفئة الصور المقرّبة تنتظر
   const usable = cats.filter((c) => vision || c.media !== 'commons-image-zoom');
   if (!vision) log('التوليد: نص بس اليوم (النموذج الحالي ما يشوف الصور)');
@@ -49,7 +51,7 @@ export async function generate(store, cats, log, { weekly }) {
     if (!next) break;
     const { c: cat, live } = next;
     const target = weekly ? live + weeklyLeft.get(cat.id) : targetFor(live);
-    const need = needFor(store, cat, Math.max(target, live + 3));
+    const need = needFor(store, cat, Math.max(target, live + 3), batch);
     const s = stats.get(cat.id) || { added: 0, rejected: 0, tries: 0 };
     stats.set(cat.id, s);
     s.tries++;

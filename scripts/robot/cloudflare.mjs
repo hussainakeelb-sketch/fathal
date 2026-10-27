@@ -59,22 +59,51 @@ function textOf(r) {
   if (r?.response && typeof r.response === 'object') return JSON.stringify(r.response);
   const choice = r?.choices?.[0]?.message?.content;
   if (choice) return choice;
-  const out = (r?.output || []).flatMap((o) => o.content || []).map((c) => c.text || '').join('');
+  // صيغة Responses: ناخذ رسالة الجواب بس، مو "تفكير" النموذج
+  const out = (r?.output || [])
+    .filter((o) => !o.type || o.type === 'message')
+    .flatMap((o) => o.content || [])
+    .map((c) => c.text || '')
+    .join('');
   return out || '';
 }
 
-async function runText(model, system, user, { temperature = 0.7, maxTokens = 3000 } = {}) {
+// سبب الجواب الفاضي (مثلاً النموذج صرف كل الحد على التفكير) حتى يطلع بالسجل
+function whyEmpty(r) {
+  const fin = r?.choices?.[0]?.finish_reason || r?.status || r?.incomplete_details?.reason || '';
+  const tokens = r?.usage ? ` ${r.usage.completion_tokens ?? r.usage.output_tokens ?? ''} tokens` : '';
+  return `${fin}${tokens}`.trim() || Object.keys(r || {}).join(',');
+}
+
+// نماذج gpt-oss "تفكر" قبل الجواب، والتفكير ينحسب من الحد. فنخلي التفكير قليل والحد كبير
+const thinks = (model) => /gpt-oss|qwen3/.test(model);
+
+async function runText(model, system, user, { temperature = 0.7, maxTokens = 12000 } = {}) {
+  let r;
   try {
-    return textOf(await cf(`/ai/run/${model}`, {
+    r = await cf(`/ai/run/${model}`, {
       messages: [...(system ? [{ role: 'system', content: system }] : []), { role: 'user', content: user }],
       temperature,
       max_tokens: maxTokens,
-    }));
+      ...(thinks(model) ? { reasoning_effort: 'low' } : {}),
+    });
   } catch (e) {
-    // بعض النماذج (gpt-oss) تقبل بس صيغة instructions + input
     if (e.quota || e.status !== 400) throw e;
-    return textOf(await cf(`/ai/run/${model}`, { instructions: system || undefined, input: user }));
+    r = null;
   }
+  const t = r && textOf(r);
+  if (t) return t;
+  // الصيغة الثانية (Responses) الي تقبلها gpt-oss، ويه تحديد التفكير
+  if (!thinks(model) && r) throw new Error(`جواب فاضي من Cloudflare (${whyEmpty(r)})`);
+  const r2 = await cf(`/ai/run/${model}`, {
+    instructions: system || undefined,
+    input: user,
+    reasoning: { effort: 'low' },
+    max_output_tokens: maxTokens,
+  });
+  const t2 = textOf(r2);
+  if (!t2) throw new Error(`جواب فاضي من Cloudflare (${whyEmpty(r || r2)})`);
+  return t2;
 }
 
 // نختار نموذج النص: المحدد بالإعدادات، أو أول نموذج من القائمة متوفر ويرد صح
