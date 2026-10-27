@@ -1,8 +1,9 @@
-import { useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { t } from '../i18n/index.js';
 import { Header } from '../components/Header.jsx';
 import { Icon } from '../components/Icon.jsx';
 import { TeamNameField } from '../components/TeamNameField.jsx';
+import { fetchIndex } from '../lib/data.js';
 import { loadTimers, saveTimers, TIMER_MIN, TIMER_MAX, TIMER_STEP } from '../lib/prefs.js';
 
 const LEVELS = [200, 400, 600];
@@ -25,6 +26,12 @@ export function Teams({ prefs, go, initial }) {
   // مسكّر بالموبايل، ومفتوح باللابتوب والتلفزيون
   const [open, setOpen] = useState(() => matchMedia('(min-width:1024px)').matches);
   const refB = useRef(null);
+
+  // قائمة الفئات تبدي تنزل من هسة، فشاشة الفئات تطلع فوراً حتى على إنترنت ضعيف.
+  // إذا فشلت، شاشة الفئات تعيد المحاولة وتعرض الخطأ هناك.
+  useEffect(() => {
+    fetchIndex().catch(() => {});
+  }, []);
 
   const { names, errors } = validate(a, b);
   const shown = showErrors ? errors : {};

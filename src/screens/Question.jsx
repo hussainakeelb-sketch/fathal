@@ -74,7 +74,7 @@ export function Question({ header, game, setGame, judge, toast }) {
             timer={cur.timer}
             steal={steal ? active : null}
             running={!done}
-            onTick={() => setGame(tickTimer)}
+            onTick={() => setGame(tickTimer, true)}
             onTogglePause={() => setGame(togglePause)}
           />
         }

@@ -4,3 +4,7 @@ dist
 .wrangler
 public/data
 src/data/catIcons.js
+
+# مهارات وإعدادات Claude المحلية (ما ترتفع للمستودع)
+.claude/
+skills-lock.json

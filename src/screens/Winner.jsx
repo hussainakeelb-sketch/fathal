@@ -46,7 +46,7 @@ export function Winner({ prefs, game, onNew, onHome }) {
           <Icon name="trophy" />
         </div>
         <h1 class="win-title">{t('win.title')}</h1>
-        <div class={`win-name win-name--${w}`}>{SYM[w]} {game.teams[w]}</div>
+        <div class={`win-name win-name--${w}`} translate={false}>{SYM[w]} {game.teams[w]}</div>
         <div class="foot" style={{ gap: 'var(--gap)' }}>
           {['a', 'b'].map((k) => (
             <span class="pill">{t('win.score', { sym: SYM[k], name: game.teams[k], n: game.scores[k] })}</span>

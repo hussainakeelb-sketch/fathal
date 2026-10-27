@@ -86,6 +86,8 @@ export function ReportModal({ q, cat, onClose }) {
           <div class="fz-field__box">
             <input
               id="report-note"
+              name="note"
+              autocomplete="off"
               value={note}
               maxLength={300}
               placeholder={t('report.note.placeholder')}

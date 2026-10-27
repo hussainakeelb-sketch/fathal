@@ -24,6 +24,10 @@ function QuestionImage({ src }) {
           ref={(el) => el && el.complete && el.naturalWidth > 0 && state === 'loading' && setState('ok')}
           src={attempt ? `${src}${src.includes('?') ? '&' : '?'}r=${attempt}` : src}
           alt={t('q.image')}
+          // صور الأسئلة مربعة تقريباً: الأبعاد تحجز مكانها حتى ما تنط الصفحة
+          width={640}
+          height={640}
+          decoding="async"
           onLoad={() => setState('ok')}
           onError={() => setState('error')}
           style={state === 'loading' ? { opacity: 0 } : null}

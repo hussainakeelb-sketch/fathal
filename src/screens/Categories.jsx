@@ -82,11 +82,11 @@ export function Categories({ prefs, game, setGame, onBack }) {
                 const disabled = pick ? !isLast : done;
                 const cls = `fz-cat${pick ? ` is-selected-${pick.team}` : ''}${disabled && !pick ? ' is-disabled' : ''}`;
                 return (
-                  <div
+                  <button
+                    type="button"
                     class={cls}
                     style={{ minWidth: 0 }}
-                    role="button"
-                    tabindex={disabled ? -1 : 0}
+                    tabindex={disabled ? -1 : undefined}
                     aria-pressed={!!pick}
                     aria-disabled={disabled ? 'true' : undefined}
                     aria-label={t('cats.label', {
@@ -94,18 +94,12 @@ export function Categories({ prefs, game, setGame, onBack }) {
                       state: pick ? t('cats.state.taken', { team: game.teams[pick.team] }) : t('cats.state.free'),
                     })}
                     onClick={() => !disabled && setGame((g) => togglePick(g, c))}
-                    onKeyDown={(e) => {
-                      if ((e.key === 'Enter' || e.key === ' ') && !disabled) {
-                        e.preventDefault();
-                        setGame((g) => togglePick(g, c));
-                      }
-                    }}
                   >
-                    {pick && <span class="fz-cat__badge">{SYM[pick.team]} {game.teams[pick.team]}</span>}
-                    <div class="fz-cat__icon"><CatIcon name={c.icon} /></div>
-                    <div class="fz-cat__name">{c.name}</div>
-                    <div class="fz-cat__meta">{t('cats.meta', { n: c.count })}</div>
-                  </div>
+                    {pick && <span class="fz-cat__badge" translate={false}>{SYM[pick.team]} {game.teams[pick.team]}</span>}
+                    <span class="fz-cat__icon"><CatIcon name={c.icon} /></span>
+                    <span class="fz-cat__name">{c.name}</span>
+                    <span class="fz-cat__meta">{t('cats.meta', { n: c.count })}</span>
+                  </button>
                 );
               })}
             </div>

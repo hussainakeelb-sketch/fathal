@@ -38,8 +38,10 @@ function Team({ team, name, score, turn, gain }) {
       {turn && <span class="fz-team__turn">{t('board.turn')}</span>}
       {gain && <span class="fz-team__gain" key={gain.key}>+{gain.points}</span>}
       <span class="fz-team__sym" aria-hidden="true">{SYM[team]}</span>
-      <span class="fz-team__name">{name}</span>
-      <span class="fz-team__score" aria-live="polite">{shown}</span>
+      <span class="fz-team__name" translate={false}>{name}</span>
+      {/* الرقم المتحرك مخفي عن قارئ الشاشة، والرقم النهائي بس ينقرا */}
+      <span class="fz-team__score" aria-hidden="true">{shown}</span>
+      <span class="vh" aria-live="polite">{score}</span>
     </div>
   );
 }

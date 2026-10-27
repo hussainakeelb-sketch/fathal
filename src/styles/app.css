@@ -40,8 +40,18 @@
 html,body{margin:0;background:var(--surface-page)}
 body{font-family:var(--font-text);color:var(--text-primary);-webkit-text-size-adjust:100%}
 button{font:inherit}
+/* اللمس بالموبايل: بدون تأخير الضغطتين وبدون اللمعة الرمادية (الأزرار عندها حالة ضغط خاصة بيها) */
+html{-webkit-tap-highlight-color:transparent}
+button,[role=button],label,input,a{touch-action:manipulation}
+/* سطور متوازنة: ما تبقى كلمة وحدة لحالها بآخر سطر */
+.h1,.win-title,.fz-modal__title,.fz-state__title,.cat-section__title{text-wrap:balance}
+.fz-qcard__q,.fz-answer__text,.fz-modal__body,.sub{text-wrap:pretty}
+/* كارت الفئة صار زر حقيقي */
+button.fz-cat{font:inherit;color:inherit;width:100%}
+.fz-cat > span{display:block}
+.fz-cat > .fz-cat__icon{display:flex}
 
-.scr{direction:rtl;font-family:var(--font-text);color:var(--text-primary);background:var(--surface-page);min-height:100dvh;padding:var(--pad-block) var(--pad-inline);display:flex;flex-direction:column;gap:var(--gap)}
+.scr{direction:rtl;font-family:var(--font-text);color:var(--text-primary);background:var(--surface-page);min-height:100dvh;padding:max(var(--pad-block),env(safe-area-inset-top)) max(var(--pad-inline),env(safe-area-inset-right)) max(var(--pad-block),env(safe-area-inset-bottom)) max(var(--pad-inline),env(safe-area-inset-left));display:flex;flex-direction:column;gap:var(--gap)}
 .scr > *{width:100%;max-width:1600px;margin-inline:auto}
 .scr .fz-btn{font-size:var(--btn);min-height:var(--btnh)}
 .scr .fz-btn--icon{width:var(--btnh);padding:0}
@@ -153,7 +163,7 @@ button{font:inherit}
 .compact .fz-team__score{font-size:calc(var(--score)*.7)}
 
 /* طبقات عائمة */
-.modal-layer{position:fixed;inset:0;z-index:50}
+.modal-layer{position:fixed;inset:0;z-index:50;overscroll-behavior:contain}
 .judge-bar .fz-toast{font-size:var(--body);max-width:100%;animation:fz-pop var(--dur-base) var(--ease-pop)}
 .judge-bar__toast{margin-bottom:var(--space-3)}
 .sticky-foot{position:sticky;bottom:0;padding-block:var(--space-3);background:var(--surface-page)}

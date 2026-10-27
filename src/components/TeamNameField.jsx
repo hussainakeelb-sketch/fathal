@@ -17,7 +17,9 @@ export function TeamNameField({ id, team, label, value, error, onInput, onEnter,
           ref={inputRef}
           value={value}
           maxLength={NAME_MAX}
-          placeholder={t('teams.placeholder')}
+          name={id}
+          placeholder={t(`teams.placeholder.${team}`)}
+          spellcheck={false}
           autocomplete="off"
           enterkeyhint="next"
           aria-invalid={error ? 'true' : undefined}

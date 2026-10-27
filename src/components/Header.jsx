@@ -3,7 +3,7 @@ import { Icon } from './Icon.jsx';
 
 export function Logo({ style }) {
   return (
-    <div class="logo" style={style}>
+    <div class="logo" style={style} translate={false}>
       {t('brand')}<span>؟</span>
     </div>
   );

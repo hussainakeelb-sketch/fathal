@@ -81,7 +81,7 @@ export function Tiebreak({ header, game, setGame }) {
                 key={tb.q.id}
                 timer={tb.timer}
                 running
-                onTick={() => setGame(tbTick)}
+                onTick={() => setGame(tbTick, true)}
                 onTogglePause={() => setGame(tbTogglePause)}
               />
             }

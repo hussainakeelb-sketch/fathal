@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { t } from './i18n/index.js';
 import { useTheme, useMuted } from './lib/prefs.js';
 import { loadGame, saveGame, newGame, endGame } from './lib/game.js';
@@ -33,13 +33,34 @@ export function App() {
   const [toast, setToast] = useState(null); // {kind, text, key, undo}
   const [confirmEnd, setConfirmEnd] = useState(false);
 
-  // يقبل لعبة جديدة أو دالة (g) => لعبة، حتى ما نشتغل على نسخة قديمة إذا صارت ضغطتين ورا بعض
-  const setGame = (u) =>
+  // يقبل لعبة جديدة أو دالة (g) => لعبة، حتى ما نشتغل على نسخة قديمة إذا صارت ضغطتين ورا بعض.
+  // lazy: لثواني العداد بس. الحفظ يكتب اللعبة كلها، فنحفظ الثواني كل 5 ثواني بدل كل ثانية
+  // (أخف على الموبايلات الضعيفة)، وأي خطوة ثانية تنحفظ فوراً.
+  const lastSave = useRef(0);
+  const gameRef = useRef(game);
+  const setGame = (u, lazy = false) =>
     setGameState((prev) => {
       const g = typeof u === 'function' ? u(prev) : u;
-      saveGame(g);
+      gameRef.current = g;
+      const now = Date.now();
+      if (!lazy || now - lastSave.current >= 5000) {
+        saveGame(g);
+        lastSave.current = now;
+      }
       return g;
     });
+
+  // إذا انسدت الصفحة أو صارت بالخلفية، نحفظ آخر ثانية حتى ما يضيع شي
+  useEffect(() => {
+    const flush = () => saveGame(gameRef.current);
+    const onHide = () => document.visibilityState === 'hidden' && flush();
+    addEventListener('pagehide', flush);
+    document.addEventListener('visibilitychange', onHide);
+    return () => {
+      removeEventListener('pagehide', flush);
+      document.removeEventListener('visibilitychange', onHide);
+    };
+  }, []);
 
   // تحكيم المقدّم: يطلع Toast بيه "تراجع" لمدة 5 ثواني
   const judge = (next, info) => {
@@ -78,6 +99,13 @@ export function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [phaseKey]);
+
+  // لون شريط المتصفح يطابق خلفية الشاشة الحالية (زعفراني، فاتح، أو داكن)
+  useEffect(() => {
+    const main = document.querySelector('main.scr');
+    const meta = document.querySelector('meta[name=theme-color]');
+    if (main && meta) meta.content = getComputedStyle(main).backgroundColor;
+  }, [phaseKey, theme]);
 
   // التوست يختفي إذا تغيرت الشاشة (التراجع بس لنفس السؤال)
   useEffect(() => {
