@@ -1,9 +1,10 @@
 // توليد أسئلة جديدة: الذكاء الاصطناعي يكتب، وبعدين يراجع بشدة (ويه بحث گوگل إذا Gemini متوفر)، وبس الي ينجح ينضاف.
 // قواعد التوازن تنطبق هنا: الصعوبة حسب المقياس، وأسئلة الأرقام سؤال من كل 5 بالكثير بكل مستوى.
-import { ask, aiLeft, aiCaps, aiProvider } from './ai.mjs';
+import { ask, askSecond, aiLeft, aiCaps, aiProvider } from './ai.mjs';
 import { generatePrompt, reviewPrompt, SYSTEM } from './prompts.mjs';
 import { LEVELS, localCheck, makeId, norm, today, isNumeric, balanceOf } from './store.mjs';
 import { buildMedia } from './media.mjs';
+import { sourcesForMany } from './wiki.mjs';
 import { imagesLeft } from './cloudflare.mjs';
 import { TARGET, BALANCE } from './config.mjs';
 
@@ -75,7 +76,10 @@ export async function generate(store, cats, log, { weekly }) {
       }
 
       // 3) المراجعة الصارمة (ويه بحث گوگل إذا متوفر)، وتحديد المستوى حسب المقياس
-      const review = await ask(reviewPrompt(cat, items, { search }), { system: SYSTEM, search, temperature: 0, kind: 'review' });
+      // بدون بحث گوگل: مقتطفات ويكيبيديا هي مصدر التأكد
+      const sources = search ? '' : await sourcesForMany(items);
+      // المراجعة من شركة ثانية إذا موجودة: الي كتب السؤال ما يراجع نفسه
+      const review = await (search ? ask : askSecond)(reviewPrompt(cat, items, { search, sources }), { system: SYSTEM, search, temperature: 0, kind: 'review' });
       const results = new Map((review.results || []).map((r) => [Number(r.i), r]));
 
       for (const [i, it] of items.entries()) {

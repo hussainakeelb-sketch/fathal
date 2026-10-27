@@ -2,10 +2,11 @@
 //  1) كل سؤال ياخذ مستواه الصحيح حسب المقياس (200 للمهتم، 400 للمتابع، 600 فطحل)، بس إذا تقييمين منفصلين اتفقوا
 //  2) أسئلة الأرقام الزايدة عن سؤال من كل 5 بالمستوى تنشال، والتوليد يعوّضها بأسئلة مو أرقام
 //  3) أي مستوى ما ينزل أبداً تحت BALANCE.minPerLevel، حتى الفئة ما تنقص
-import { ask, aiLeft, aiCaps } from './ai.mjs';
+import { ask, askSecond, aiLeft, aiCaps } from './ai.mjs';
 import { auditPrompt, SYSTEM } from './prompts.mjs';
 import { LEVELS, isLive, isNumeric, balanceOf, today } from './store.mjs';
 import { TARGET, BALANCE } from './config.mjs';
+import { sourcesForMany } from './wiki.mjs';
 
 const BATCH = 15;
 
@@ -43,8 +44,8 @@ function applyMoves(store, cat, qs) {
   return moved;
 }
 
-async function rate(cat, items, search) {
-  const res = await ask(auditPrompt(cat, items, { search }), { system: SYSTEM, search, temperature: 0, kind: 'audit' });
+async function rate(cat, items, search, sources, second = false) {
+  const res = await (second ? askSecond : ask)(auditPrompt(cat, items, { search, sources }), { system: SYSTEM, search, temperature: 0, kind: 'audit' });
   return new Map((res.results || []).map((r) => [Number(r.i), r]));
 }
 
@@ -81,8 +82,10 @@ export async function audit(store, cats, log) {
       // تأكيد مرتين: نسأل مرتين منفصلتين (المرة الثانية بترتيب مقلوب)، والقرار يمشي بس إذا الجوابين اتفقوا
       let r1, r2;
       try {
-        r1 = await rate(cat, items, search);
-        r2 = await rate(cat, [...items].reverse(), search);
+        // التقييم الثاني من شركة ثانية إذا موجودة (Mistral أو Cloudflare)، وويه مقتطفات ويكيبيديا إذا ماكو بحث گوگل
+        const rev = [...items].reverse();
+        r1 = await rate(cat, items, search, search ? '' : await sourcesForMany(items));
+        r2 = await rate(cat, rev, search, await sourcesForMany(rev), true);
       } catch (e) {
         if (e.message === 'budget' || e.message === 'daily-quota') break outer;
         log(`  ⚠️ مراجعة ${cat.id}: ${e.message.slice(0, 160)}`);

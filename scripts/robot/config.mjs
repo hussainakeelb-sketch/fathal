@@ -13,6 +13,11 @@ export const GEMINI = {
   minGapMs: Number(env.GEMINI_MIN_GAP_MS || 7000), // تقريباً 8 طلبات بالدقيقة
 };
 
+export const MISTRAL = {
+  key: env.MISTRAL_API_KEY, // اختياري: إذا موجود، Mistral يصير عقل ثاني ورأي ثاني
+  model: env.MISTRAL_MODEL || 'mistral-large-latest',
+};
+
 export const AI = {
   maxRequests: Number(env.AI_MAX_REQUESTS || 120), // حد يومي لكل الطلبات (Gemini + Cloudflare)
   maxMinutes: Number(env.ROBOT_MAX_MINUTES || 35), // بعدها الروبوت يوقف بهدوء ويحفظ الي سواه

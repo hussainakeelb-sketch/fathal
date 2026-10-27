@@ -3,13 +3,14 @@
 //   2) يراجع شوية من الأسئلة القديمة على قواعد الصعوبة والتوازن
 //   3) يولّد أسئلة جديدة ويراجعها (كل يوم لحد ما توصل كل الفئات للهدف، بعدها مرة بالأسبوع)
 //   4) يحفظ ويبني ملفات الموقع، وGitHub Actions ترفعها وCloudflare ينشرها تلقائياً
-// العقل: Gemini إذا عنده حصة، وإلا Cloudflare Workers AI. وما يشتغل أكثر من AI.maxMinutes دقيقة.
+// العقل: Gemini إذا عنده حصة، وإلا Mistral، وإلا Cloudflare Workers AI. ويتأكد من ويكيبيديا.
+// اللي ما يتأكد منه يروح لطابور مراجعة أسبوعية يسويها Claude (data/review-queue.json). وما يشتغل أكثر من AI.maxMinutes دقيقة.
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { ROOT, MOCK, CF, TARGET, AI } from './config.mjs';
 import { Store, loadCategories } from './store.mjs';
-import { processReports } from './reports.mjs';
+import { processReports, exportQueue } from './reports.mjs';
 import { audit } from './audit.mjs';
 import { generate } from './generate.mjs';
 import { ensureAI, aiUsed, aiProvider, aiModel } from './ai.mjs';
@@ -72,9 +73,10 @@ async function main() {
       await generate(store, categories, log, { weekly: allFull });
     });
 
+    await step('queue', () => exportQueue(store, categories, log));
     const saved = store.save();
     execFileSync(process.execPath, [path.join(ROOT, 'scripts/build-data.mjs')], { stdio: 'inherit' });
-    log(`العقل: ${aiProvider()} (${aiModel()})، طلبات: ${aiUsed()}، ملفات تغيرت: ${saved}، الوقت: ${Math.round((Date.now() - started) / 1000)} ثانية`);
+    log(`العقل: ${aiModel()}، طلبات: ${aiUsed()}، ملفات تغيرت: ${saved}، الوقت: ${Math.round((Date.now() - started) / 1000)} ثانية`);
     log(`عدد الأسئلة: ${categories.map((c) => `${c.name}: ${store.live(c.id).length}`).join(' | ')}`);
   } finally {
     // السجل ينحفظ دائماً، حتى لو صار خطأ، حتى نعرف شصار

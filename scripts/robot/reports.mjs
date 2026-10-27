@@ -1,13 +1,84 @@
 // معالجة بلاغات اللاعبين: الذكاء الاصطناعي يتأكد من المعلومة (ببحث گوگل إذا Gemini متوفر)، ويقرر يبقي السؤال أو يصلحه أو يحذفه.
-// إذا ما متأكد (unsure)، السؤال يبقى والبلاغ ينتظر مراجعة أدق (Gemini ويه البحث، أو Claude).
+// إذا ما متأكد (unsure)، السؤال يبقى والبلاغ يروح لطابور المراجعة الأسبوعية (Claude):
+//   الروبوت يكتب الطابور بـ data/review-queue.json، وClaude يكتب قراراته بـ data/review-decisions.json،
+//   والروبوت ينفذها بالتشغيل الجاي ويمسح الملف.
+import fs from 'node:fs';
+import path from 'node:path';
+import { ROOT } from './config.mjs';
+import { isLive } from './store.mjs';
 import { d1 } from './cloudflare.mjs';
 import { ask, aiLeft, aiCaps } from './ai.mjs';
+import { sourcesFor } from './wiki.mjs';
 import { reportPrompt, SYSTEM } from './prompts.mjs';
 import { localCheck, today } from './store.mjs';
 
 const MAX_QUESTIONS_PER_RUN = 40;
 
+const QUEUE = path.join(ROOT, 'data/review-queue.json');
+const DECISIONS = path.join(ROOT, 'data/review-decisions.json');
+
+// ملاحظات اللاعبين تنحفظ بمستودع عام: نشيل منها أي إيميل أو رقم تلفون أو رابط
+const clean = (t) =>
+  String(t || '')
+    .replace(/\S+@\S+/g, '[…]')
+    .replace(/https?:\/\/\S+|www\.\S+/g, '[…]')
+    .replace(/[+\d][\d\s-]{7,}\d/g, '[…]')
+    .slice(0, 300);
+
+// قرارات Claude من المراجعة الأسبوعية: [{ "report_ids":[..], "qid":"..", "action":"keep|fix_answer|rewrite|drop_media|remove", "a":"..", "q":"..", "why":".." }]
+async function applyClaudeDecisions(store, log) {
+  if (!fs.existsSync(DECISIONS)) return;
+  let list = [];
+  try {
+    list = JSON.parse(fs.readFileSync(DECISIONS, 'utf8'));
+  } catch (e) {
+    return log(`⚠️ قرارات Claude: الملف مو صالح (${e.message})`);
+  }
+  let n = 0;
+  for (const d of list) {
+    const found = d.qid && store.find(d.qid);
+    const resolution = found && found.q.status !== 'removed' && d.action ? applyDecision(store, found, d) : 'missing';
+    const ids = (d.report_ids || []).filter(Number.isInteger);
+    if (ids.length) {
+      await d1(
+        `UPDATE reports SET status = 'done', resolution = ?, resolved_at = ? WHERE id IN (${ids.map(() => '?').join(',')})`,
+        [`claude:${resolution}`, new Date().toISOString(), ...ids]
+      );
+    }
+    n++;
+  }
+  fs.rmSync(DECISIONS);
+  log(`قرارات Claude: نفذنا ${n} قرار`);
+}
+
+// الطابور للمراجعة الأسبوعية: بلاغات ما تأكد منها الروبوت، وأسئلة شك بيها بالمراجعة على القواعد
+export async function exportQueue(store, cats, log) {
+  const rows = await d1("SELECT id, qid, cat, reason, note FROM reports WHERE status = 'review' ORDER BY id LIMIT 300");
+  const reports = [];
+  const byQ = new Map();
+  for (const r of rows) {
+    if (!byQ.has(r.qid)) byQ.set(r.qid, []);
+    byQ.get(r.qid).push(r);
+  }
+  for (const [qid, rs] of byQ) {
+    const found = store.find(qid);
+    reports.push({
+      qid,
+      report_ids: rs.map((r) => r.id),
+      q: found?.q.q,
+      a: found?.q.a,
+      p: found?.q.p,
+      reasons: rs.map((r) => ({ reason: r.reason, ...(r.note ? { note: clean(r.note) } : {}) })),
+    });
+  }
+  const flagged = [];
+  for (const c of cats) for (const q of store.get(c.id)) if (isLive(q) && q.flag) flagged.push({ cat: c.id, id: q.id, p: q.p, q: q.q, a: q.a, flag: q.flag });
+  fs.writeFileSync(QUEUE, JSON.stringify({ updated: new Date().toISOString(), reports, flagged }, null, 1));
+  log(`طابور المراجعة الأسبوعية: ${reports.length} بلاغ، ${flagged.length} سؤال مشكوك بيه`);
+}
+
 export async function processReports(store, cats, log) {
+  await applyClaudeDecisions(store, log);
   const pending = await d1("SELECT id, qid, cat, q, a, reason, note FROM reports WHERE status = 'pending' ORDER BY id LIMIT 500");
   if (!pending.length) return log('البلاغات: ماكو بلاغات جديدة');
 
@@ -32,7 +103,8 @@ export async function processReports(store, cats, log) {
       let decision;
       try {
         const { search } = aiCaps();
-        decision = await ask(reportPrompt(cat, found.q, reports, { search }), { system: SYSTEM, search, temperature: 0, kind: 'report' });
+        const sources = search ? '' : await sourcesFor(found.q, { maxChars: 900 });
+        decision = await ask(reportPrompt(cat, found.q, reports, { search, sources }), { system: SYSTEM, search, temperature: 0, kind: 'report' });
       } catch (e) {
         if (e.message === 'budget' || e.message === 'daily-quota') break;
         log(`  ⚠️ بلاغ ${qid}: ${e.message}`);
@@ -40,10 +112,8 @@ export async function processReports(store, cats, log) {
       }
       // بدون بحث گوگل، الحذف والتعديل يحتاجون تأكيد أقوى: إذا مو متأكد، ننتظر
       if (decision?.action === 'unsure' || !decision?.action) {
-        // نرجعه للمراجعة بس إذا Gemini (ويه البحث) هو الي ما تأكد؛ غير هيچ يبقى pending حتى Gemini يرجع
-        if (aiCaps().search) {
-          await d1(`UPDATE reports SET status = 'review' WHERE id IN (${reports.map(() => '?').join(',')})`, reports.map((r) => r.id));
-        }
+        // يروح لطابور المراجعة الأسبوعية (Claude) بدل ما نعيده كل يوم
+        await d1(`UPDATE reports SET status = 'review' WHERE id IN (${reports.map(() => '?').join(',')})`, reports.map((r) => r.id));
         done.unsure = (done.unsure || 0) + 1;
         continue;
       }

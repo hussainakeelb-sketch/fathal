@@ -1,5 +1,15 @@
 // التعليمات الي نرسلها للذكاء الاصطناعي. بالإنگليزي لأن النموذج يفهمها أدق، والناتج عربي.
 
+// مقتطفات ويكيبيديا تنضاف للتعليمات حتى النموذج يتأكد منها بدل ما يعتمد على ذاكرته
+function sourcesBlock(sources) {
+  if (!sources) return '';
+  return `
+REFERENCE EXCERPTS (Wikipedia, may be incomplete; #N refers to question N):
+${sources}
+Use them to verify facts: if an excerpt contradicts an answer, that answer is wrong. If the excerpts say nothing about a fact, judge from your own knowledge and be strict.
+`;
+}
+
 // قواعد الصعوبة والتوازن (وافق عليها صاحب المشروع). نفس النص يروح للتوليد والمراجعة وإعادة التقييم.
 export const DIFFICULTY = `DIFFICULTY SCALE (judge it for an Iraqi adult who likes this category's topic):
   200 "للمهتم" = about HALF of such people would know it. A known fact about a known thing.
@@ -54,11 +64,12 @@ Return JSON only:
 {"questions":[{"p":200,"q":"<question>","a":"<short answer>","type":"text","media":null,"fact":"<one short English sentence with the source of the fact>"}]}`;
 }
 
-export function reviewPrompt(cat, items, { search }) {
+export function reviewPrompt(cat, items, { search, sources }) {
   return `You are a strict fact-checker and editor for a family trivia game in Iraq.${search ? ' Use Google Search to verify every fact.' : ' You cannot browse: reject anything you are not completely sure about from your own knowledge.'}
 Category: "${cat.name}" — ${cat.guide}
 ${DIFFICULTY}
 
+${sourcesBlock(sources)}
 For EACH question below decide:
 - "ok": true only if ALL are true: the answer is 100% correct and verifiable; the question has one clear answer; it belongs to the category; it is family friendly with no politics, sects, religion disputes, violence or anything offensive to any Iraqi group; the Arabic reads naturally.
 - If the only problem is the answer wording, put the corrected short answer in "a".
@@ -73,11 +84,12 @@ Return JSON only:
 }
 
 // إعادة تقييم الأسئلة الموجودة على القواعد الجديدة (شوية كل يوم)
-export function auditPrompt(cat, items, { search }) {
+export function auditPrompt(cat, items, { search, sources }) {
   return `You are re-rating existing questions of a family trivia game in Iraq against new rules.${search ? ' Use Google Search when a fact looks doubtful.' : ''}
 Category: "${cat.name}" — ${cat.guide}
 ${DIFFICULTY}
 
+${sourcesBlock(sources)}
 For EACH question give:
 - "p": its correct level by the scale above (200/400/600).
 - "wrong": true ONLY if you are sure the answer is factually wrong or the question is inappropriate; otherwise false.
@@ -90,7 +102,7 @@ Return JSON only:
 {"results":[{"i":0,"p":400,"wrong":false,"why":"..."}]}`;
 }
 
-export function reportPrompt(cat, q, reports, { search }) {
+export function reportPrompt(cat, q, reports, { search, sources }) {
   return `Players reported a problem with this trivia question from a family game in Iraq.${search ? ' Use Google Search to check the facts carefully.' : ' You cannot browse: only decide what you are sure about.'}
 Category: "${cat.name}" — ${cat.guide}
 Question: ${q.q}
@@ -100,6 +112,7 @@ Has media: ${q.m ? q.t : 'no'}
 Reports:
 ${reports.map((r) => `- reason: ${r.reason}${r.note ? `, note: ${r.note}` : ''}`).join('\n')}
 
+${sourcesBlock(sources)}
 Decide ONE action:
 - "keep": the question and answer are correct and appropriate (reports are wrong or abusive).
 - "fix_answer": the answer is wrong or incomplete; give the corrected answer in "a".

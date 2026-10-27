@@ -1,67 +1,77 @@
-// عقل الروبوت: Gemini إذا عنده حصة (أدق، وبيه بحث گوگل ويشوف الصور)، وإلا Cloudflare Workers AI (مجاني).
-// إذا الاثنين خلصت حصتهم، الروبوت يوقف ويكمل باچر. وأي طلب بعد الوقت المسموح يوقف بهدوء.
+// عقل الروبوت. الترتيب: Gemini (أدق، وبيه بحث گوگل ويشوف الصور) ← Mistral ← Cloudflare Workers AI.
+// كل الي يشتغلون اليوم يتجهزون من البداية: الأول هو الرئيسي، والي بعده "رأي ثاني" من شركة مختلفة.
+// إذا واحد خلصت حصته، الروبوت ينتقل للي بعده. وأي طلب بعد الوقت المسموح يوقف بهدوء.
 import { AI, MOCK } from './config.mjs';
 import { askGemini, probeGemini, parseJSON, currentGeminiModel, geminiDead } from './gemini.mjs';
+import { askMistral, probeMistral, mistralModel, mistralDead } from './mistral.mjs';
 import { askCf, ensureCfText, cfTextModel } from './cloudflare.mjs';
 
-let provider = null; // 'gemini' | 'cloudflare'
-let cfReady = false;
+const NAMES = { gemini: 'Gemini', mistral: 'Mistral', cloudflare: 'Cloudflare' };
+let ready = []; // المزودين الي يشتغلون اليوم، بالترتيب
 let used = 0;
 let deadline = Infinity;
 let log = console.log;
 
 export const aiUsed = () => used;
 export const aiLeft = () => (Date.now() > deadline ? 0 : AI.maxRequests - used);
-export const aiProvider = () => provider;
+export const aiProvider = () => ready[0] || null;
+export const aiProviders = () => [...ready];
 // Gemini بس يگدر يبحث بگوگل ويشوف الصور
-export const aiCaps = () => ({ search: provider === 'gemini', vision: provider === 'gemini' });
-export const aiModel = () => (provider === 'gemini' ? currentGeminiModel() : cfTextModel());
-
-async function useCloudflare() {
-  if (!cfReady) {
-    await ensureCfText(log);
-    cfReady = true;
-  }
-  provider = 'cloudflare';
-}
+export const aiCaps = () => ({ search: ready[0] === 'gemini', vision: ready[0] === 'gemini' });
+const modelOf = (p) => ({ gemini: currentGeminiModel, mistral: mistralModel, cloudflare: cfTextModel })[p]?.();
+export const aiModel = () => ready.map((p) => `${NAMES[p]} ${modelOf(p) || ''}`.trim()).join(' + ');
 
 export async function ensureAI(logFn, { deadlineAt } = {}) {
   log = logFn;
   if (deadlineAt) deadline = deadlineAt;
   if (MOCK) {
-    provider = 'gemini';
-    return provider;
+    ready = ['gemini'];
+    return ready[0];
   }
-  if (await probeGemini(log)) {
-    provider = 'gemini';
-    return provider;
+  if (await probeGemini(log)) ready.push('gemini');
+  else log('Gemini معطّل اليوم');
+  if (await probeMistral(log)) ready.push('mistral');
+  try {
+    await ensureCfText(log);
+    ready.push('cloudflare');
+  } catch (e) {
+    log(`Cloudflare: ${e.message}`);
   }
-  log(`Gemini معطّل اليوم، نكمل بـ Cloudflare`);
-  await useCloudflare();
-  return provider;
+  if (!ready.length) throw new Error('ماكو أي ذكاء اصطناعي يشتغل اليوم');
+  log(`العقل الرئيسي: ${NAMES[ready[0]]}${ready[1] ? `، والرأي الثاني: ${NAMES[ready[1]]}` : ''}`);
+  return ready[0];
 }
 
-/** طلب واحد. يرجع JSON (أو نص إذا json:false). يرمي 'budget' أو 'daily-quota' إذا لازم نوقف. */
-export async function ask(parts, opts = {}) {
-  if (aiLeft() <= 0) throw new Error('budget');
-  used++;
-  if (provider === 'gemini') {
-    try {
-      return await askGemini(parts, opts);
-    } catch (e) {
-      if (e.message !== 'daily-quota') throw e;
-      log(`Gemini وقف (${geminiDead()})، نكمل بـ Cloudflare`);
-      try {
-        await useCloudflare();
-      } catch (err) {
-        log(`❌ ${err.message}`);
-        throw new Error('daily-quota');
-      }
-    }
-  }
-  // الصور ما تنرسل لـ Cloudflare: الي يحتاج يشوف صورة يتوقف
-  if (typeof parts !== 'string' && parts.some((p) => p.inline_data)) throw new Error('no-vision');
-  const text = typeof parts === 'string' ? parts : parts.map((p) => p.text || '').join('\n');
-  const out = await askCf(opts.system, text, opts);
+const deadReason = (p) => ({ gemini: geminiDead, mistral: mistralDead })[p]?.() || '';
+
+async function askOne(p, parts, opts) {
+  if (p === 'gemini') return askGemini(parts, opts);
+  // الصور تروح لـ Gemini بس
+  if (typeof parts !== 'string' && parts.some((x) => x.inline_data)) throw new Error('no-vision');
+  const text = typeof parts === 'string' ? parts : parts.map((x) => x.text || '').join('\n');
+  const out = p === 'mistral' ? await askMistral(opts.system, text, opts) : await askCf(opts.system, text, opts);
   return opts.json === false ? out : parseJSON(out);
 }
+
+// يجرب المزودين من index وطالع. الي يرفض (حصة) ينشال من القائمة لباقي اليوم
+async function askFrom(index, parts, opts) {
+  if (aiLeft() <= 0) throw new Error('budget');
+  used++;
+  for (let i = Math.min(index, ready.length - 1); i < ready.length; ) {
+    const p = ready[i];
+    try {
+      return await askOne(p, parts, opts);
+    } catch (e) {
+      if (e.message !== 'daily-quota') throw e;
+      log(`${NAMES[p]} وقف (${deadReason(p) || 'الحصة خلصت'})${ready[i + 1] ? `، نكمل بـ ${NAMES[ready[i + 1]]}` : ''}`);
+      ready.splice(i, 1);
+    }
+  }
+  throw new Error('daily-quota');
+}
+
+/** طلب للعقل الرئيسي. يرجع JSON (أو نص إذا json:false). يرمي 'budget' أو 'daily-quota' إذا لازم نوقف. */
+export const ask = (parts, opts = {}) => askFrom(0, parts, opts);
+
+/** "رأي ثاني": من المزود الثاني (شركة مختلفة) إذا موجود، وإلا من الرئيسي. */
+export const askSecond = (parts, opts = {}) => askFrom(ready.length > 1 ? 1 : 0, parts, opts);
