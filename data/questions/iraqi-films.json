@@ -19,7 +19,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "flag": "audit: Lead actor of 'Saeed Afandi' is not Yusuf Al‑Ani",
   "updated": "2026-10-27"
  },
  {
@@ -42,7 +41,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "flag": "audit: No known horror film with that title; location answer doubtful",
   "updated": "2026-10-27"
  },
  {
@@ -87,7 +85,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "flag": "audit: Source novel author given is fabricated",
   "updated": "2026-10-27"
  },
  {
@@ -299,7 +296,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "pWant": 200,
   "updated": "2026-10-27"
  },
  {
@@ -344,7 +340,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "pWant": 200,
   "updated": "2026-10-27"
  },
  {
@@ -356,7 +351,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "pWant": 200,
   "updated": "2026-10-27"
  },
  {
@@ -379,7 +373,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "flag": "audit: Estimated number of cinemas before 1991 is inaccurate",
   "updated": "2026-10-27",
   "pWas": 400
  },
@@ -448,7 +441,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "pWant": 200,
   "updated": "2026-10-27"
  },
  {
@@ -495,7 +487,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "pWant": 200,
   "updated": "2026-10-27"
  },
  {
@@ -507,7 +498,6 @@
   "src": "claude",
   "created": "2026-10-01",
   "audited": "2026-10-27",
-  "pWant": 200,
   "updated": "2026-10-27"
  },
  {

@@ -1,5 +1,5 @@
 // مراجعة الأسئلة القديمة على قواعد الصعوبة والتوازن الجديدة، شوية كل يوم (TARGET.audit سؤال):
-//  1) كل سؤال ياخذ مستواه الصحيح حسب المقياس (200 للمهتم، 400 للمتابع، 600 فطحل)
+//  1) كل سؤال ياخذ مستواه الصحيح حسب المقياس (200 للمهتم، 400 للمتابع، 600 فطحل)، بس إذا تقييمين منفصلين اتفقوا
 //  2) أسئلة الأرقام الزايدة عن سؤال من كل 5 بالمستوى تنشال، والتوليد يعوّضها بأسئلة مو أرقام
 //  3) أي مستوى ما ينزل أبداً تحت BALANCE.minPerLevel، حتى الفئة ما تنقص
 import { ask, aiLeft, aiCaps } from './ai.mjs';
@@ -23,13 +23,14 @@ function applyMoves(store, cat, qs) {
     changed = false;
     for (const q of qs) {
       if (!isLive(q) || !q.pWant || q.pWant === q.p || balanceOf(qs)[q.p].n <= BALANCE.minPerLevel) continue;
+      if (q.pWant === 200 && isNumeric(q)) continue; // أسئلة السنين ما تنزل لـ 200
       store.update(cat.id, q.id, { pWas: q.p, p: q.pWant, pWant: undefined });
       changed = true;
       moved++;
     }
   }
   // تبديل: سؤال لفوگ ويه سؤال لجوه بين نفس المستويين، فالعدد ما يتغير (يحل حالة 20/20/20)
-  const waiting = qs.filter((q) => isLive(q) && q.pWant && q.pWant !== q.p);
+  const waiting = qs.filter((q) => isLive(q) && q.pWant && q.pWant !== q.p && !(q.pWant === 200 && isNumeric(q)));
   for (const a of waiting) {
     if (!a.pWant || a.pWant === a.p) continue;
     const b = waiting.find((x) => x !== a && x.pWant && x.p === a.pWant && x.pWant === a.p);
@@ -40,6 +41,11 @@ function applyMoves(store, cat, qs) {
     moved += 2;
   }
   return moved;
+}
+
+async function rate(cat, items, search) {
+  const res = await ask(auditPrompt(cat, items, { search }), { system: SYSTEM, search, temperature: 0, kind: 'audit' });
+  return new Map((res.results || []).map((r) => [Number(r.i), r]));
 }
 
 export async function audit(store, cats, log) {
@@ -72,32 +78,38 @@ export async function audit(store, cats, log) {
     for (let i = 0; i < todo.length; i += BATCH) {
       if (done.checked >= TARGET.audit || aiLeft() < 4) break outer;
       const items = todo.slice(i, i + BATCH);
-      let res;
+      // تأكيد مرتين: نسأل مرتين منفصلتين (المرة الثانية بترتيب مقلوب)، والقرار يمشي بس إذا الجوابين اتفقوا
+      let r1, r2;
       try {
-        res = await ask(auditPrompt(cat, items, { search }), { system: SYSTEM, search, temperature: 0, kind: 'audit' });
+        r1 = await rate(cat, items, search);
+        r2 = await rate(cat, [...items].reverse(), search);
       } catch (e) {
         if (e.message === 'budget' || e.message === 'daily-quota') break outer;
         log(`  ⚠️ مراجعة ${cat.id}: ${e.message.slice(0, 160)}`);
         continue;
       }
-      const results = new Map((res.results || []).map((r) => [Number(r.i), r]));
+      const n = items.length;
       for (const [j, q] of items.entries()) {
-        const r = results.get(j);
-        if (!r) continue;
+        const a1 = r1.get(j);
+        const a2 = r2.get(n - 1 - j);
+        if (!a1 || !a2) continue;
         done.checked++;
         const patch = { audited: today() };
-        // غلط أكيد: نحذفه بس إذا تأكدنا ببحث گوگل، وإلا نعلّمه للمراجعة
-        if (r.wrong === true) {
+        // غلط: لازم الجوابين يگولون غلط. نحذفه بس إذا تأكدنا ببحث گوگل، وإلا ملاحظة للمراجعة
+        if (a1.wrong === true && a2.wrong === true) {
           if (search && balanceOf(qs)[q.p].n > BALANCE.minPerLevel) {
-            store.update(cat.id, q.id, { ...patch, status: 'removed', removedWhy: `audit: ${String(r.why || '').slice(0, 150)}` });
+            store.update(cat.id, q.id, { ...patch, status: 'removed', removedWhy: `audit: ${String(a1.why || '').slice(0, 150)}` });
             done.removedWrong++;
             continue;
           }
-          patch.flag = `audit: ${String(r.why || '').slice(0, 150)}`;
+          patch.flag = `audit: ${String(a1.why || '').slice(0, 150)}`;
           done.flagged++;
         }
-        const np = Number(r.p);
-        if (LEVELS.includes(np) && np !== q.p) patch.pWant = np;
+        const p1 = Number(a1.p);
+        const p2 = Number(a2.p);
+        // المستوى يتغير بس إذا الجوابين اتفقوا، وأسئلة السنين والأرقام ما تنزل لـ 200 أبداً
+        if (LEVELS.includes(p1) && p1 === p2 && p1 !== q.p && !(p1 === 200 && isNumeric(q))) patch.pWant = p1;
+        else if (q.pWant) patch.pWant = undefined;
         store.update(cat.id, q.id, patch);
       }
       done.moved += applyMoves(store, cat, qs);
