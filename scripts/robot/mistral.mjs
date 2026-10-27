@@ -33,7 +33,9 @@ async function chat(m, system, user, { temperature = 0.7, json = true, maxTokens
 
 export async function probeMistral(log) {
   if (MOCK || !MISTRAL.key) return false;
-  for (const m of [...new Set([MISTRAL.model, 'mistral-large-latest', 'mistral-medium-latest', 'mistral-small-latest'].filter(Boolean))]) {
+  // الأقوى أول. النماذج الي مو ضمن الباقة المجانية ترجع 403 (tier_not_allowed) فنجرب الي بعدها
+  const list = [MISTRAL.model, 'mistral-large-latest', 'mistral-medium-latest', 'magistral-medium-latest', 'mistral-small-latest', 'mistral-saba-latest', 'open-mistral-nemo', 'ministral-8b-latest'];
+  for (const m of [...new Set(list.filter(Boolean))]) {
     const res = await chat(m, null, 'Reply with JSON {"ok":true}', { temperature: 0, maxTokens: 30 });
     if (res.ok) {
       model = m;
@@ -42,7 +44,7 @@ export async function probeMistral(log) {
     }
     dead = `${res.status} ${m}: ${short(await res.text())}`;
     log(`  ✗ Mistral ${dead}`);
-    if (res.status === 401 || res.status === 403) break; // المفتاح نفسه غلط، ما نجرب غيره
+    if (res.status === 401) break; // المفتاح نفسه غلط، ما نجرب غيره
   }
   return false;
 }

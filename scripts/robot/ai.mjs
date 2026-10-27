@@ -8,6 +8,7 @@ import { askCf, ensureCfText, cfTextModel } from './cloudflare.mjs';
 
 const NAMES = { gemini: 'Gemini', mistral: 'Mistral', cloudflare: 'Cloudflare' };
 let ready = []; // المزودين الي يشتغلون اليوم، بالترتيب
+let started = []; // الي اشتغلوا ببداية اليوم (للسجل)
 let used = 0;
 let deadline = Infinity;
 let log = console.log;
@@ -19,13 +20,14 @@ export const aiProviders = () => [...ready];
 // Gemini بس يگدر يبحث بگوگل ويشوف الصور
 export const aiCaps = () => ({ search: ready[0] === 'gemini', vision: ready[0] === 'gemini' });
 const modelOf = (p) => ({ gemini: currentGeminiModel, mistral: mistralModel, cloudflare: cfTextModel })[p]?.();
-export const aiModel = () => ready.map((p) => `${NAMES[p]} ${modelOf(p) || ''}`.trim()).join(' + ');
+export const aiModel = () => started.map((p) => `${NAMES[p]} ${modelOf(p) || ''}`.trim()).join(' + ');
 
 export async function ensureAI(logFn, { deadlineAt } = {}) {
   log = logFn;
   if (deadlineAt) deadline = deadlineAt;
   if (MOCK) {
     ready = ['gemini'];
+    started = [...ready];
     return ready[0];
   }
   if (await probeGemini(log)) ready.push('gemini');
@@ -38,6 +40,7 @@ export async function ensureAI(logFn, { deadlineAt } = {}) {
     log(`Cloudflare: ${e.message}`);
   }
   if (!ready.length) throw new Error('ماكو أي ذكاء اصطناعي يشتغل اليوم');
+  started = [...ready];
   log(`العقل الرئيسي: ${NAMES[ready[0]]}${ready[1] ? `، والرأي الثاني: ${NAMES[ready[1]]}` : ''}`);
   return ready[0];
 }

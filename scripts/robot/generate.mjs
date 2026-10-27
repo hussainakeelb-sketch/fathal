@@ -86,6 +86,8 @@ export async function generate(store, cats, log, { weekly }) {
         const r = results.get(i);
         if (!r || r.ok !== true) {
           s.rejected++;
+          // أول سببين بكل فئة يطلعون بالسجل، حتى نعرف ليش المراجع يرفض
+          if ((s.why ||= []).length < 2) s.why.push(`[${it.p}] ${it.q.slice(0, 60)} ← ${String(r?.why || 'ماكو جواب').slice(0, 120)}`);
           continue;
         }
         if (r.a) it.a = String(r.a).trim();
@@ -133,6 +135,7 @@ export async function generate(store, cats, log, { weekly }) {
   for (const [id, s] of stats) {
     total += s.added;
     log(`  ${id}: +${s.added} (مرفوض ${s.rejected})${s.stuck ? ' — توقف مؤقتاً' : ''}`);
+    for (const w of s.why || []) log(`    ✗ ${w}`);
   }
   log(`التوليد: انضاف ${total} سؤال جديد`);
   return total;
