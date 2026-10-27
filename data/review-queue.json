@@ -1,0 +1,78 @@
+{
+ "updated": "2026-10-27T20:46:02.077Z",
+ "reports": [],
+ "flagged": [
+  {
+   "cat": "iraqi-films",
+   "id": "iraqi-films-46fbbc00",
+   "p": 600,
+   "q": "فيلم \"أحلام\" لمحمد الدراجي انتج بيا سنة؟",
+   "a": "2006",
+   "flag": "audit: Film Ahlaam (أحلام) by Mohamed Al‑Daradji was released in 2005, not 2006"
+  },
+  {
+   "cat": "iraqi-films",
+   "id": "iraqi-films-b32c771b",
+   "p": 600,
+   "q": "فيلم \"زمان، رجل القصب\" انتج بيا سنة؟",
+   "a": "2003",
+   "flag": "audit: زمان رجل القصب premiered in 2005, not 2003"
+  },
+  {
+   "cat": "iraqi-films",
+   "id": "iraqi-films-3b0a7baf",
+   "p": 600,
+   "q": "فيلم \"غير صالح للعرض\" انتج بيا سنة؟",
+   "a": "2005",
+   "flag": "audit: No known Iraqi film titled غير صالح للعرض; answer appears fabricated"
+  },
+  {
+   "cat": "iraqi-films",
+   "id": "iraqi-films-935019d6",
+   "p": 600,
+   "q": "منو المخرجة العراقية صاحبة فيلم \"العودة إلى بلاد العجائب\"؟",
+   "a": "ميسون الباججي",
+   "flag": "audit: Director of العودة إلى بلاد العجائب is not ميسون الباججي (information not found)"
+  },
+  {
+   "cat": "iraqi-films",
+   "id": "iraqi-films-1f0bb318",
+   "p": 600,
+   "q": "منو كاتب سيناريو فيلم \"الملك غازي\"؟",
+   "a": "معاذ يوسف",
+   "flag": "audit: Screenwriter of فيلم الملك غازي is not معاذ يوسف (no source)"
+  },
+  {
+   "cat": "iraqi-films",
+   "id": "iraqi-films-3066ccf9",
+   "p": 600,
+   "q": "أول فيلم عراقي بيه اسم \"عليا\" البطلة، شنو اسم البطل؟",
+   "a": "عصام",
+   "flag": "audit: First Iraqi film with heroine named عليا does not have بطله named عصام (unverified)"
+  },
+  {
+   "cat": "iraqi-films",
+   "id": "iraqi-films-3f6a7872",
+   "p": 600,
+   "q": "منو المخرج العراقي صاحب فيلم \"بلانچة\"؟",
+   "a": "علي رحيم",
+   "flag": "audit: Film بلانچة was not directed by علي رحيم (no evidence)"
+  },
+  {
+   "cat": "iraqi-league",
+   "id": "iraqi-league-63aa58a8",
+   "p": 200,
+   "q": "نادي أربيل فاز بالدوري العراقي كم مرة ورا بعض من 2007؟",
+   "a": "3 مرات (2007 و2008 و2009)",
+   "flag": "audit: Erbil did not win three consecutive league titles from 2007; only two consecutive titles were achieved"
+  },
+  {
+   "cat": "iraqi-league",
+   "id": "iraqi-league-93f8aabd",
+   "p": 400,
+   "q": "نادي الطلبة شنو جان اسمه الأول؟",
+   "a": "الجامعة",
+   "flag": "audit: No evidence that نادي الطلبة was ever called الجامعة; answer likely incorrect"
+  }
+ ]
+}

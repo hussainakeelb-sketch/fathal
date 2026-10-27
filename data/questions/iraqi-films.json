@@ -507,7 +507,9 @@
   "q": "فيلم \"ابن بابل\" انتج بيا سنة؟",
   "a": "2009",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-46fbbc00",
@@ -516,7 +518,10 @@
   "q": "فيلم \"أحلام\" لمحمد الدراجي انتج بيا سنة؟",
   "a": "2006",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "flag": "audit: Film Ahlaam (أحلام) by Mohamed Al‑Daradji was released in 2005, not 2006",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-b32c771b",
@@ -525,7 +530,11 @@
   "q": "فيلم \"زمان، رجل القصب\" انتج بيا سنة؟",
   "a": "2003",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "flag": "audit: زمان رجل القصب premiered in 2005, not 2003",
+  "pWant": 400,
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-3b0a7baf",
@@ -534,7 +543,10 @@
   "q": "فيلم \"غير صالح للعرض\" انتج بيا سنة؟",
   "a": "2005",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "flag": "audit: No known Iraqi film titled غير صالح للعرض; answer appears fabricated",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-c3c3bf48",
@@ -543,7 +555,9 @@
   "q": "فيلم \"شارع حيفا\" انتج بيا سنة؟",
   "a": "2019",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-bb4408d3",
@@ -552,7 +566,9 @@
   "q": "فيلم \"فجر العالم\" انتج بيا سنة؟",
   "a": "2008",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-2ad300b9",
@@ -561,7 +577,10 @@
   "q": "فيلم \"الملك غازي\" انتج بيا سنة؟",
   "a": "1993",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "pWant": 400,
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-a37b006e",
@@ -570,7 +589,9 @@
   "q": "المركز العراقي للفيلم المستقل تأسس بيا سنة؟",
   "a": "2003",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-935019d6",
@@ -579,7 +600,10 @@
   "q": "منو المخرجة العراقية صاحبة فيلم \"العودة إلى بلاد العجائب\"؟",
   "a": "ميسون الباججي",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "flag": "audit: Director of العودة إلى بلاد العجائب is not ميسون الباججي (information not found)",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-93637e54",
@@ -588,7 +612,9 @@
   "q": "الفنان يوسف العاني توفى بيا سنة؟",
   "a": "2016",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-130c42c0",
@@ -597,7 +623,9 @@
   "q": "الفنان سامي عبد الحميد توفى بيا سنة؟",
   "a": "2019",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-c6b80a5d",
@@ -606,7 +634,10 @@
   "q": "فيلم \"قرنطينة\" منو مخرجه؟",
   "a": "عدي رشيد",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "pWant": 400,
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-1f0bb318",
@@ -615,7 +646,10 @@
   "q": "منو كاتب سيناريو فيلم \"الملك غازي\"؟",
   "a": "معاذ يوسف",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "flag": "audit: Screenwriter of فيلم الملك غازي is not معاذ يوسف (no source)",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-3066ccf9",
@@ -624,7 +658,10 @@
   "q": "أول فيلم عراقي بيه اسم \"عليا\" البطلة، شنو اسم البطل؟",
   "a": "عصام",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "flag": "audit: First Iraqi film with heroine named عليا does not have بطله named عصام (unverified)",
+  "updated": "2026-10-27"
  },
  {
   "id": "iraqi-films-3f6a7872",
@@ -633,6 +670,9 @@
   "q": "منو المخرج العراقي صاحب فيلم \"بلانچة\"؟",
   "a": "علي رحيم",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-27",
+  "flag": "audit: Film بلانچة was not directed by علي رحيم (no evidence)",
+  "updated": "2026-10-27"
  }
 ]
