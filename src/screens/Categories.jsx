@@ -4,7 +4,7 @@ import { Header } from '../components/Header.jsx';
 import { CatIcon } from '../components/Icon.jsx';
 import { ErrorState } from '../components/ErrorState.jsx';
 import { fetchIndex, fetchCategory } from '../lib/data.js';
-import { buildColumn, loadSeen } from '../lib/deck.js';
+import { buildColumn, loadSeenAll } from '../lib/deck.js';
 import { pickTurn, togglePick, startBoard, SYM } from '../lib/game.js';
 
 export function Categories({ prefs, game, setGame, onBack }) {
@@ -26,8 +26,11 @@ export function Categories({ prefs, game, setGame, onBack }) {
     setStarting(true);
     setError(null);
     try {
-      const files = await Promise.all(game.picks.map((p) => fetchCategory(p.id)));
-      const seen = loadSeen();
+      // ملفات الفئات وسجل الأسئلة المستعملة بكل الأجهزة ينزلون سوا
+      const [files, seen] = await Promise.all([
+        Promise.all(game.picks.map((p) => fetchCategory(p.id))),
+        loadSeenAll(game.picks.map((p) => p.id)),
+      ]);
       const columns = game.picks.map((p, i) => ({ ...p, tiles: buildColumn(files[i].questions, { seen }) }));
       setGame(startBoard(game, columns));
     } catch (e) {

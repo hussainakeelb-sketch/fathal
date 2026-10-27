@@ -29,6 +29,11 @@ for (const file of fs.readdirSync(srcDir).filter((f) => f.endsWith('.txt'))) {
     seen.add(key);
     const id = `${cat}-${crypto.createHash('sha1').update(key).digest('hex').slice(0, 8)}`;
     const prev = byId.get(id);
+    // إذا الروبوت عدّل السؤال (بلاغ، مستوى جديد، حذف للتوازن)، تعديله يبقى وما نرجّعه للنص الأصلي
+    if (prev && (prev.updated || prev.status || prev.audited)) {
+      out.push(prev);
+      return;
+    }
     out.push({ id, p: Number(p), t: 'text', q, a, src: 'claude', ...(prev?.created ? { created: prev.created } : { created: new Date().toISOString().slice(0, 10) }) });
   });
 

@@ -8,10 +8,14 @@ export const MOCK = env.ROBOT_MOCK === '1'; // تشغيل تجريبي بدون 
 
 export const GEMINI = {
   key: env.GEMINI_API_KEY,
-  // إذا هذا النموذج ما متوفر، الروبوت يدوّر لحاله على نموذج Flash ثاني مجاني
+  // إذا هذا النموذج ما متوفر، الروبوت يجرب أحدث نموذج Flash، وإذا هم ما اشتغل يكمل بـ Cloudflare
   model: env.GEMINI_MODEL || 'gemini-3.8-flash',
-  maxRequests: Number(env.GEMINI_MAX_REQUESTS || 180), // حد يومي حتى نبقى ضمن الباقة المجانية
   minGapMs: Number(env.GEMINI_MIN_GAP_MS || 7000), // تقريباً 8 طلبات بالدقيقة
+};
+
+export const AI = {
+  maxRequests: Number(env.AI_MAX_REQUESTS || 120), // حد يومي لكل الطلبات (Gemini + Cloudflare)
+  maxMinutes: Number(env.ROBOT_MAX_MINUTES || 35), // بعدها الروبوت يوقف بهدوء ويحفظ الي سواه
 };
 
 export const CF = {
@@ -19,6 +23,7 @@ export const CF = {
   token: env.CF_API_TOKEN,
   d1Id: env.D1_DATABASE_ID,
   maxImages: Number(env.CF_MAX_IMAGES || 120), // الحد المجاني تقريباً 170 صورة باليوم
+  textModel: env.CF_TEXT_MODEL || '', // فارغ = الروبوت يختار لحاله
 };
 
 export const TARGET = {
@@ -27,6 +32,13 @@ export const TARGET = {
   weekly: 10, // بعد ما توصل كل الفئات للهدف: أسئلة جديدة لكل فئة كل أسبوع
   weeklyDay: 5, // الجمعة
   batch: 12, // عدد الأسئلة بكل طلب توليد
+  audit: Number(env.ROBOT_AUDIT || 45), // كم سؤال قديم نراجع على القواعد الجديدة كل يوم
+};
+
+// قواعد التوازن (وافق عليها صاحب المشروع)
+export const BALANCE = {
+  minPerLevel: 20, // ما ننزل أي مستوى بالفئة تحت هذا العدد
+  maxNumericShare: 0.2, // أسئلة السنين والأرقام: سؤال من كل 5 بالكثير، بكل مستوى
 };
 
 export const MEDIA = {

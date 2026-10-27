@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { ROOT, MEDIA, MOCK } from './config.mjs';
 import { aiImage } from './cloudflare.mjs';
-import { ask } from './gemini.mjs';
+import { ask } from './ai.mjs';
 import { mediaCheckPrompt } from './prompts.mjs';
 
 const FREE_LICENSE = /^(public domain|cc0|pd\b|pd-)/i;

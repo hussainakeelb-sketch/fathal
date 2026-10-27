@@ -33,6 +33,10 @@ export function mockGemini(parts, { kind }) {
     if (/reason: inappropriate/.test(text)) return { action: 'remove', why: 'mock' };
     return { action: 'keep', why: 'mock' };
   }
+  if (kind === 'audit') {
+    const count = (text.match(/^\d+\. \[/gm) || []).length;
+    return { results: Array.from({ length: count }, (_, i) => ({ i, p: [200, 400, 600][i % 3], wrong: false, why: 'mock' })) };
+  }
   if (kind === 'media-check') return { matches: true, safe: true, leaks: false };
   return {};
 }

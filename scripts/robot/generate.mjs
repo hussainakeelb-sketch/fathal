@@ -1,10 +1,11 @@
-// توليد أسئلة جديدة: Gemini يكتب، وبعدين Gemini ثاني (ويه بحث گوگل) يراجع بشدة، وبس الي ينجح ينضاف.
-import { ask, geminiLeft } from './gemini.mjs';
+// توليد أسئلة جديدة: الذكاء الاصطناعي يكتب، وبعدين يراجع بشدة (ويه بحث گوگل إذا Gemini متوفر)، وبس الي ينجح ينضاف.
+// قواعد التوازن تنطبق هنا: الصعوبة حسب المقياس، وأسئلة الأرقام سؤال من كل 5 بالكثير بكل مستوى.
+import { ask, aiLeft, aiCaps } from './ai.mjs';
 import { generatePrompt, reviewPrompt, SYSTEM } from './prompts.mjs';
-import { LEVELS, localCheck, makeId, norm, today } from './store.mjs';
+import { LEVELS, localCheck, makeId, norm, today, isNumeric, balanceOf } from './store.mjs';
 import { buildMedia } from './media.mjs';
 import { imagesLeft } from './cloudflare.mjs';
-import { TARGET } from './config.mjs';
+import { TARGET, BALANCE } from './config.mjs';
 
 // كم سؤال نحتاج بكل مستوى حتى نوصل الهدف
 function needFor(store, cat, target) {
@@ -21,19 +22,29 @@ function needFor(store, cat, target) {
   return need;
 }
 
+// سؤال رقم جديد مسموح بس إذا ما يخلي نسبة الأرقام بالمستوى أكثر من الحد
+function numericAllowed(balance, p) {
+  const b = balance[p];
+  return (b.numeric + 1) / (b.n + 1) <= BALANCE.maxNumericShare;
+}
+
 export async function generate(store, cats, log, { weekly }) {
   const known = store.allNormalized();
   const stats = new Map();
-  // الترتيب: الفئات الي بيها أقل أسئلة أول
+  const { search, vision } = aiCaps();
+  // بدون نموذج يشوف الصور، ما نگدر نتأكد من أي صورة: فالأسئلة تصير نص بس، وفئة الصور المقرّبة تنتظر
+  const usable = cats.filter((c) => vision || c.media !== 'commons-image-zoom');
+  if (!vision) log('التوليد: نص بس اليوم (النموذج الحالي ما يشوف الصور)');
+
   const order = () =>
-    cats
+    usable
       .map((c) => ({ c, live: store.live(c.id).length }))
       .sort((a, b) => a.live - b.live);
 
   const targetFor = (live) => (weekly ? live + 1 : live < TARGET.launch ? TARGET.launch : TARGET.full);
-  const weeklyLeft = new Map(cats.map((c) => [c.id, weekly ? TARGET.weekly : Infinity]));
+  const weeklyLeft = new Map(usable.map((c) => [c.id, weekly ? TARGET.weekly : Infinity]));
 
-  while (geminiLeft() >= 3) {
+  while (aiLeft() >= 3) {
     const next = order().find(({ c, live }) => (weekly ? weeklyLeft.get(c.id) > 0 : live < TARGET.full) && !stats.get(c.id)?.stuck);
     if (!next) break;
     const { c: cat, live } = next;
@@ -46,7 +57,8 @@ export async function generate(store, cats, log, { weekly }) {
     try {
       // 1) التوليد
       const existing = store.get(cat.id).map((q) => q.q);
-      const out = await ask(generatePrompt(cat, need, existing, cat.media || 'none'), { system: SYSTEM, temperature: 0.9, kind: 'generate' });
+      const mediaKind = vision ? cat.media || 'none' : 'none';
+      const out = await ask(generatePrompt(cat, need, existing, mediaKind, balanceOf(store.get(cat.id))), { system: SYSTEM, temperature: 0.9, kind: 'generate' });
       let items = (out.questions || []).map((x) => ({ ...x, p: Number(x.p), q: String(x.q || '').trim(), a: String(x.a || '').trim() }));
 
       // 2) فحص محلي + منع التكرار
@@ -60,8 +72,8 @@ export async function generate(store, cats, log, { weekly }) {
         continue;
       }
 
-      // 3) المراجعة الصارمة ويه بحث گوگل
-      const review = await ask(reviewPrompt(cat, items), { search: true, temperature: 0, kind: 'review' });
+      // 3) المراجعة الصارمة (ويه بحث گوگل إذا متوفر)، وتحديد المستوى حسب المقياس
+      const review = await ask(reviewPrompt(cat, items, { search }), { system: SYSTEM, search, temperature: 0, kind: 'review' });
       const results = new Map((review.results || []).map((r) => [Number(r.i), r]));
 
       for (const [i, it] of items.entries()) {
@@ -76,14 +88,19 @@ export async function generate(store, cats, log, { weekly }) {
           s.rejected++;
           continue;
         }
+        // 4) قاعدة الأرقام: إذا المستوى بيه أرقام كفاية، نرفض سؤال الرقم
+        if (isNumeric(it) && !numericAllowed(balanceOf(store.get(cat.id)), it.p)) {
+          s.rejected++;
+          continue;
+        }
         const id = makeId(cat.id, it.q);
-        const q = { id, p: it.p, t: 'text', q: it.q, a: it.a, src: 'robot', created: today(), ...(it.fact ? { fact: String(it.fact).slice(0, 200) } : {}) };
+        const q = { id, p: it.p, t: 'text', q: it.q, a: it.a, src: 'robot', created: today(), audited: today(), ...(it.fact ? { fact: String(it.fact).slice(0, 200) } : {}) };
 
-        // 4) الوسائط (إذا موجودة): إذا فشلت والسؤال يعتمد عليها، ما ننشره
+        // 5) الوسائط (إذا موجودة): إذا فشلت والسؤال يعتمد عليها، ما ننشره
         if ((it.type === 'image' || it.type === 'audio') && it.media) {
           const needsMedia = /(هذا|هاي|هذي|الصورة|الصوت|المقطع|بالصورة)/.test(it.q);
           const canImage = it.media.source !== 'ai' || imagesLeft() > 0;
-          const media = canImage && geminiLeft() > 1 ? await buildMedia(cat.id, id, it) : null;
+          const media = canImage && aiLeft() > 1 ? await buildMedia(cat.id, id, it) : null;
           if (media) {
             q.t = it.type === 'audio' || it.media.kind === 'audio' ? 'audio' : 'image';
             q.m = media.m;
@@ -101,7 +118,7 @@ export async function generate(store, cats, log, { weekly }) {
       if (s.tries >= 6 && s.added === 0) s.stuck = true;
     } catch (e) {
       if (e.message === 'budget' || e.message === 'daily-quota') break;
-      log(`  ⚠️ ${cat.id}: ${e.message}`);
+      log(`  ⚠️ ${cat.id}: ${e.message.slice(0, 200)}`);
       if (s.tries >= 4) s.stuck = true;
     }
   }

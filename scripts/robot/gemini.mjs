@@ -1,16 +1,17 @@
-// الاتصال بـ Google Gemini (الباقة المجانية): توليد ومراجعة وتحقق من الصور، ويه بحث گوگل للتأكد من المعلومات.
+// الاتصال بـ Google Gemini (الباقة المجانية). ميزته: بحث گوگل للتأكد من المعلومات، ويشوف الصور.
+// إذا رفض (الحصة خلصت أو ماكو حصة أصلاً) نتركه فوراً لباقي اليوم ونكمل بـ Cloudflare، بدون انتظار.
 import { GEMINI, MOCK } from './config.mjs';
 import { mockGemini } from './mock.mjs';
 
 const API = 'https://generativelanguage.googleapis.com/v1beta';
-let used = 0;
 let lastAt = 0;
 let model = GEMINI.model;
-
-export const geminiUsed = () => used;
-export const geminiLeft = () => GEMINI.maxRequests - used;
+let dead = '';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const short = (t) => String(t).replace(/\s+/g, ' ').slice(0, 160);
+export const currentGeminiModel = () => model;
+export const geminiDead = () => dead;
 
 // يطلّع JSON من جواب النموذج حتى لو كتب شي قبله أو بعده
 export function parseJSON(text) {
@@ -22,80 +23,50 @@ export function parseJSON(text) {
   return JSON.parse(m[1]);
 }
 
-// النماذج الي جربناها وما اشتغلت (Google يوقف النماذج القديمة بين فترة وفترة)
-const badModels = new Set();
-const versionOf = (n) => (n.match(/(\d+(?:\.\d+)?)/) || [0, 0])[1] * 1;
+async function call(m, body) {
+  return fetch(`${API}/models/${m}:generateContent`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI.key },
+    body: JSON.stringify(body),
+  });
+}
 
-// إذا النموذج ما متوفر: ناخذ النموذج الي Google ينصح بيه برسالة الخطأ، أو أحدث نموذج Flash بالقائمة
-async function pickFallbackModel(errorText) {
-  badModels.add(model);
-  const suggested = errorText.match(/use models\/([\w.-]+)/)?.[1];
-  let next = suggested && !badModels.has(suggested) ? suggested : null;
-  if (!next) {
+// نجرب النموذج المحدد وأحدث نموذج Flash بس (طلبين بالكثير). إذا ما اشتغل، Gemini يبقى معطّل لباقي اليوم.
+export async function probeGemini(log) {
+  if (MOCK) return true;
+  if (!GEMINI.key) {
+    dead = 'ماكو مفتاح';
+    return false;
+  }
+  const candidates = [model];
+  try {
     const res = await fetch(`${API}/models?pageSize=200`, { headers: { 'x-goog-api-key': GEMINI.key } });
     const { models = [] } = await res.json();
-    const ok = models
-      .filter((m) => m.supportedGenerationMethods?.includes('generateContent') && /flash/.test(m.name) && !/image|tts|live|audio|exp/.test(m.name))
-      .map((m) => m.name.replace('models/', ''))
-      .filter((n) => !badModels.has(n))
-      .sort((a, b) => versionOf(b) - versionOf(a));
-    next = ok.find((n) => !/lite|preview/.test(n)) || ok.find((n) => !/lite/.test(n)) || ok[0];
-  }
-  if (!next) throw new Error('ما لگينا نموذج Gemini متوفر');
-  console.log(`⚠️ النموذج ${model} مو متوفر، راح نستخدم ${next}`);
-  model = next;
-}
-
-export const currentModel = () => model;
-
-let lastError = '';
-let busyCount = 0;
-// سجل تبديل النماذج خلال التشغيل (يطلع بسجل الروبوت)
-export const modelLog = [];
-const short = (t) => String(t).replace(/\s+/g, ' ').slice(0, 220);
-
-async function listFlashModels() {
-  const res = await fetch(`${API}/models?pageSize=200`, { headers: { 'x-goog-api-key': GEMINI.key } });
-  const { models = [] } = await res.json().catch(() => ({}));
-  return models
-    .filter((m) => m.supportedGenerationMethods?.includes('generateContent') && /flash/.test(m.name) && !/image|tts|live|audio|exp/.test(m.name))
-    .map((m) => m.name.replace('models/', ''))
-    .sort((a, b) => versionOf(b) - versionOf(a) || /lite/.test(a) - /lite/.test(b));
-}
-
-// قبل ما نبدي: نجرب النماذج ونختار أول واحد يشتغل فعلاً بالحصة المجانية، ونسجل سبب رفض الباقي
-export async function ensureModel(log) {
-  if (MOCK) return model;
-  const candidates = [model, ...(await listFlashModels())].filter((m, i, a) => a.indexOf(m) === i).slice(0, 8);
+    const flash = models
+      .filter((x) => x.supportedGenerationMethods?.includes('generateContent') && /flash/.test(x.name) && !/image|tts|live|audio|exp|lite|preview/.test(x.name))
+      .map((x) => x.name.replace('models/', ''));
+    if (flash[0] && flash[0] !== model) candidates.push(flash.sort().reverse()[0]);
+  } catch {}
   for (const m of candidates) {
-    used++;
-    const res = await fetch(`${API}/models/${m}:generateContent`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI.key },
-      body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Reply with the word OK.' }] }] }),
-    });
+    const res = await call(m, { contents: [{ role: 'user', parts: [{ text: 'Reply with the word OK.' }] }] });
     if (res.ok) {
       model = m;
       log(`نموذج Gemini المستخدم: ${m}`);
-      return m;
+      return true;
     }
-    log(`  ✗ ${m}: ${res.status} ${short(await res.text()).slice(0, 160)}`);
-    badModels.add(m);
-    await sleep(3000);
+    dead = `${res.status} ${m}: ${short(await res.text())}`;
+    log(`  ✗ Gemini ${dead}`);
   }
-  throw new Error('ماكو أي نموذج Gemini يشتغل بهذا المفتاح');
+  return false;
 }
 
 /**
- * طلب واحد لـ Gemini.
- * parts: نص، أو [{text}|{inline_data:{mime_type,data}}]
- * search: يفعّل بحث گوگل (للتأكد من المعلومات)
+ * طلب واحد لـ Gemini. parts: نص، أو [{text}|{inline_data:{mime_type,data}}]
+ * يرمي 'daily-quota' إذا Gemini رفض، حتى الروبوت يبدّل لـ Cloudflare.
  */
-export async function ask(parts, { system, search = false, json = true, temperature = 0.7, kind = 'general' } = {}) {
-  if (geminiLeft() <= 0) throw new Error('budget');
-  used++;
+export async function askGemini(parts, { system, search = false, json = true, temperature = 0.7, kind = 'general' } = {}) {
   if (MOCK) return mockGemini(parts, { kind });
-
+  if (dead) throw new Error('daily-quota');
   const wait = lastAt + GEMINI.minGapMs - Date.now();
   if (wait > 0) await sleep(wait);
 
@@ -106,66 +77,22 @@ export async function ask(parts, { system, search = false, json = true, temperat
     ...(search ? { tools: [{ google_search: {} }] } : {}),
   };
 
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     lastAt = Date.now();
-    const res = await fetch(`${API}/models/${model}:generateContent`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI.key },
-      body: JSON.stringify(body),
-    });
-    if (res.status === 404) {
-      // النموذج انسحب: نبدّل لغيره، وإذا ماكو غيره نوقف لباچر
-      const raw = await res.text();
-      modelLog.push(`404 ${model}`);
-      try {
-        await pickFallbackModel(raw);
-      } catch {
-        throw new Error('daily-quota');
-      }
-      attempt--; // تبديل النموذج ما ينحسب محاولة
-      continue;
+    const res = await call(model, body);
+    if (res.ok) {
+      const data = await res.json();
+      const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
+      if (!text) throw new Error('جواب فاضي من Gemini');
+      return json ? parseJSON(text) : text;
     }
-    if (res.status === 429 || res.status >= 500) {
-      const raw = await res.text();
-      const info = (() => {
-        try {
-          return JSON.parse(raw);
-        } catch {
-          return {};
-        }
-      })();
-      // اسم الحصة الي خلصت (بالدقيقة لو باليوم) حتى نعرف وين المشكلة بالضبط
-      const quota = (info?.error?.details || [])
-        .flatMap((d) => d.violations || [])
-        .map((v) => v.quotaId || v.quotaMetric)
-        .filter(Boolean)
-        .join('، ');
-      lastError = `${res.status} ${model}: ${quota || short(info?.error?.message || raw).slice(0, 120)}`;
-
-      // كل نموذج إله حصة مجانية منفصلة. إذا خلصت حصته اليومية، أو مشغول مرتين ورا بعض، نبدّل لنموذج ثاني بدل ما ننتظر
-      const daily = /PerDay/i.test(quota) || /limit:\s*0\b/.test(raw);
-      busyCount = res.status >= 500 ? busyCount + 1 : 0;
-      if (daily || busyCount >= 2) {
-        modelLog.push(lastError);
-        busyCount = 0;
-        try {
-          await pickFallbackModel(raw);
-        } catch {
-          throw new Error('daily-quota'); // ماكو نموذج ثاني، نكمل باچر
-        }
-        attempt--;
-        continue;
-      }
-      const retry = info?.error?.details?.find((d) => d.retryDelay)?.retryDelay;
-      const ms = retry ? parseFloat(retry) * 1000 + 2000 : 30000 * (attempt + 1);
-      await sleep(Math.min(ms, 90000));
-      continue;
+    const raw = await res.text();
+    // حصة (429) أو نموذج انسحب (404): نتركه لباقي اليوم. مشغول (5xx): نعيد مرة وحدة بس بعد 20 ثانية
+    if (res.status === 429 || res.status === 404 || res.status === 403 || attempt === 1) {
+      dead = `${res.status} ${model}: ${short(raw)}`;
+      throw new Error('daily-quota');
     }
-    if (!res.ok) throw new Error(`Gemini ${res.status}: ${short(await res.text())}`);
-    const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
-    if (!text) throw new Error('جواب فاضي من Gemini');
-    return json ? parseJSON(text) : text;
+    await sleep(20000);
   }
-  throw new Error(`Gemini ما رد بعد عدة محاولات (${lastError})`);
+  throw new Error('daily-quota');
 }

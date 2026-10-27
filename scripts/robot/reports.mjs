@@ -1,6 +1,7 @@
-// معالجة بلاغات اللاعبين: الذكاء الاصطناعي يتأكد من المعلومة ببحث گوگل، ويقرر يبقي السؤال أو يصلحه أو يحذفه.
+// معالجة بلاغات اللاعبين: الذكاء الاصطناعي يتأكد من المعلومة (ببحث گوگل إذا Gemini متوفر)، ويقرر يبقي السؤال أو يصلحه أو يحذفه.
+// إذا ما متأكد (unsure)، السؤال يبقى والبلاغ ينتظر مراجعة أدق (Gemini ويه البحث، أو Claude).
 import { d1 } from './cloudflare.mjs';
-import { ask, geminiLeft } from './gemini.mjs';
+import { ask, aiLeft, aiCaps } from './ai.mjs';
 import { reportPrompt, SYSTEM } from './prompts.mjs';
 import { localCheck, today } from './store.mjs';
 
@@ -20,7 +21,7 @@ export async function processReports(store, cats, log) {
   const done = { keep: 0, fix_answer: 0, rewrite: 0, drop_media: 0, remove: 0, missing: 0 };
   let handled = 0;
   for (const [qid, reports] of byQ) {
-    if (handled >= MAX_QUESTIONS_PER_RUN || geminiLeft() < 5) break;
+    if (handled >= MAX_QUESTIONS_PER_RUN || aiLeft() < 5) break;
     handled++;
     const found = store.find(qid);
     let resolution;
@@ -30,11 +31,21 @@ export async function processReports(store, cats, log) {
       const cat = cats.find((c) => c.id === found.cat) || { name: found.cat, guide: '' };
       let decision;
       try {
-        decision = await ask(reportPrompt(cat, found.q, reports), { system: SYSTEM, search: true, temperature: 0, kind: 'report' });
+        const { search } = aiCaps();
+        decision = await ask(reportPrompt(cat, found.q, reports, { search }), { system: SYSTEM, search, temperature: 0, kind: 'report' });
       } catch (e) {
         if (e.message === 'budget' || e.message === 'daily-quota') break;
         log(`  ⚠️ بلاغ ${qid}: ${e.message}`);
         continue; // يبقى pending ونرجعله باچر
+      }
+      // بدون بحث گوگل، الحذف والتعديل يحتاجون تأكيد أقوى: إذا مو متأكد، ننتظر
+      if (decision?.action === 'unsure' || !decision?.action) {
+        // نرجعه للمراجعة بس إذا Gemini (ويه البحث) هو الي ما تأكد؛ غير هيچ يبقى pending حتى Gemini يرجع
+        if (aiCaps().search) {
+          await d1(`UPDATE reports SET status = 'review' WHERE id IN (${reports.map(() => '?').join(',')})`, reports.map((r) => r.id));
+        }
+        done.unsure = (done.unsure || 0) + 1;
+        continue;
       }
       resolution = applyDecision(store, found, decision);
     }
@@ -45,7 +56,7 @@ export async function processReports(store, cats, log) {
       [resolution, new Date().toISOString(), ...ids]
     );
   }
-  log(`البلاغات: عالجنا ${handled} سؤال — بقى كما هو ${done.keep}، تصحيح جواب ${done.fix_answer}، إعادة صياغة ${done.rewrite}، شيل وسائط ${done.drop_media}، حذف ${done.remove}`);
+  log(`البلاغات: عالجنا ${handled} سؤال — بقى كما هو ${done.keep}، تصحيح جواب ${done.fix_answer}، إعادة صياغة ${done.rewrite}، شيل وسائط ${done.drop_media}، حذف ${done.remove}، ينتظر مراجعة ${done.unsure || 0}`);
 }
 
 function applyDecision(store, { cat, q }, d) {

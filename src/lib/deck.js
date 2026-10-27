@@ -1,6 +1,10 @@
-// اختيار الأسئلة ومنع التكرار على نفس الجهاز.
-// الترتيب: أسئلة ما شافها الجهاز أبداً (الأحدث أولاً) ← الي مر عليها 90 يوم ← أقدم الي شافها.
+// اختيار الأسئلة ومنع التكرار، على هذا الجهاز وعلى كل الأجهزة.
+// السؤال ينحسب مستعمل أول ما ينفتح. ينحفظ بالجهاز، وينرسل للسيرفر حتى ما يطلع فوراً
+// لأي جهاز يبدي لعبة بعده.
+// الترتيب: أسئلة ما انشافت أبداً (الأحدث أولاً) ← الي مر عليها 90 يوم ← أقدم الي انشافت.
 import { load, save, KEYS } from './storage.js';
+
+const SEEN_API = import.meta.env.VITE_SEEN_URL || '/api/seen';
 
 const DAY = 86400000;
 export const FRESH_MS = 90 * DAY;
@@ -15,6 +19,28 @@ export function markSeen(id, now = Date.now()) {
   seen[id] = now;
   for (const k in seen) if (now - seen[k] > FORGET_MS) delete seen[k];
   save(KEYS.seen, seen);
+  // للسيرفر: إذا ما وصل (ماكو نت) عادي، الجهاز نفسه يبقى يتذكر
+  try {
+    const body = JSON.stringify({ id });
+    if (!navigator.sendBeacon?.(SEEN_API, body)) fetch(SEEN_API, { method: 'POST', body, keepalive: true }).catch(() => {});
+  } catch {}
+}
+
+// سجل الأجهزة الثانية للفئات المختارة، مدموج ويه سجل هذا الجهاز (ناخذ الأحدث لكل سؤال).
+// إذا السيرفر تأخر أكثر من 3 ثواني أو فشل، نكمل بسجل الجهاز بس حتى اللعبة ما تتعطل.
+export async function loadSeenAll(cats) {
+  const seen = { ...loadSeen() };
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 3000);
+    const res = await fetch(`${SEEN_API}?cats=${cats.map(encodeURIComponent).join(',')}`, { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (res.ok) {
+      const { seen: global = {} } = await res.json();
+      for (const id in global) if (!(seen[id] >= global[id])) seen[id] = global[id];
+    }
+  } catch {}
+  return seen;
 }
 
 function shuffle(arr) {

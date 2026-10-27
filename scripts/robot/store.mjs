@@ -100,3 +100,19 @@ export function localCheck(item) {
   if (bad) return `كلمة ممنوعة: ${bad.trim()}`;
   return null;
 }
+
+// سؤال "رقم": جوابه سنة أو عدد، أو يسأل عن سنة/كمية (قاعدة التوازن: سؤال من كل 5 بالكثير)
+export function isNumeric(q) {
+  const a = String(q.a || '').trim();
+  return /^[\d٠-٩][\d٠-٩\s.,،/-]*(\s*\S{0,12})?$/.test(a) || /(بيا|بأي|أي|اي) (سنة|عام)|شگد|كم (سنة|عدد|مرة|هدف|كيلو|متر)/.test(String(q.q || ''));
+}
+
+// حالة التوازن لفئة: لكل مستوى، كم سؤال وكم منها أرقام
+export function balanceOf(questions) {
+  const b = {};
+  for (const p of LEVELS) {
+    const lv = questions.filter((q) => q.p === p && isLive(q));
+    b[p] = { n: lv.length, numeric: lv.filter(isNumeric).length };
+  }
+  return b;
+}
