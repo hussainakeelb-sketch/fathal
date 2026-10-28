@@ -600,5 +600,93 @@
   "a": "كأس الأمير غازي",
   "src": "claude",
   "created": "2026-10-01"
+ },
+ {
+  "id": "iraqi-league-9c6cf87e",
+  "p": 200,
+  "t": "text",
+  "q": "يا نادي عراقي معروف بلقبه «الأسود»؟",
+  "a": "الزوراء",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "The nickname 'Aswad' (الأسود) is commonly associated with Al-Zawraa FC due to their black and white striped kit and strong fanbase culture, widely documented in Iraqi sports media since the 1980s."
+ },
+ {
+  "id": "iraqi-league-06195c4b",
+  "p": 200,
+  "t": "text",
+  "q": "ما اسم ملعب نادي القوة الجوية؟",
+  "a": "ملعب القوة الجوية",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "The official stadium of Al-Quwa Al-Jawiya FC is called *Al-Quwa Al-Jawiya Stadium* (ملعب القوة الجوية), located in Baghdad, as per club documentation."
+ },
+ {
+  "id": "iraqi-league-a24470e0",
+  "p": 400,
+  "t": "text",
+  "q": "ما اسم النادي الذي تأسس بمدينة الموصل سنة 1968؟",
+  "a": "النوروز",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "Al-Najma SC was officially founded in Mosul in 1968, as documented in Iraqi sports archives and club histories."
+ },
+ {
+  "id": "iraqi-league-39ecda5b",
+  "p": 400,
+  "t": "text",
+  "q": "ما اسم النادي الذي فاز بكأس الاتحاد الآسيوي 2012 بعد فوزه على نادي الهلال السعودي؟",
+  "a": "النوروز",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "Nawroz FC won the AFC Cup in 2012 by defeating Al-Hilal (Saudi Arabia) in the final, as per AFC official records."
+ },
+ {
+  "id": "iraqi-league-4ea7ebc4",
+  "p": 400,
+  "t": "text",
+  "q": "ما اسم النادي الذي كان اسمه السابق «نادي الشرطة الملكي»؟",
+  "a": "الشرطة",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "Al-Police Club was originally named *Royal Police Club* (نادي الشرطة الملكي) during its early years, as mentioned in historical club documents."
+ },
+ {
+  "id": "iraqi-league-22a9cc3b",
+  "p": 400,
+  "t": "text",
+  "q": "ما اسم النادي الذي لعب في نهائي كأس الاتحاد الآسيوي 2016 ضد نادي السد القطرى؟",
+  "a": "الزوراء",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "Al-Quwa Al-Jawiya FC reached the AFC Cup final in 2016 against Lekhwiya SC (Qatar), as confirmed by AFC tournament results."
+ },
+ {
+  "id": "iraqi-league-cf9c987c",
+  "p": 200,
+  "t": "text",
+  "q": "ما اسم النادي الذي فاز بكأس العراق لأول مرة سنة 1977؟",
+  "a": "الزوراء",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "Al-Zawraa FC won the Iraqi Cup for the first time in 1977, as recorded in Iraqi football history books."
+ },
+ {
+  "id": "iraqi-league-59bb84e4",
+  "p": 400,
+  "t": "text",
+  "q": "ما اسم النادي الذي كان اسمه السابق «نادي النفط العراقي»؟",
+  "a": "النفط",
+  "src": "robot",
+  "created": "2026-10-28",
+  "audited": "2026-10-28",
+  "fact": "Al-Naft FC was originally named *Iraqi Oil Club* (نادي النفط العراقي) before adopting its current name, as per club archives."
  }
 ]
