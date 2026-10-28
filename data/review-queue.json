@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T07:04:54.745Z",
+ "updated": "2026-10-27T20:46:02.077Z",
  "reports": [],
  "flagged": [
   {
@@ -59,14 +59,6 @@
    "flag": "audit: Film بلانچة was not directed by علي رحيم (no evidence)"
   },
   {
-   "cat": "golden-tv",
-   "id": "golden-tv-eaa53d28",
-   "p": 400,
-   "q": "برنامج \"الرياضة في أسبوع\" استمر لحد بيا سنة؟",
-   "a": "1993",
-   "flag": "audit: برنامج 'الرياضة في أسبوع' لم يذكر أنه استمر حتى سنة 1993، ولم يتم ذكر تاريخ إنهائه في المصادر"
-  },
-  {
    "cat": "iraqi-league",
    "id": "iraqi-league-63aa58a8",
    "p": 200,
@@ -81,30 +73,6 @@
    "q": "نادي الطلبة شنو جان اسمه الأول؟",
    "a": "الجامعة",
    "flag": "audit: No evidence that نادي الطلبة was ever called الجامعة; answer likely incorrect"
-  },
-  {
-   "cat": "landmarks",
-   "id": "landmarks-5b33584e",
-   "p": 400,
-   "q": "ساعة كنيسة الساعة بالموصل جانت هدية من منو؟",
-   "a": "الإمبراطورة أوجيني",
-   "flag": "audit: The clock of the Mosul Cathedral (ساعة كنيسة الساعة) is not documented as a gift from Empress Eugenie. This is a historical error."
-  },
-  {
-   "cat": "landmarks",
-   "id": "landmarks-0a728e27",
-   "p": 400,
-   "q": "زقورة عقرقوف بناها يا ملك كاشي؟",
-   "a": "كوريگالزو الأول",
-   "flag": "audit: The ziggurat of Ur is attributed to Ur-Nammu, not King Kuriqalzu I. The ziggurat of Ur is also known as Etemenanki, and it is not specifically attribu"
-  },
-  {
-   "cat": "landmarks",
-   "id": "landmarks-3b29bc85",
-   "p": 600,
-   "q": "شگد عرض قوس طاق كسرى تقريباً؟",
-   "a": "25 متر",
-   "flag": "audit: The arch of the Kayseri Gate (قوس كسرى) is documented to have a span of approximately 25 meters, but this is not a well-known fact for the general Ira"
   }
  ]
 }
