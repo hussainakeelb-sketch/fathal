@@ -14,8 +14,8 @@ export const mistralModel = () => model;
 export const mistralDead = () => dead;
 
 async function chat(m, system, user, { temperature = 0.7, json = true, maxTokens = 8000 } = {}) {
-  // الباقة المجانية تسمح تقريباً بطلب بالثانية
-  const wait = lastAt + 1500 - Date.now();
+  // الباقة المجانية حدّها تقريباً طلب بالثانية، فنترك فاصل أكبر شوية
+  const wait = lastAt + 2500 - Date.now();
   if (wait > 0) await sleep(wait);
   lastAt = Date.now();
   return fetch(`${API}/chat/completions`, {
@@ -33,10 +33,17 @@ async function chat(m, system, user, { temperature = 0.7, json = true, maxTokens
 
 export async function probeMistral(log) {
   if (MOCK || !MISTRAL.key) return false;
-  // الأقوى أول. النماذج الي مو ضمن الباقة المجانية ترجع 403 (tier_not_allowed) فنجرب الي بعدها
-  const list = [MISTRAL.model, 'mistral-large-latest', 'mistral-medium-latest', 'magistral-medium-latest', 'mistral-small-latest', 'mistral-saba-latest', 'open-mistral-nemo', 'ministral-8b-latest'];
+  // الأقوى أول. النماذج الي مو ضمن الباقة المجانية ترجع 403 (tier_not_allowed) فنجرب الي بعدها.
+  // النماذج الصغيرة (nemo، ministral) ممنوعة: جربناها وكتبت معلومات غلط كثيرة.
+  const list = [MISTRAL.model, 'mistral-large-latest', 'mistral-medium-latest', 'mistral-small-latest', 'mistral-saba-latest'];
   for (const m of [...new Set(list.filter(Boolean))]) {
-    const res = await chat(m, null, 'Reply with JSON {"ok":true}', { temperature: 0, maxTokens: 30 });
+    let res;
+    // "Rate limit" يعني بسرعة زايدة، مو إن النموذج ممنوع: ننتظر ونعيد نفس النموذج
+    for (let k = 0; k < 3; k++) {
+      res = await chat(m, null, 'Reply with JSON {"ok":true}', { temperature: 0, maxTokens: 30 });
+      if (res.status !== 429) break;
+      await sleep(6000 * (k + 1));
+    }
     if (res.ok) {
       model = m;
       log(`نموذج Mistral المستخدم: ${m}`);
@@ -62,9 +69,9 @@ export async function askMistral(system, user, { temperature, json = true, kind 
       throw new Error('جواب فاضي من Mistral');
     }
     const raw = await res.text();
-    // 429 مرة أو مرتين = سرعة (ننتظر شوية). أكثر = الحصة خلصت
+    // 429 = سرعة زايدة (ننتظر ونعيد). إذا تكرر ثلاث مرات = الحصة خلصت
     if (res.status === 429 && attempt < 2) {
-      await sleep(5000 * (attempt + 1));
+      await sleep(10000 * (attempt + 1));
       continue;
     }
     if (res.status === 429 || res.status === 401 || res.status === 403) {

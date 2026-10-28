@@ -18,6 +18,7 @@
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",
     "@tabler/icons": "^3.48.0",
+    "jsonrepair": "^3.15.0",
     "sharp": "^0.35.5",
     "vite": "^8.3.1",
     "wrangler": "^4.145.0"

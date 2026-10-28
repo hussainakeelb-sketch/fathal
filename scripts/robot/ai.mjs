@@ -17,6 +17,9 @@ export const aiUsed = () => used;
 export const aiLeft = () => (Date.now() > deadline ? 0 : AI.maxRequests - used);
 export const aiProvider = () => ready[0] || null;
 export const aiProviders = () => [...ready];
+// قاعدة أمان: ما نضيف سؤال ولا نغيّر مستوى إلا إذا الي يكتب والي يراجع من شركتين مختلفتين،
+// أو Gemini ويه بحث گوگل. نموذج واحد يراجع نفسه يمرّر أغلاطه (صار هذا يوم 2026-10-28).
+export const aiHasSecondOpinion = () => ready[0] === 'gemini' || ready.length >= 2;
 // Gemini بس يگدر يبحث بگوگل ويشوف الصور
 export const aiCaps = () => ({ search: ready[0] === 'gemini', vision: ready[0] === 'gemini' });
 const modelOf = (p) => ({ gemini: currentGeminiModel, mistral: mistralModel, cloudflare: cfTextModel })[p]?.();

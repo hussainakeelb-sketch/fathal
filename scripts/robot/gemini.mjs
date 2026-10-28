@@ -2,6 +2,7 @@
 // إذا رفض (الحصة خلصت أو ماكو حصة أصلاً) نتركه فوراً لباقي اليوم ونكمل بـ Cloudflare، بدون انتظار.
 import { GEMINI, MOCK } from './config.mjs';
 import { mockGemini } from './mock.mjs';
+import { jsonrepair } from 'jsonrepair';
 
 const API = 'https://generativelanguage.googleapis.com/v1beta';
 let lastAt = 0;
@@ -20,7 +21,12 @@ export function parseJSON(text) {
   } catch {}
   const m = text.match(/```(?:json)?\s*([\s\S]*?)```/) || text.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
   if (!m) throw new Error('ماكو JSON بالجواب');
-  return JSON.parse(m[1]);
+  try {
+    return JSON.parse(m[1]);
+  } catch {
+    // النماذج الصغيرة أحياناً تنسى فارزة أو قوس: نصلحه بدل ما نرمي الجواب كله
+    return JSON.parse(jsonrepair(m[1]));
+  }
 }
 
 async function call(m, body) {

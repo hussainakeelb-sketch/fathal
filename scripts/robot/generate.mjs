@@ -1,6 +1,6 @@
 // توليد أسئلة جديدة: الذكاء الاصطناعي يكتب، وبعدين يراجع بشدة (ويه بحث گوگل إذا Gemini متوفر)، وبس الي ينجح ينضاف.
 // قواعد التوازن تنطبق هنا: الصعوبة حسب المقياس، وأسئلة الأرقام سؤال من كل 5 بالكثير بكل مستوى.
-import { ask, askSecond, aiLeft, aiCaps, aiProvider } from './ai.mjs';
+import { ask, askSecond, aiLeft, aiCaps, aiProvider, aiHasSecondOpinion } from './ai.mjs';
 import { generatePrompt, reviewPrompt, SYSTEM } from './prompts.mjs';
 import { LEVELS, localCheck, makeId, norm, today, isNumeric, balanceOf } from './store.mjs';
 import { buildMedia } from './media.mjs';
@@ -48,6 +48,10 @@ export async function generate(store, cats, log, { weekly }) {
   const weeklyLeft = new Map(usable.map((c) => [c.id, weekly ? TARGET.weekly : Infinity]));
 
   while (aiLeft() >= 3) {
+    if (!aiHasSecondOpinion()) {
+      log('التوليد: وقف، ماكو رأي ثاني اليوم (شركة وحدة بس تشتغل) — ما نضيف أسئلة بدون مراجع مستقل');
+      break;
+    }
     const next = order().find(({ c, live }) => (weekly ? weeklyLeft.get(c.id) > 0 : live < TARGET.full) && !stats.get(c.id)?.stuck);
     if (!next) break;
     const { c: cat, live } = next;

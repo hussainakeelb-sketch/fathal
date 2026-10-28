@@ -2,7 +2,7 @@
 //  1) كل سؤال ياخذ مستواه الصحيح حسب المقياس (200 للمهتم، 400 للمتابع، 600 فطحل)، بس إذا تقييمين منفصلين اتفقوا
 //  2) أسئلة الأرقام الزايدة عن سؤال من كل 5 بالمستوى تنشال، والتوليد يعوّضها بأسئلة مو أرقام
 //  3) أي مستوى ما ينزل أبداً تحت BALANCE.minPerLevel، حتى الفئة ما تنقص
-import { ask, askSecond, aiLeft, aiCaps } from './ai.mjs';
+import { ask, askSecond, aiLeft, aiCaps, aiHasSecondOpinion } from './ai.mjs';
 import { auditPrompt, SYSTEM } from './prompts.mjs';
 import { LEVELS, isLive, isNumeric, balanceOf, today } from './store.mjs';
 import { TARGET, BALANCE } from './config.mjs';
@@ -111,7 +111,8 @@ export async function audit(store, cats, log) {
         const p1 = Number(a1.p);
         const p2 = Number(a2.p);
         // المستوى يتغير بس إذا الجوابين اتفقوا، وأسئلة السنين والأرقام ما تنزل لـ 200 أبداً
-        if (LEVELS.includes(p1) && p1 === p2 && p1 !== q.p && !(p1 === 200 && isNumeric(q))) patch.pWant = p1;
+        // وتغيير المستوى يحتاج رأي ثاني مستقل (شركة ثانية أو Gemini ويه البحث)
+        if (aiHasSecondOpinion() && LEVELS.includes(p1) && p1 === p2 && p1 !== q.p && !(p1 === 200 && isNumeric(q))) patch.pWant = p1;
         else if (q.pWant) patch.pWant = undefined;
         store.update(cat.id, q.id, patch);
       }
