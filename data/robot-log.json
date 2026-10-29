@@ -1,5 +1,27 @@
 [
  {
+  "at": "2026-10-29T06:45:09.632Z",
+  "lines": [
+   "  ✗ Gemini 503 gemini-3.8-flash: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\", \"statu",
+   "  ✗ Gemini 429 gemini-omni-1.1-flash: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: ",
+   "Gemini معطّل اليوم",
+   "  ✗ Mistral 403 mistral-large-latest: {\"object\":\"error\",\"message\":\"This model is not available in your subscription tier\",\"type\":\"tier_not_allowed\",\"param\":null,\"code\":\"1910\",\"raw_status_code\":403}",
+   "  ✗ Mistral 429 mistral-medium-latest: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+   "  ✗ Mistral 429 mistral-small-latest: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+   "  ✗ Mistral 429 mistral-saba-latest: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+   "نموذج Cloudflare المستخدم: @cf/openai/gpt-oss-120b",
+   "العقل الرئيسي: Cloudflare",
+   "البلاغات: ماكو بلاغات جديدة",
+   "المراجعة على القواعد: راجعنا 45 سؤال — تغيّر مستواه 0، شلنا أرقام زايدة 0، شلنا غلط 0، للمراجعة 16",
+   "التوليد: نص بس اليوم (النموذج الحالي ما يشوف الصور)",
+   "التوليد: وقف، ماكو رأي ثاني اليوم (شركة وحدة بس تشتغل) — ما نضيف أسئلة بدون مراجع مستقل",
+   "التوليد: انضاف 0 سؤال جديد",
+   "طابور المراجعة الأسبوعية: 0 بلاغ، 25 سؤال مشكوك بيه",
+   "العقل: Cloudflare @cf/openai/gpt-oss-120b، طلبات: 6، ملفات تغيرت: 0، الوقت: 297 ثانية",
+   "عدد الأسئلة: مسلسلات عراقية: 60 | أفلام ومسرحيات عراقية: 60 | مطربون وأغانٍ عراقية: 60 | من القائل؟: 60 | تلفزيون الزمن الجميل: 60 | احزر العمل من قصته: 60 | كرة القدم العراقية: 60 | المنتخب العراقي: 60 | الدوري والأندية العراقية: 60 | كرة القدم العالمية: 60 | من أنا؟ رياضية: 60 | أمثال شعبية: 60 | كلمات عراقية: 60 | لهجات المحافظات: 60 | شعراء وأدباء عراقيون: 60 | محافظات ومدن: 60 | معالم وآثار: 60 | تاريخ العراق القديم: 60 | أنهار وأهوار وطبيعة: 60 | جغرافيا العالم: 60 | أعلام ودول: 60 | أكلات عراقية: 60 | حلويات ومشروبات: 60 | أسواق ومهن قديمة: 60 | جيل الطيبين: 60 | ألعاب شعبية: 60 | رمضان والعيد: 60 | معلومات عامة: 70 | علوم وطب: 60 | عالم الحيوان: 60 | قصص الأنبياء: 60 | سيارات: 60 | كرتون الطفولة: 60 | أنمي: 60 | ألعاب إلكترونية: 60 | من أنا؟: 60 | صورة مقرّبة: 60 | رتّبها: 60 | صحّح الخطأ: 60 | الجواب بكلمتين: 60 | إي لو لا؟: 60 | ولا كلمة: 60"
+  ]
+ },
+ {
   "at": "2026-10-28T07:04:54.817Z",
   "lines": [
    "  ✗ Gemini 503 gemini-3.8-flash: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\", \"statu",

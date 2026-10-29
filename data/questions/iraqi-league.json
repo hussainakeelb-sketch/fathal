@@ -338,7 +338,10 @@
   "q": "نادي الشرطة فاز بالدوري كم مرة ورا بعض بين 2022 و2025؟",
   "a": "4 مرات",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al-Shorta did not win four consecutive titles between 2022 and 2025",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-3ab0dc94",
@@ -347,7 +350,10 @@
   "q": "كم لقب دوري عند نادي الشرطة لحد 2026؟",
   "a": "8 ألقاب",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al-Shorta have 6 league titles, not 8",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-e8cc6537",
@@ -356,7 +362,10 @@
   "q": "كم لقب دوري عند القوة الجوية لحد 2026؟",
   "a": "8 ألقاب",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al-Quwa Al-Jawiya have 7 league titles, not 8",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-02b25309",
@@ -365,7 +374,10 @@
   "q": "كم لقب دوري عند نادي الطلبة؟",
   "a": "5 ألقاب",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al-Students have never won 5 league titles",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-8ca0f41b",
@@ -374,7 +386,10 @@
   "q": "نادي الطلبة آخر مرة فاز بالدوري بيا موسم؟",
   "a": "2001-2002",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al-Students last league win was not in 2001‑2002",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-e7bb3558",
@@ -383,7 +398,9 @@
   "q": "منو سجّل أول هدف بتاريخ دوري الأندية العراقي؟",
   "a": "فلاح حسن",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-819684c7",
@@ -392,7 +409,9 @@
   "q": "يا نادي فاز بأول دوري للأندية موسم 1974-1975؟",
   "a": "الطيران (القوة الجوية)",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-0379979a",
@@ -401,7 +420,9 @@
   "q": "كم لقب دوري عند نادي أربيل؟",
   "a": "4 ألقاب",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-c7aa5be0",
@@ -410,7 +431,9 @@
   "q": "نادي أربيل تأسس بيا سنة؟",
   "a": "1968",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-fff200cc",
@@ -419,7 +442,9 @@
   "q": "يا نادي عراقي جان أول من وصل لنهائي كأس الاتحاد الآسيوي؟",
   "a": "أربيل",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-8f87d591",
@@ -428,7 +453,9 @@
   "q": "نادي القوة الجوية تأسس قرب يا قاعدة جوية؟",
   "a": "الهنيدي",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-3d040e51",
@@ -437,7 +464,10 @@
   "q": "نادي القوة الجوية تأسس بعد كم يوم من تأسيس القوة الجوية العراقية؟",
   "a": "73 يوم",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: The 73‑day interval is not documented and is likely incorrect",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-0dffe332",
@@ -446,7 +476,9 @@
   "q": "يا نادي عراقي جان أول من فاز بكل البطولات المحلية الأربعة بموسم واحد؟",
   "a": "القوة الجوية (1996-1997)",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-137b24bf",
@@ -455,7 +487,9 @@
   "q": "الزوراء فاز بكل البطولات المحلية الأربعة بيا موسم؟",
   "a": "1999-2000",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-02e99618",
@@ -464,7 +498,9 @@
   "q": "كم مرة فاز الزوراء بكأس العراق (رقم قياسي)؟",
   "a": "16 مرة",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-c9002e52",
@@ -473,7 +509,9 @@
   "q": "الزوراء وصل لنهائي يا بطولة آسيوية موسم 1999-2000؟",
   "a": "كأس الكؤوس الآسيوية",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-082445f7",
@@ -482,7 +520,10 @@
   "q": "نادي الشرطة وصل لنصف نهائي البطولة العربية للأندية بيا سنة؟",
   "a": "2023",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al‑Shorta won the 2023 Arab Club Champions Cup, not just reached the semi‑final",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-f8ad4a40",
@@ -491,7 +532,10 @@
   "q": "يا نادي جان أول نادي يفوز بكل مباريات الديربي الست بموسم واحد؟",
   "a": "الشرطة (2021-2022)",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: No club has won all six derby matches in a single season; claim is false",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-da967d1e",
@@ -500,7 +544,10 @@
   "q": "منو أسس فريق الشرطة سنة 1932؟",
   "a": "مظفر أحمد",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al‑Shorta was founded by the police force, not by an individual named Muzaffar Ahmed",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-203a650d",
@@ -509,7 +556,10 @@
   "q": "نادي الطلبة جان تابع ليا جهة لحد سنة 1993؟",
   "a": "الاتحاد الوطني لطلبة العراق",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al‑Talaba was linked to the Ministry of Higher Education, not the National Union of Iraqi Students",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-5f957f19",
@@ -518,7 +568,9 @@
   "q": "نادي الطلبة وصل لنهائي يا بطولة آسيوية موسم 1995-1996؟",
   "a": "كأس الكؤوس الآسيوية",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-7b4fdea6",
@@ -527,7 +579,10 @@
   "q": "نادي الطلبة طلع رابع ببطولة الأندية الآسيوية بيا سنة؟",
   "a": "1986",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al‑Talaba never finished fourth in an Asian club competition in 1986",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-e3c79a02",
@@ -536,7 +591,10 @@
   "q": "الزوراء طلع رابع ببطولة الأندية الآسيوية بيا موسم؟",
   "a": "1996-1997",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al‑Zawraa never placed fourth in the 1996‑97 Asian Club Championship",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-b4511958",
@@ -545,7 +603,9 @@
   "q": "نادي الميناء تأسس بيا منطقة بالبصرة؟",
   "a": "المعقل",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-1b458e14",
@@ -554,7 +614,10 @@
   "q": "نادي الميناء جان أول نادي من خارج بغداد يلعب بدوري أبطال آسيا بيا سنة؟",
   "a": "2006",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al‑Minaa was not the first non‑Baghdad club to play in the AFC Champions League in 2006",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-7adc70fd",
@@ -563,7 +626,10 @@
   "q": "ملعب الزوراء الجديد انفتح بيا سنة؟",
   "a": "2022",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Al‑Zawraa’s new stadium has not been opened in 2022",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-ef3798a2",
@@ -572,7 +638,10 @@
   "q": "نادي أربيل حقق أكبر فوز إله بكأس العراق 13-0 على يا فريق؟",
   "a": "مخمور",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: Erbil’s biggest Iraq FA Cup win was not a 13‑0 victory over Makmur",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-dc6d10f5",
@@ -581,7 +650,9 @@
   "q": "شنو جان الاسم الرسمي للدوري العراقي لما انطلق سنة 1974؟",
   "a": "دوري الأندية الوطني للدرجة الأولى",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-7adad73c",
@@ -590,7 +661,9 @@
   "q": "الزوراء حقق أول ثنائية (دوري وكأس) بتاريخ الكرة العراقية بيا موسم؟",
   "a": "1975-1976",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "updated": "2026-10-29"
  },
  {
   "id": "iraqi-league-0c2e4ddb",
@@ -599,6 +672,9 @@
   "q": "القوة الجوية فاز بأول بطولة إله سنة 1933، شنو اسمها؟",
   "a": "كأس الأمير غازي",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-10-29",
+  "flag": "audit: The first tournament won by Al‑Quwa Al‑Jawiya in 1933 was not called “كأس الأمير غازي”",
+  "updated": "2026-10-29"
  }
 ]
