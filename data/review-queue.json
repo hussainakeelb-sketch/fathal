@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T06:45:09.555Z",
+ "updated": "2026-10-30T06:45:59.550Z",
  "reports": [],
  "flagged": [
   {
@@ -57,6 +57,102 @@
    "q": "منو المخرج العراقي صاحب فيلم \"بلانچة\"؟",
    "a": "علي رحيم",
    "flag": "audit: Film بلانچة was not directed by علي رحيم (no evidence)"
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-8aa32b5d",
+   "p": 400,
+   "q": "برنامج \"الرياضة في أسبوع\" بدا بيا سنة؟",
+   "a": "1963",
+   "flag": "audit: Program started later than 1963"
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-eaa53d28",
+   "p": 400,
+   "q": "برنامج \"الرياضة في أسبوع\" استمر لحد بيا سنة؟",
+   "a": "1993",
+   "flag": "audit: End year not 1993"
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-65255a9d",
+   "p": 400,
+   "q": "خيرية حبيب بدت تقدّم \"عدسة الفن\" بيا سنة؟",
+   "a": "1969",
+   "flag": "audit: عدسة الفن started later than 1969"
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-d732a39a",
+   "p": 400,
+   "q": "خيرية حبيب قدّمت \"عدسة الفن\" تقريباً شگد سنة؟",
+   "a": "16 سنة",
+   "flag": "audit: Answer 16 years is not a documented duration for Khairia Habib's show"
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-a2c43a7a",
+   "p": 400,
+   "q": "برنامج \"ركن البيت\" سنة 1961 منو قدّمته؟",
+   "a": "فتوح مصطفى",
+   "flag": "audit: The 1961 “Rukn al‑Bayt” presenter was not Fatouh Mustafa"
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-146a1135",
+   "p": 600,
+   "q": "كامل الدباغ تخرج سنة 1947 من يا معهد عالي؟",
+   "a": "دار المعلمين العالية",
+   "flag": "audit: He graduated from the Higher Institute of Teachers, not “Dar al‑Mu‘allimin al‑‘Aliyah”"
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-7aa81433",
+   "p": 600,
+   "q": "كامل الدباغ أعدّ برنامج بإذاعة بغداد، شنو اسمه؟",
+   "a": "الجديد في العلم",
+   "flag": "audit: Program by كامل الدباغ was 'العلم للجميع' not 'الجديد في العلم'; answer seems wrong."
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-2d25c579",
+   "p": 600,
+   "q": "منو معدّ برنامج \"عدسة الفن\" الي شارك خيرية حبيب نجاحه؟",
+   "a": "خالد ناجي",
+   "flag": "audit: خالد ناجي did not prepare 'عدسة الفن'; the show was prepared by عبد الحليم أبو عمار. Answer likely wrong."
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-bc9d62e4",
+   "p": 600,
+   "q": "خيرية حبيب بدت شغلها بالإذاعة والتلفزيون بيا سنة؟",
+   "a": "1968",
+   "flag": "audit: خيرية حبيب started at radio/TV in 1970, not 1968; answer likely inaccurate."
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-ce63db37",
+   "p": 600,
+   "q": "إذاعة بغداد بالبداية جانت بيا منطقة ببغداد؟",
+   "a": "الصالحية",
+   "flag": "audit: Initial broadcast area was not الصالحية but the district of Al-Mansour; answer likely wrong."
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-3b951f07",
+   "p": 600,
+   "q": "بالبداية، إذاعة بغداد شگد يوم بالأسبوع جانت تذيع؟",
+   "a": "3 أيام",
+   "flag": "audit: Initially Radio Baghdad broadcast 7 days a week, not 3 days; answer incorrect."
+  },
+  {
+   "cat": "golden-tv",
+   "id": "golden-tv-13ebd885",
+   "p": 600,
+   "q": "المخرج عمانوئيل رسام صار رئيس قسم الدراما بالتلفزيون بيا سنة؟",
+   "a": "1979",
+   "flag": "audit: Ammanuel Rasam became head of drama in 1982, not 1979; answer likely wrong."
   },
   {
    "cat": "iraqi-league",
