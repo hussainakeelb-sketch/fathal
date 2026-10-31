@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-30T06:45:59.550Z",
+ "updated": "2026-10-31T06:39:05.993Z",
  "reports": [],
  "flagged": [
   {
@@ -153,6 +153,126 @@
    "q": "المخرج عمانوئيل رسام صار رئيس قسم الدراما بالتلفزيون بيا سنة؟",
    "a": "1979",
    "flag": "audit: Ammanuel Rasam became head of drama in 1982, not 1979; answer likely wrong."
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-78394889",
+   "p": 400,
+   "q": "بكأس العالم 2026، العراق جان بمجموعة ويا فرنسا والنرويج ويا منتخب ثالث؟",
+   "a": "السنغال",
+   "flag": "audit: Group composition for 2026 WC is not known/factual"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-dafa5dd7",
+   "p": 400,
+   "q": "منو سجّل هدف العراق بكأس العالم 2026؟",
+   "a": "أيمن حسين",
+   "flag": "audit: No Iraq goal scorer at 2026 WC because tournament hasn't happened"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-ecee2d2f",
+   "p": 400,
+   "q": "هدف العراق بمونديال 2026 انسجل ضد يا منتخب؟",
+   "a": "النرويج",
+   "flag": "audit: No Iraq goal at 2026 WC, question is speculative"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-8a1051ec",
+   "p": 400,
+   "q": "بملحق التأهل العالمي لمونديال 2026، العراق فاز على يا منتخب؟",
+   "a": "بوليفيا",
+   "flag": "audit: No inter‑continental playoff result exists yet"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-8cf86b37",
+   "p": 400,
+   "q": "منو سجّل ضربة الجزاء الحاسمة بالوقت القاتل ضد الإمارات بالبصرة؟",
+   "a": "أمير العماري",
+   "flag": "audit: No recorded decisive penalty by Amir Al‑Ammari against UAE"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-fd8e885e",
+   "p": 600,
+   "q": "شنو يسمّون خسارة العراق المؤلمة بتصفيات مونديال 1994 بقطر؟",
+   "a": "مأساة الدوحة",
+   "flag": "audit: No known term 'مأساة الدوحة' for that loss"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-b19f911f",
+   "p": 600,
+   "q": "بكأس آسيا 2015، شگد جانت نتيجة ترجيح العراق وإيران؟",
+   "a": "7-6",
+   "flag": "audit: Penalty shootout 7‑6 never occurred between Iraq and Iran in 2015"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-ac369e3c",
+   "p": 600,
+   "q": "بكأس آسيا 2015، شگد انتهت مباراة العراق وإيران بعد 120 دقيقة؟",
+   "a": "3-3",
+   "flag": "audit: Match did not end 3‑3 after 120 minutes"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-d226679f",
+   "p": 600,
+   "q": "بمونديال 2026، شگد خسر العراق ضد السنغال؟",
+   "a": "5-0",
+   "flag": "audit: Iraq did not qualify for 2026 World Cup"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-7e51d7a5",
+   "p": 600,
+   "q": "بمونديال 2026، شگد خسر العراق ضد فرنسا؟",
+   "a": "3-0",
+   "flag": "audit: Iraq did not qualify for 2026 World Cup"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-ea07f18c",
+   "p": 600,
+   "q": "بمونديال 2026، شگد خسر العراق ضد النرويج؟",
+   "a": "4-1",
+   "flag": "audit: Iraq did not qualify for 2026 World Cup"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-8ce04628",
+   "p": 600,
+   "q": "منو المدرب السلوفيني الي ما خسر وياه العراق 19 مباراة ورا بعض؟",
+   "a": "سريتشكو كاتانيتس",
+   "flag": "audit: Katanec never had a 19‑match unbeaten run with Iraq"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-384acfe0",
+   "p": 600,
+   "q": "بالدور الثاني لتصفيات مونديال 2026، العراق فاز بكم مباراة من 6؟",
+   "a": "بكل الست",
+   "flag": "audit: Second round of 2026 qualifiers not applicable"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-ecc2b6f1",
+   "p": 600,
+   "q": "النجمة الي انحطت فوگ شعار منتخب العراق بين 2021 و2022 جانت تخلّد يا إنجاز؟",
+   "a": "كأس آسيا 2007",
+   "flag": "audit: No star added 2021‑2022 to commemorate 2007 Asian Cup"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-5d5ae37c",
+   "p": 600,
+   "q": "شنو الهتاف الي يرددوه جمهور العراق ببداية المباراة؟",
+   "a": "\"هسه يجي الأول\"",
+   "flag": "audit: Chant 'هسه يجي الأول' is not a recognized standard Iraqi fan chant"
   },
   {
    "cat": "iraqi-league",
