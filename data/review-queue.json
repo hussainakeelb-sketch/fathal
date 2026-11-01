@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T06:39:05.993Z",
+ "updated": "2026-11-01T07:08:04.438Z",
  "reports": [],
  "flagged": [
   {
@@ -193,6 +193,46 @@
    "q": "منو سجّل ضربة الجزاء الحاسمة بالوقت القاتل ضد الإمارات بالبصرة؟",
    "a": "أمير العماري",
    "flag": "audit: No recorded decisive penalty by Amir Al‑Ammari against UAE"
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-4fb05171",
+   "p": 400,
+   "q": "ببطولة غرب آسيا 2002، العراق فاز بالنهائي على يا منتخب؟",
+   "a": "الأردن",
+   "flag": "audit: Iraq beat Saudi Arabia, not Jordan, in the 2002 West Asian Games final."
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-0e9b25e6",
+   "p": 600,
+   "q": "العراق لعب أول مباراة بتاريخه سنة 1951 ضد يا فريق؟",
+   "a": "فريق \"سي سي\" بالحبانية",
+   "flag": "audit: Iraq’s first match in 1951 was against a British military team, not “SC” from Al‑Habbaniya."
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-5ffae58a",
+   "p": 600,
+   "q": "أول مباراة دولية رسمية للعراق بدورة الألعاب العربية 1957 جانت ضد يا منتخب؟",
+   "a": "المغرب",
+   "flag": "audit: The first official international at the 1957 Arab Games was against Lebanon, not Morocco."
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-efd78e46",
+   "p": 600,
+   "q": "أول مباراة دولية رسمية للعراق سنة 1957 انتهت بشگد؟",
+   "a": "3-3",
+   "flag": "audit: The 1957 match ended 2‑0, not 3‑3."
+  },
+  {
+   "cat": "national-team",
+   "id": "national-team-0fdb0129",
+   "p": 600,
+   "q": "شنو جنسية أول مدرب أجنبي لمنتخب العراق سنة 1962؟",
+   "a": "روماني",
+   "flag": "audit: The first foreign coach in 1962 was Hungarian, not Romanian."
   },
   {
    "cat": "national-team",
@@ -417,6 +457,14 @@
    "q": "القوة الجوية فاز بأول بطولة إله سنة 1933، شنو اسمها؟",
    "a": "كأس الأمير غازي",
    "flag": "audit: The first tournament won by Al‑Quwa Al‑Jawiya in 1933 was not called “كأس الأمير غازي”"
+  },
+  {
+   "cat": "landmarks",
+   "id": "landmarks-d6b7d226",
+   "p": 200,
+   "q": "مدينة الحضر جانت عاصمة مملكة عربية بيا عصر؟",
+   "a": "العصر الفرثي",
+   "flag": "audit: Hatra was not the capital of a Frthian kingdom"
   }
  ]
 }
