@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01T07:08:04.438Z",
+ "updated": "2026-11-02T07:07:08.504Z",
  "reports": [],
  "flagged": [
   {
@@ -465,6 +465,70 @@
    "q": "مدينة الحضر جانت عاصمة مملكة عربية بيا عصر؟",
    "a": "العصر الفرثي",
    "flag": "audit: Hatra was not the capital of a Frthian kingdom"
+  },
+  {
+   "cat": "landmarks",
+   "id": "landmarks-0a728e27",
+   "p": 400,
+   "q": "زقورة عقرقوف بناها يا ملك كاشي؟",
+   "a": "كوريگالزو الأول",
+   "flag": "audit: Builder of Aqar Qūf ziggurat is not King Korigalzu I"
+  },
+  {
+   "cat": "landmarks",
+   "id": "landmarks-99c5a7c2",
+   "p": 600,
+   "q": "سلّم الملوية يلف حولها كم لفّة تقريباً؟",
+   "a": "5 لفّات",
+   "flag": "audit: No reliable source for 5 turns on the Mowlaya staircase"
+  },
+  {
+   "cat": "landmarks",
+   "id": "landmarks-d118a596",
+   "p": 600,
+   "q": "شنو اسم شارع الموكب ببابل بالأكدية؟",
+   "a": "آي إبور شابو",
+   "flag": "audit: No evidence the Akkadian name is “آي إبور شابو”"
+  },
+  {
+   "cat": "landmarks",
+   "id": "landmarks-b1b80780",
+   "p": 600,
+   "q": "كنوز نمرود الذهبية انكشفت بيا سنة تقريباً؟",
+   "a": "1989",
+   "flag": "audit: Discovery date of Nimrod’s gold treasure is not 1989"
+  },
+  {
+   "cat": "tayyibeen",
+   "id": "tayyibeen-5d62252e",
+   "p": 200,
+   "q": "\"اللالة\" شنو وقودها؟",
+   "a": "النفط",
+   "flag": "audit: اللالة is a village, not a fuel source"
+  },
+  {
+   "cat": "tayyibeen",
+   "id": "tayyibeen-83597d16",
+   "p": 200,
+   "q": "\"البريمز\" شنو جانوا يسوّون بيه؟",
+   "a": "يطبخون ويسخّنون الماي",
+   "flag": "audit: البريمز is an enzyme, not for cooking"
+  },
+  {
+   "cat": "tayyibeen",
+   "id": "tayyibeen-5fc84354",
+   "p": 200,
+   "q": "\"الحِب\" مصنوع من شنو؟",
+   "a": "الفخار",
+   "flag": "audit: الحِب is not a material made of pottery"
+  },
+  {
+   "cat": "tayyibeen",
+   "id": "tayyibeen-b3892a1e",
+   "p": 200,
+   "q": "\"الدرهم\" العراقي القديم شگد يساوي فلس؟",
+   "a": "50 فلس",
+   "flag": "audit: Old Iraqi dirham value not 50 fils"
   }
  ]
 }
