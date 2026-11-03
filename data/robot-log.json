@@ -1,5 +1,11 @@
 [
  {
+  "at": "2026-11-03T07:30:56.120Z",
+  "lines": [
+   "❌ fetch failed"
+  ]
+ },
+ {
   "at": "2026-11-02T07:07:08.582Z",
   "lines": [
    "  ✗ Gemini 503 gemini-3.8-flash: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\", \"statu",
