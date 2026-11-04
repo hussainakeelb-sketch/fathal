@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-02T07:07:08.504Z",
+ "updated": "2026-11-04T07:12:54.205Z",
  "reports": [],
  "flagged": [
   {
@@ -529,6 +529,30 @@
    "q": "\"الدرهم\" العراقي القديم شگد يساوي فلس؟",
    "a": "50 فلس",
    "flag": "audit: Old Iraqi dirham value not 50 fils"
+  },
+  {
+   "cat": "tayyibeen",
+   "id": "tayyibeen-40d01276",
+   "p": 600,
+   "q": "حاسوب \"صخر\" العربي المشهور من يا شركة؟",
+   "a": "العالمية الكويتية",
+   "flag": "audit: The answer \"العالمية الكويتية\" is not the company that made the Sakhr computer; it was Sakhr Software Company"
+  },
+  {
+   "cat": "tayyibeen",
+   "id": "tayyibeen-448d25cd",
+   "p": 600,
+   "q": "تلفزيون بغداد يعتبر أول محطة تلفزيون بيا منطقة؟",
+   "a": "بالعالم العربي",
+   "flag": "audit: Answer “بالعالم العربي” is vague/incorrect"
+  },
+  {
+   "cat": "tayyibeen",
+   "id": "tayyibeen-408c9e9d",
+   "p": 600,
+   "q": "شنو اسم لعبة الحية الأصلية بموبايل نوكيا 3310؟",
+   "a": "Snake II",
+   "flag": "audit: Snake II was not on Nokia 3310; original Snake was"
   }
  ]
 }
