@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T07:12:54.205Z",
+ "updated": "2026-11-05T07:43:20.232Z",
  "reports": [],
  "flagged": [
   {
@@ -153,6 +153,46 @@
    "q": "المخرج عمانوئيل رسام صار رئيس قسم الدراما بالتلفزيون بيا سنة؟",
    "a": "1979",
    "flag": "audit: Ammanuel Rasam became head of drama in 1982, not 1979; answer likely wrong."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-da92a3ff",
+   "p": 400,
+   "q": "بنهائي ألعاب غرب آسيا 2005، العراق فاز بالترجيح على يا منتخب؟",
+   "a": "سوريا",
+   "flag": "audit: Final of West Asian Games 2005 was not against Syria (it was vs Saudi Arabia)"
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-98c6dd0a",
+   "p": 400,
+   "q": "بكأس آسيا 2023، العراق فاز على إندونيسيا بشگد؟",
+   "a": "3-1",
+   "flag": "audit: Iraq beat Indonesia 2‑0, not 3‑1"
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-12861830",
+   "p": 600,
+   "q": "منو مدرب العراق ببطولة كأس العرب 2021؟",
+   "a": "جيليكو بيتروفيتش",
+   "flag": "audit: Iraq did not take part in Arab Cup 2021; premise false"
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-d7659699",
+   "p": 600,
+   "q": "المدرب كاتانيتس ترك منتخب العراق سنة 2021 بسبب شنو؟",
+   "a": "تأخر رواتبه 6 أشهر",
+   "flag": "audit: Reason for Katanić’s departure is not documented as six‑month salary delay"
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-87f83ec0",
+   "p": 600,
+   "q": "بتصفيات مونديال 2026، العراق خسر 2-1 ضد يا منتخب وانطرد المدرب كاساس بعدها؟",
+   "a": "فلسطين",
+   "flag": "audit: 2026 qualifiers have not occurred yet; premise false"
   },
   {
    "cat": "national-team",
