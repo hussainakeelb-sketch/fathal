@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T07:43:20.232Z",
+ "updated": "2026-11-06T07:37:07.659Z",
  "reports": [],
  "flagged": [
   {
@@ -537,6 +537,46 @@
    "q": "كنوز نمرود الذهبية انكشفت بيا سنة تقريباً؟",
    "a": "1989",
    "flag": "audit: Discovery date of Nimrod’s gold treasure is not 1989"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-080bc729",
+   "p": 200,
+   "q": "نهر الخابور يكون جزء من الحدود بين العراق ويا دولة؟",
+   "a": "تركيا",
+   "flag": "audit: Nahr al‑Khabur forms Iraq‑Syria border, not Turkey"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-e39b48df",
+   "p": 200,
+   "q": "شنو اسم سمكة نهرية عراقية غالية، لحمها طيب ويسوّون منها المسگوف أحياناً؟",
+   "a": "البني",
+   "flag": "audit: No known Iraqi river fish called ‘البني’; likely incorrect"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-0f84523c",
+   "p": 400,
+   "q": "سد الموصل خلص بناؤه بيا سنة؟",
+   "a": "1986",
+   "flag": "audit: Mosul Dam was completed in 1984, not 1986"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-28c8effd",
+   "p": 400,
+   "q": "شجر \"الغَرَب\" الي على ضفاف أنهار العراق شنو اسمه العلمي؟",
+   "a": "حور الفرات",
+   "flag": "audit: The tree “al‑gharab” is a willow (Salix), not “ḥūr al‑Furāt”"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-82cced35",
+   "p": 600,
+   "q": "شنو اسم الطائر المستوطن الي اسمه العلمي يرجع للعراق ويعيش بالأهوار؟",
+   "a": "ثرثار العراق",
+   "flag": "audit: No bird endemic to Iraq marshes is called “Therthar al‑Iraq”; the answer is incorrect"
   },
   {
    "cat": "tayyibeen",
