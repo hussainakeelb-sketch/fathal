@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T07:37:07.659Z",
+ "updated": "2026-11-07T06:53:57.890Z",
  "reports": [],
  "flagged": [
   {
@@ -193,6 +193,78 @@
    "q": "بتصفيات مونديال 2026، العراق خسر 2-1 ضد يا منتخب وانطرد المدرب كاساس بعدها؟",
    "a": "فلسطين",
    "flag": "audit: 2026 qualifiers have not occurred yet; premise false"
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-879c6210",
+   "p": 600,
+   "q": "بالدور الرابع لتصفيات مونديال 2026، العراق جان ويا السعودية ويا منتخب ثاني؟",
+   "a": "إندونيسيا",
+   "flag": "audit: Qualifiers for 2026 have not occurred; the stated opponent is speculative and likely incorrect."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-3afbc206",
+   "p": 600,
+   "q": "بالدور الرابع لتصفيات 2026، شگد جانت نتيجة العراق والسعودية؟",
+   "a": "0-0",
+   "flag": "audit: Match result between Iraq and Saudi Arabia in a non‑existent 2026 fourth‑round qualifier cannot be verified."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-e25d7123",
+   "p": 600,
+   "q": "بالدور الرابع لتصفيات 2026، العراق فاز على إندونيسيا بشگد؟",
+   "a": "1-0",
+   "flag": "audit: No such match against Indonesia in a 2026 fourth‑round qualifier has taken place."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-01571bf1",
+   "p": 600,
+   "q": "مباراة ملحق العراق وبوليفيا لمونديال 2026 انلعبت بيا دولة؟",
+   "a": "المكسيك",
+   "flag": "audit: A play‑off between Iraq and Bolivia for 2026 does not exist; location is unfounded."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-16081609",
+   "p": 600,
+   "q": "بطولة الخليج 21 انسحبت من العراق وانتقلت ليا دولة؟",
+   "a": "البحرين",
+   "flag": "audit: The Gulf Cup 21 (2023) was not withdrawn by Iraq nor moved to Bahrain; statement is false."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-e27023d8",
+   "p": 600,
+   "q": "العراق تأهل لكأس آسيا 2015 بفوز 3-1 على الصين بيا ملعب؟",
+   "a": "ملعب الشارقة",
+   "flag": "audit: Iraq qualified for the 2015 Asian Cup by beating China 3‑1 in a match played in Doha, not at Sharjah Stadium."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-c87012ff",
+   "p": 600,
+   "q": "بنهائي كأس العرب 1966 ببغداد، العراق فاز على يا منتخب؟",
+   "a": "سوريا",
+   "flag": "audit: The 1966 Arab Cup final was Iraq vs Syria, but it was held in Baghdad; the answer is correct but the question is about a 600‑level fact that is too ob"
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-3ba53bcb",
+   "p": 600,
+   "q": "بمونديال 1986، العراق لبس يا لون ضد بلجيكا والمكسيك؟",
+   "a": "أزرق",
+   "flag": "audit: In the 1986 World Cup, Iraq wore a red kit against Belgium and a white kit against Mexico, not blue."
+  },
+  {
+   "cat": "iraqi-football",
+   "id": "iraqi-football-fe31957e",
+   "p": 600,
+   "q": "بتصفيات مونديال 1986، العراق أطلع الإمارات بيا قاعدة؟",
+   "a": "الهدف خارج الأرض",
+   "flag": "audit: In the 1986 World Cup qualifiers, Iraq did not advance past the UAE due to a \"goal off the ground\"; the statement is nonsensical."
   },
   {
    "cat": "national-team",
@@ -577,6 +649,30 @@
    "q": "شنو اسم الطائر المستوطن الي اسمه العلمي يرجع للعراق ويعيش بالأهوار؟",
    "a": "ثرثار العراق",
    "flag": "audit: No bird endemic to Iraq marshes is called “Therthar al‑Iraq”; the answer is incorrect"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-54912832",
+   "p": 600,
+   "q": "شنو يسمّون الريح الجنوبية الشرقية الحارة الرطبة بجنوب العراق؟",
+   "a": "الشرجي",
+   "flag": "audit: Hot humid SE wind is not called “الشرجي”"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-4c0de839",
+   "p": 600,
+   "q": "نهر الزاب الكبير يصب بدجلة جنوب يا مدينة؟",
+   "a": "الموصل",
+   "flag": "audit: نهر الزاب الكبير يلتقي بالفرات شمال الموصل، ليس جنوبه"
+  },
+  {
+   "cat": "rivers-nature",
+   "id": "rivers-nature-1f235f4a",
+   "p": 600,
+   "q": "بحيرة ساوة سطحها أعلى من الأرض الي حواليها، صح لو غلط؟",
+   "a": "صح",
+   "flag": "audit: سطح بحيرة ساوة ليس أعلى من الأرض المحيطة"
   },
   {
    "cat": "tayyibeen",

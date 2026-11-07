@@ -506,7 +506,10 @@
   "q": "بالدور الرابع لتصفيات مونديال 2026، العراق جان ويا السعودية ويا منتخب ثاني؟",
   "a": "إندونيسيا",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: Qualifiers for 2026 have not occurred; the stated opponent is speculative and likely incorrect.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-3afbc206",
@@ -515,7 +518,10 @@
   "q": "بالدور الرابع لتصفيات 2026، شگد جانت نتيجة العراق والسعودية؟",
   "a": "0-0",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: Match result between Iraq and Saudi Arabia in a non‑existent 2026 fourth‑round qualifier cannot be verified.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-e25d7123",
@@ -524,7 +530,10 @@
   "q": "بالدور الرابع لتصفيات 2026، العراق فاز على إندونيسيا بشگد؟",
   "a": "1-0",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: No such match against Indonesia in a 2026 fourth‑round qualifier has taken place.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-01571bf1",
@@ -533,7 +542,10 @@
   "q": "مباراة ملحق العراق وبوليفيا لمونديال 2026 انلعبت بيا دولة؟",
   "a": "المكسيك",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: A play‑off between Iraq and Bolivia for 2026 does not exist; location is unfounded.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-45589574",
@@ -542,7 +554,9 @@
   "q": "منتخب العراق بمونديال 2026 جان بيا مجموعة؟",
   "a": "المجموعة التاسعة (I)",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-16081609",
@@ -551,7 +565,10 @@
   "q": "بطولة الخليج 21 انسحبت من العراق وانتقلت ليا دولة؟",
   "a": "البحرين",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: The Gulf Cup 21 (2023) was not withdrawn by Iraq nor moved to Bahrain; statement is false.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-3878e92f",
@@ -560,7 +577,9 @@
   "q": "بكأس آسيا 2011، منو سجّل هدف أستراليا بالدقيقة 117 ضد العراق؟",
   "a": "هاري كيويل",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-0200b956",
@@ -569,7 +588,9 @@
   "q": "بكأس آسيا 2015، شگد خسر العراق مباراة المركز الثالث ضد الإمارات؟",
   "a": "3-2",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-e27023d8",
@@ -578,7 +599,10 @@
   "q": "العراق تأهل لكأس آسيا 2015 بفوز 3-1 على الصين بيا ملعب؟",
   "a": "ملعب الشارقة",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: Iraq qualified for the 2015 Asian Cup by beating China 3‑1 in a match played in Doha, not at Sharjah Stadium.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-c87012ff",
@@ -587,7 +611,10 @@
   "q": "بنهائي كأس العرب 1966 ببغداد، العراق فاز على يا منتخب؟",
   "a": "سوريا",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: The 1966 Arab Cup final was Iraq vs Syria, but it was held in Baghdad; the answer is correct but the question is about a 600‑level fact that is too ob",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-b701f6e0",
@@ -596,7 +623,9 @@
   "q": "نهائي كأس العرب 1966 انتهى بشگد؟",
   "a": "2-1 للعراق",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-a5b6cbba",
@@ -605,7 +634,9 @@
   "q": "بأول مباراة دولية رسمية للعراق 1957، منو سجّل ويا عمو بابا ويورا إيشايا؟",
   "a": "فخري محمد سلمان",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-3ba53bcb",
@@ -614,7 +645,10 @@
   "q": "بمونديال 1986، العراق لبس يا لون ضد بلجيكا والمكسيك؟",
   "a": "أزرق",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: In the 1986 World Cup, Iraq wore a red kit against Belgium and a white kit against Mexico, not blue.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-fe31957e",
@@ -623,7 +657,10 @@
   "q": "بتصفيات مونديال 1986، العراق أطلع الإمارات بيا قاعدة؟",
   "a": "الهدف خارج الأرض",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "flag": "audit: In the 1986 World Cup qualifiers, Iraq did not advance past the UAE due to a \"goal off the ground\"; the statement is nonsensical.",
+  "updated": "2026-11-07"
  },
  {
   "id": "iraqi-football-b0a522af",
@@ -632,6 +669,8 @@
   "q": "بتصفيات مونديال 1994، العراق خسر ضد كوريا الشمالية 3-2 بعد ما جان متقدم بشگد؟",
   "a": "2-0",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "audited": "2026-11-07",
+  "updated": "2026-11-07"
  }
 ]
