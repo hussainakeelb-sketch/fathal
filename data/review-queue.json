@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T06:53:57.890Z",
+ "updated": "2026-11-08T06:57:57.927Z",
  "reports": [],
  "flagged": [
   {
@@ -729,6 +729,110 @@
    "q": "شنو اسم لعبة الحية الأصلية بموبايل نوكيا 3310؟",
    "a": "Snake II",
    "flag": "audit: Snake II was not on Nokia 3310; original Snake was"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-c1c1422e",
+   "p": 400,
+   "q": "بـ\"طرّة لو كتبة\"، الكتبة يا وجه من العملة؟",
+   "a": "الوجه الي عليه الكتابة",
+   "flag": "audit: Question nonsensical, answer not factual"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-91efa0f6",
+   "p": 400,
+   "q": "شنو اسم الدومنة الي بيها رقم 6 على الجهتين؟",
+   "a": "الدوشيش",
+   "flag": "audit: Common term is double‑six, not “الدوشيش”"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-320f5ab8",
+   "p": 600,
+   "q": "منو الباحث البريطاني الي فكّ قواعد لعبة أور من لوح بابلي؟",
+   "a": "إيرفنغ فينكل",
+   "flag": "audit: Researcher is Irving Finkel, not إيرفنغ فينكل"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-1fdd1e84",
+   "p": 600,
+   "q": "شنو اسم الشطرنج الهندي القديم الي تطور منه الشطرنج؟",
+   "a": "چاتورانغا",
+   "flag": "audit: Question about Indian chess not a traditional Iraqi game"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-81cf9369",
+   "p": 600,
+   "q": "بالشطرنج القديم العربي، الوزير شنو جان اسمه؟",
+   "a": "الفِرزان",
+   "flag": "audit: Arabic chess detail unrelated to Iraqi popular games"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-d3167fbd",
+   "p": 600,
+   "q": "بالشطرنج العربي القديم، الفيل شلون جان يتحرك؟",
+   "a": "يقفز مربعين بالقطر",
+   "flag": "audit: Moves of the elephant in ancient chess not an Iraqi folk game"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-feff86c8",
+   "p": 600,
+   "q": "منو أول بطل عالم رسمي بالشطرنج سنة 1886؟",
+   "a": "فيلهلم شتاينتس",
+   "flag": "audit: First official world chess champion is not a topic of Iraqi popular games"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-f7067f17",
+   "p": 600,
+   "q": "كم حركة افتتاح ممكنة للأبيض بالشطرنج؟",
+   "a": "20 حركة",
+   "flag": "audit: Number of possible opening moves is a chess statistic, not an Iraqi game"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-f3445808",
+   "p": 600,
+   "q": "بالطاولي، شنو يسمّون الطريقة الي يحبسون بيها قطع الخصم؟",
+   "a": "المحبوسة",
+   "flag": "audit: ‘الطاولي’ is not a recognized Iraqi traditional game"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-d971cb89",
+   "p": 600,
+   "q": "بالشطرنج، شنو يسمّون حالة اللاغالب ولا مغلوب لما الملك ما عنده حركة قانونية وهو مو مكشوش؟",
+   "a": "الپات (تعادل الجمود)",
+   "flag": "audit: Chess stalemate term is unrelated to Iraqi popular games"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-3e726672",
+   "p": 600,
+   "q": "بالشطرنج، شنو اسم الحركة الخاصة الي البيدق بيها ياكل بيدق جنبه بعد ما يتقدم خطوتين؟",
+   "a": "الأخذ بالتجاوز (آن باسان)",
+   "flag": "audit: En passant rule is a chess concept, not an Iraqi folk game"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-dc79fd73",
+   "p": 600,
+   "q": "بالشطرنج، البيدق إذا وصل آخر صف شنو يصير؟",
+   "a": "يترقّى لأي قطعة غير الملك",
+   "flag": "audit: Pawn promotion is a chess rule, not relevant to Iraqi games"
+  },
+  {
+   "cat": "folk-games",
+   "id": "folk-games-4c813786",
+   "p": 600,
+   "q": "كم قطعة تقريباً كانت بلعبة أور الملكية لكل لاعب؟",
+   "a": "7 قطع",
+   "flag": "audit: ‘أور الملكية’ is not an Iraqi traditional game"
   }
  ]
 }
