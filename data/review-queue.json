@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T07:57:41.705Z",
+ "updated": "2026-11-14T07:22:08.144Z",
  "reports": [],
  "flagged": [
   {
@@ -57,6 +57,30 @@
    "q": "منو المخرج العراقي صاحب فيلم \"بلانچة\"؟",
    "a": "علي رحيم",
    "flag": "audit: Film بلانچة was not directed by علي رحيم (no evidence)"
+  },
+  {
+   "cat": "singers",
+   "id": "singers-8cf6bc90",
+   "p": 400,
+   "q": "شنو اسم المقطع الافتتاحي بأداء المقام العراقي؟",
+   "a": "التحرير",
+   "flag": "audit: Opening maqam piece is called “al‑muqaddima”, not “al‑tahrir”"
+  },
+  {
+   "cat": "singers",
+   "id": "singers-e466238c",
+   "p": 600,
+   "q": "منو المغني الأمريكي المشهور الي تعاون وياه كاظم الساهر ومعروف بأغاني الروك؟",
+   "a": "ليني كرافيتز",
+   "flag": "audit: Lenny Kravitz never collaborated with Kadim Al Sahir"
+  },
+  {
+   "cat": "singers",
+   "id": "singers-abfa5cdd",
+   "p": 600,
+   "q": "منو المنتج الموسيقي الأمريكي الأسطوري الي تعاون ويا كاظم الساهر؟",
+   "a": "كوينسي جونز",
+   "flag": "audit: Quincy Jones has no recorded collaboration with Kadim Al Sahir"
   },
   {
    "cat": "golden-tv",
