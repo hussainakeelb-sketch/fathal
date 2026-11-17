@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T07:35:05.590Z",
+ "updated": "2026-11-17T08:46:59.393Z",
  "reports": [],
  "flagged": [
   {
@@ -857,6 +857,14 @@
    "q": "كم قطعة تقريباً كانت بلعبة أور الملكية لكل لاعب؟",
    "a": "7 قطع",
    "flag": "audit: ‘أور الملكية’ is not an Iraqi traditional game"
+  },
+  {
+   "cat": "ramadan-eid",
+   "id": "ramadan-eid-4a9cc3c2",
+   "p": 200,
+   "q": "شنو العبارة الي يگولها العراقيين للتهنئة بالعيد؟",
+   "a": "أيامكم سعيدة",
+   "flag": "audit: Incorrect: common Eid greeting is “عيدكم مبارك” or “كل عام وأنتم بخير”, not “أيامكم سعيدة”."
   }
  ]
 }
