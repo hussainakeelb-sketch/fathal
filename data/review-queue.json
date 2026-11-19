@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T08:12:41.820Z",
+ "updated": "2026-11-19T08:24:14.501Z",
  "reports": [],
  "flagged": [
   {
@@ -593,6 +593,78 @@
    "q": "القوة الجوية فاز بأول بطولة إله سنة 1933، شنو اسمها؟",
    "a": "كأس الأمير غازي",
    "flag": "audit: The first tournament won by Al‑Quwa Al‑Jawiya in 1933 was not called “كأس الأمير غازي”"
+  },
+  {
+   "cat": "poets",
+   "id": "poets-2f910a5f",
+   "p": 400,
+   "q": "ديوان البياتي \"أباريق مهشّمة\" صدر بيا سنة؟",
+   "a": "1954",
+   "flag": "audit: Abdul Wahab al-Bayati's \"Abariq Mahshama\" published 1965, not 1954"
+  },
+  {
+   "cat": "poets",
+   "id": "poets-5cb66ee8",
+   "p": 400,
+   "q": "برواية \"فرانكشتاين في بغداد\"، شنو يسمّون المخلوق؟",
+   "a": "الشسمه",
+   "flag": "audit: In \"Frankenstein in Baghdad\" the creature is called \"The Monster\" (Al-Monster), not \"الشسمه\"."
+  },
+  {
+   "cat": "poets",
+   "id": "poets-5354afbb",
+   "p": 400,
+   "q": "المتنبي راح لمصر ومدح منو وبعدين هجاه؟",
+   "a": "كافور الإخشيدي",
+   "flag": "audit: Al-Mutanabbi went to Egypt and praised the vizier Ibn al-Muqaffa', not \"كافور الإخشيدي\"."
+  },
+  {
+   "cat": "poets",
+   "id": "poets-ee439314",
+   "p": 600,
+   "q": "شنو اسم ابن السياب الي ذكره بقصائده؟",
+   "a": "غيلان",
+   "flag": "audit: Al‑Sayyab mentions his son \"جمال\" in his poetry, not \"غيلان\"."
+  },
+  {
+   "cat": "poets",
+   "id": "poets-4f178815",
+   "p": 600,
+   "q": "شنو اسم الفتاة الي تكرر ذكرها بقصيدة السياب المشهورة \"شبّاك ...\"؟",
+   "a": "وفيقة",
+   "flag": "audit: The recurring female name in al‑Sayyab’s famous poem \"شباك ...\" is \"فاطمة\" (or \"فاطمة الزهراء\"), not \"وفيقة\"."
+  },
+  {
+   "cat": "poets",
+   "id": "poets-553cd371",
+   "p": 600,
+   "q": "الشاعر سعدي يوسف من يا مدينة؟",
+   "a": "أبو الخصيب بالبصرة",
+   "flag": "audit: Saadi Yusuf was born in Al‑Muthanna, not “Abu al‑Khasib in Basra”; the answer is factually incorrect."
+  },
+  {
+   "cat": "poets",
+   "id": "poets-f29cc6fe",
+   "p": 600,
+   "q": "منو الروائي العراقي صاحب رواية \"الوشم\"؟",
+   "a": "عبد الرحمن مجيد الربيعي",
+   "flag": "audit: The novel “Al‑Wushm” (The Tattoo) was written by Abdul‑Rahman Majid al‑Rabi‘i, not a widely known author; the answer is correct but the difficulty is "
+  },
+  {
+   "cat": "poets",
+   "id": "poets-8645c9ef",
+   "p": 600,
+   "q": "رواية \"خمسة أصوات\" لغائب طعمة فرمان صدرت بيا سنة؟",
+   "a": "1967",
+   "flag": "audit: The novel “Khamsat Aswat” by Ghaib al‑Taʿma was published in 1970, not 1967; answer incorrect."
+  },
+  {
+   "cat": "poets",
+   "id": "poets-5d7af319",
+   "p": 600,
+   "q": "رواية \"النخلة والجيران\" صدرت بيا سنة؟",
+   "a": "1966",
+   "flag": "audit: The novel “Al‑Nakhlah wa al‑Jiran” was first published in 1972, not 1966; answer incorrect."
   },
   {
    "cat": "landmarks",

@@ -24,7 +24,11 @@
   "q": "كم ثانية بالساعة؟",
   "a": "3600",
   "src": "claude",
-  "created": "2026-10-01"
+  "created": "2026-10-01",
+  "status": "removed",
+  "removedWhy": "balance: too many number questions",
+  "audited": "2026-11-19",
+  "updated": "2026-11-19"
  },
  {
   "id": "general-77550cb7",
