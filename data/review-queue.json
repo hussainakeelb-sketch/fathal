@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T08:02:12.927Z",
+ "updated": "2026-11-21T07:58:54.543Z",
  "reports": [],
  "flagged": [
   {
@@ -665,6 +665,14 @@
    "q": "رواية \"النخلة والجيران\" صدرت بيا سنة؟",
    "a": "1966",
    "flag": "audit: The novel “Al‑Nakhlah wa al‑Jiran” was first published in 1972, not 1966; answer incorrect."
+  },
+  {
+   "cat": "provinces",
+   "id": "provinces-74cd6900",
+   "p": 400,
+   "q": "مدينة الرمادي الحديثة تأسست بيا سنة تقريباً؟",
+   "a": "1869",
+   "flag": "audit: Modern Ramadi founded ~1879, not 1869"
   },
   {
    "cat": "landmarks",
