@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T07:46:31.747Z",
+ "updated": "2026-11-24T10:43:27.617Z",
  "reports": [],
  "flagged": [
   {
@@ -953,6 +953,38 @@
    "q": "بكرتون \"ريمي\"، شنو اسم القرد؟",
    "a": "جولي كير",
    "flag": "audit: Monkey’s name is جولي (Jolly), not جولي كير"
+  },
+  {
+   "cat": "cartoons",
+   "id": "cartoons-a3799eb4",
+   "p": 200,
+   "q": "\"كابتن ماجد\" شنو اسمه الأصلي الياباني؟",
+   "a": "تسوباسا",
+   "flag": "audit: The full Japanese name is “ماكوتو تسوباسا”, not just “تسوباسا”"
+  },
+  {
+   "cat": "cartoons",
+   "id": "cartoons-319d0453",
+   "p": 400,
+   "q": "بـ\"ريمي\"، شنو اسم الكلبين الثانيين بالفرقة غير كابي؟",
+   "a": "زيربينو ودولتشي",
+   "flag": "audit: The two other dogs are not “زيربينو ودولتشي”; the answer is incorrect"
+  },
+  {
+   "cat": "cartoons",
+   "id": "cartoons-656de1aa",
+   "p": 400,
+   "q": "بـ\"كابتن ماجد\"، شنو اسم اللاعب البرازيلي الي درّب ماجد بالصغر؟",
+   "a": "روبرتو",
+   "flag": "audit: The Brazilian coach’s name is not “روبرتو” in the series"
+  },
+  {
+   "cat": "cartoons",
+   "id": "cartoons-3c664cbf",
+   "p": 400,
+   "q": "بـ\"عدنان ولينا\"، شنو اسم صديق عدنان الولد الشجاع؟",
+   "a": "عبسي",
+   "flag": "audit: Friend’s name is not ‘عبسي’; answer is incorrect"
   }
  ]
 }
