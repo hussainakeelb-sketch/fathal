@@ -1,7 +1,119 @@
 {
- "updated": "2026-11-24T10:43:27.617Z",
+ "updated": "2026-11-25T09:31:20.141Z",
  "reports": [],
  "flagged": [
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-91d7abbc",
+   "p": 200,
+   "q": "منو كتب مسلسل \"تحت موس الحلاق\"؟",
+   "a": "سليم البصري",
+   "flag": "audit: Writer not سليم البصري; answer incorrect"
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-b03cf282",
+   "p": 200,
+   "q": "بأي سنة انعرض الجزء الثاني من مسلسل \"عالم الست وهيبة\"؟",
+   "a": "2024",
+   "flag": "audit: No 2024 part; series only aired 1997‑1998"
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-2654c587",
+   "p": 200,
+   "q": "شنو اسم الشخصية الي لعبها قاسم الملاك بمسلسل \"النسر وعيون المدينة\"؟",
+   "a": "رجب",
+   "flag": "audit: No source shows قاسم الملاك playing a character named رجب; answer likely incorrect."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-7f89138d",
+   "p": 400,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعب دور \"غفوري\"؟",
+   "a": "سليم البصري",
+   "flag": "audit: No evidence that سليم البصري played غفوري; answer appears incorrect."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-ee4ca4c6",
+   "p": 400,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعب دور \"أبو عطية\"؟",
+   "a": "سامي عبد الحميد",
+   "flag": "audit: No source links سامي عبد الحميد to the role أبو عطية; answer likely wrong."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-12d6b0c2",
+   "p": 400,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعب دور \"رحومي\"؟",
+   "a": "طعمة التميمي",
+   "flag": "audit: طعمة التميمي is not listed as playing رحومي; answer appears incorrect."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-cc6c3c37",
+   "p": 400,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، شنو أسماء ولدين إسماعيل جلبي؟",
+   "a": "إبراهيم ورؤوف",
+   "flag": "audit: Names إبراهيم ورؤوف are not documented as إسماعيل جلبي’s sons; answer likely wrong."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-7b3b156c",
+   "p": 400,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعب دور إسماعيل جلبي بشبابه؟",
+   "a": "مقداد عبد الرضا",
+   "flag": "audit: مقداد عبد الرضا is not shown as playing young إسماعيل جلبي; answer likely wrong."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-d6b68c83",
+   "p": 400,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، شنو أشهر صفة بشخصية قادر بيك؟",
+   "a": "البخل",
+   "flag": "audit: No source states البخل as the most famous trait of قادر بيك; answer likely wrong."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-f12cdf15",
+   "p": 400,
+   "q": "بمسلسل \"عالم الست وهيبة\"، منو لعب دور \"بدر الغافل\"؟",
+   "a": "سامي قفطان",
+   "flag": "audit: No evidence that سامي قفطان played بدر الغافل; answer appears incorrect."
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-be04c2e4",
+   "p": 600,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعب دور قادر بيك بشبابه؟",
+   "a": "فارس خليل شوقي",
+   "flag": "audit: Character قادر بيك played by خليل شوقي, not فارس خليل شوقي"
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-742904e2",
+   "p": 600,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعب دور \"حمادي العربنجي\"؟",
+   "a": "راسم الجميلي",
+   "flag": "audit: راسم الجميلي not listed as حمادي العربنجي"
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-a49f6a4f",
+   "p": 600,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعب دور \"عبد الله أفندي\"؟",
+   "a": "جعفر السعدي",
+   "flag": "audit: No evidence جعفر السعدي played عبد الله أفندي"
+  },
+  {
+   "cat": "iraqi-series",
+   "id": "iraqi-series-bda062c7",
+   "p": 600,
+   "q": "بمسلسل \"النسر وعيون المدينة\"، منو لعبت دور \"نظيرة خاتون\"؟",
+   "a": "فوزية عارف",
+   "flag": "audit: فوزية عارف not associated with نظيرة خاتون"
+  },
   {
    "cat": "iraqi-films",
    "id": "iraqi-films-46fbbc00",
