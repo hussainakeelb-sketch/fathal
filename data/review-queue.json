@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T09:09:23.184Z",
+ "updated": "2026-11-27T09:24:51.365Z",
  "reports": [],
  "flagged": [
   {
@@ -819,6 +819,30 @@
    "flag": "audit: Ballon d'Or 2024 not decided yet"
   },
   {
+   "cat": "world-football",
+   "id": "world-football-2dd3c233",
+   "p": 400,
+   "q": "منو فاز بكوبا أمريكا 2024؟",
+   "a": "الأرجنتين",
+   "flag": "audit: Copa América 2024 has not been played yet"
+  },
+  {
+   "cat": "world-football",
+   "id": "world-football-f812f1bb",
+   "p": 400,
+   "q": "يا نادي فاز بدوري أبطال أوروبا 2025؟",
+   "a": "باريس سان جيرمان",
+   "flag": "audit: Champions League 2025 winner is not known yet"
+  },
+  {
+   "cat": "world-football",
+   "id": "world-football-1ef26750",
+   "p": 600,
+   "q": "يا نادي فاز بكأس العالم للأندية بنظامها الجديد سنة 2025؟",
+   "a": "تشيلسي",
+   "flag": "audit: The 2025 Club World Cup has not occurred; answer is speculative and invalid"
+  },
+  {
    "cat": "poets",
    "id": "poets-2f910a5f",
    "p": 400,
@@ -1169,6 +1193,14 @@
    "q": "شنو العبارة الي يگولها العراقيين للتهنئة بالعيد؟",
    "a": "أيامكم سعيدة",
    "flag": "audit: Incorrect: common Eid greeting is “عيدكم مبارك” or “كل عام وأنتم بخير”, not “أيامكم سعيدة”."
+  },
+  {
+   "cat": "animals",
+   "id": "animals-329fafbe",
+   "p": 200,
+   "q": "شنو اسم صغير الغزال؟",
+   "a": "الخِشف",
+   "flag": "audit: الخِشف is a gazelle species, not the name of a gazelle's young"
   },
   {
    "cat": "cartoons",
