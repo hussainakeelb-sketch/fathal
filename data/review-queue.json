@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T09:24:51.365Z",
+ "updated": "2026-11-28T08:43:21.161Z",
  "reports": [],
  "flagged": [
   {
@@ -1201,6 +1201,46 @@
    "q": "شنو اسم صغير الغزال؟",
    "a": "الخِشف",
    "flag": "audit: الخِشف is a gazelle species, not the name of a gazelle's young"
+  },
+  {
+   "cat": "animals",
+   "id": "animals-d3b451e1",
+   "p": 400,
+   "q": "شنو اسم صغير الفيل بالعربي؟",
+   "a": "الدغفل",
+   "flag": "audit: Arabic term for baby elephant is العجل or الفيل الصغير, not الدغفل"
+  },
+  {
+   "cat": "animals",
+   "id": "animals-aa4b0bc0",
+   "p": 400,
+   "q": "شنو اسم صغير الثعلب بالعربي؟",
+   "a": "الهجرس",
+   "flag": "audit: Baby fox is called شبل, not الهجرس"
+  },
+  {
+   "cat": "animals",
+   "id": "animals-6a50fd4a",
+   "p": 400,
+   "q": "شنو اسم صغير الأرنب بالعربي؟",
+   "a": "الخرنق",
+   "flag": "audit: Baby rabbit is أرنب صغير or أرنوب, not الخرنق"
+  },
+  {
+   "cat": "animals",
+   "id": "animals-388c4e82",
+   "p": 600,
+   "q": "يا طير عنده أطول هجرة سنوية بالعالم؟",
+   "a": "خطّاف البحر القطبي",
+   "flag": "audit: Correct bird is Arctic tern, not ‘خطّاف البحر القطبي’"
+  },
+  {
+   "cat": "animals",
+   "id": "animals-1683eb66",
+   "p": 600,
+   "q": "شنو اسم صوت الغزال؟",
+   "a": "البغام",
+   "flag": "audit: \"البغام\" is not the standard Arabic name for a deer’s sound"
   },
   {
    "cat": "cartoons",
